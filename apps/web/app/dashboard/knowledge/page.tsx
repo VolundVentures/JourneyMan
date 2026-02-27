@@ -1,0 +1,143 @@
+'use client';
+
+import { useState } from 'react';
+import {
+  Upload,
+  FileText,
+  Link2,
+  Edit3,
+  Search,
+  MoreVertical,
+  Archive,
+  Trash2,
+  Eye,
+  File,
+  RefreshCw,
+} from 'lucide-react';
+import { cn, formatRelativeTime } from '@/lib/utils';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { mockKnowledgeItems } from '@/lib/mock-data';
+
+const sourceIcons: Record<string, React.ElementType> = {
+  upload: FileText,
+  sync: RefreshCw,
+  manual: Edit3,
+};
+
+const sourceColors: Record<string, string> = {
+  upload: 'text-brand-400 bg-brand-500/10',
+  sync: 'text-accent-400 bg-accent-500/10',
+  manual: 'text-warning-400 bg-warning-500/10',
+};
+
+export default function KnowledgePage() {
+  const [search, setSearch] = useState('');
+
+  const filtered = mockKnowledgeItems.filter((item) =>
+    search === '' ||
+    item.title.toLowerCase().includes(search.toLowerCase()) ||
+    item.sourceType.includes(search.toLowerCase())
+  );
+
+  return (
+    <div className="space-y-6 animate-fade-in">
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="font-heading text-2xl font-bold text-surface-50">Knowledge Base</h1>
+          <p className="mt-1 text-sm text-surface-400">
+            {mockKnowledgeItems.length} documents powering your AI employees
+          </p>
+        </div>
+        <Button>
+          <Upload className="w-4 h-4" />
+          Upload Knowledge
+        </Button>
+      </div>
+
+      {/* Upload zone */}
+      <div className="rounded-xl border-2 border-dashed border-surface-700 bg-surface-800/20 p-8 text-center hover:border-brand-500/30 hover:bg-brand-500/5 transition-all duration-300 cursor-pointer group">
+        <div className="flex flex-col items-center gap-3">
+          <div className="w-14 h-14 rounded-xl bg-surface-800 flex items-center justify-center group-hover:bg-brand-500/10 transition-colors">
+            <Upload className="w-7 h-7 text-surface-500 group-hover:text-brand-400 transition-colors" />
+          </div>
+          <div>
+            <p className="text-sm font-medium text-surface-300">
+              Drop files here or click to upload
+            </p>
+            <p className="text-xs text-surface-500 mt-1">
+              PDF, DOCX, TXT, MD, HTML, CSV, Excel — up to 50MB each
+            </p>
+          </div>
+          <div className="flex items-center gap-4 mt-2">
+            <Badge variant="outline"><FileText className="w-3 h-3 mr-1" />PDF</Badge>
+            <Badge variant="outline"><FileText className="w-3 h-3 mr-1" />DOCX</Badge>
+            <Badge variant="outline"><File className="w-3 h-3 mr-1" />CSV</Badge>
+            <Badge variant="outline"><Link2 className="w-3 h-3 mr-1" />URL</Badge>
+          </div>
+        </div>
+      </div>
+
+      {/* Search */}
+      <div className="relative max-w-md">
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-surface-500" />
+        <Input
+          placeholder="Search knowledge..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="pl-9"
+        />
+      </div>
+
+      {/* Knowledge items */}
+      <div className="space-y-3">
+        {filtered.map((item) => {
+          const SourceIcon = sourceIcons[item.sourceType] || FileText;
+          const sourceColor = sourceColors[item.sourceType] || 'text-surface-400 bg-surface-800';
+
+          return (
+            <div
+              key={item.id}
+              className="rounded-xl border border-surface-800/50 bg-surface-800/30 p-4 hover:bg-surface-800/50 transition-colors group"
+            >
+              <div className="flex items-start gap-3">
+                <div className={cn('rounded-lg p-2 shrink-0', sourceColor)}>
+                  <SourceIcon className="w-4 h-4" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2">
+                    <h3 className="font-medium text-surface-200 truncate">{item.title}</h3>
+                    <Badge variant={item.status === 'active' ? 'success' : 'secondary'}>
+                      {item.status}
+                    </Badge>
+                  </div>
+                  <p className="text-xs text-surface-500 mt-1 line-clamp-1">{item.content}</p>
+                  <div className="flex items-center gap-3 mt-2 text-xs text-surface-500">
+                    <span>Source: {item.sourceType}</span>
+                    {item.sourceRef && <span className="truncate max-w-[200px]">{item.sourceRef}</span>}
+                    <span>Updated {formatRelativeTime(item.updatedAt)}</span>
+                    {item.metadata && 'pages' in item.metadata && (
+                      <span>{item.metadata.pages as number} pages</span>
+                    )}
+                  </div>
+                </div>
+                <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <Button variant="ghost" size="icon" className="h-8 w-8 text-surface-500 hover:text-surface-300">
+                    <Eye className="w-4 h-4" />
+                  </Button>
+                  <Button variant="ghost" size="icon" className="h-8 w-8 text-surface-500 hover:text-surface-300">
+                    <Archive className="w-4 h-4" />
+                  </Button>
+                  <Button variant="ghost" size="icon" className="h-8 w-8 text-surface-500 hover:text-destructive-400">
+                    <Trash2 className="w-4 h-4" />
+                  </Button>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
