@@ -10,28 +10,28 @@ interface StatusBadgeProps {
 const statusConfig: Record<EmployeeStatus, { label: string; dotClass: string; badgeClass: string }> = {
   active: {
     label: 'Active',
-    dotClass: 'bg-success-500 shadow-[0_0_8px_rgba(16,185,129,0.6)]',
-    badgeClass: 'bg-success-500/10 text-success-400 border-success-500/20',
+    dotClass: 'bg-emerald-500',
+    badgeClass: 'bg-emerald-950/50 text-emerald-400 border-emerald-900/50',
   },
   onboarding: {
     label: 'Onboarding',
-    dotClass: 'bg-brand-400 shadow-[0_0_8px_rgba(99,102,241,0.6)]',
-    badgeClass: 'bg-brand-500/10 text-brand-400 border-brand-500/20',
+    dotClass: 'bg-neutral-400',
+    badgeClass: 'bg-neutral-800 text-neutral-300 border-neutral-700',
   },
   supervised: {
     label: 'Supervised',
-    dotClass: 'bg-warning-500 shadow-[0_0_8px_rgba(245,158,11,0.6)]',
-    badgeClass: 'bg-warning-500/10 text-warning-400 border-warning-500/20',
+    dotClass: 'bg-amber-500',
+    badgeClass: 'bg-amber-950/50 text-amber-400 border-amber-900/50',
   },
   paused: {
     label: 'Paused',
-    dotClass: 'bg-surface-500',
-    badgeClass: 'bg-surface-700/50 text-surface-400 border-surface-600',
+    dotClass: 'bg-neutral-600',
+    badgeClass: 'bg-neutral-800/50 text-neutral-500 border-neutral-800',
   },
   terminated: {
     label: 'Terminated',
-    dotClass: 'bg-destructive-500',
-    badgeClass: 'bg-destructive-500/10 text-destructive-400 border-destructive-500/20',
+    dotClass: 'bg-red-500',
+    badgeClass: 'bg-red-950/50 text-red-400 border-red-900/50',
   },
 };
 
@@ -61,7 +61,7 @@ export function StatusBadge({ status, size = 'md', showDot = true }: StatusBadge
       {showDot && (
         <span
           className={cn(
-            'rounded-full animate-pulse-slow',
+            'rounded-full',
             dotSizes[size],
             config.dotClass
           )}

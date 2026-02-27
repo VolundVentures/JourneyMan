@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Zap, ArrowRight, Eye, EyeOff } from 'lucide-react';
+import { ArrowRight, Eye, EyeOff } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
@@ -10,25 +10,23 @@ export default function LoginPage() {
 
   return (
     <div className="space-y-8 animate-slide-up">
-      {/* Logo */}
       <div className="text-center space-y-4">
-        <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-500 to-accent-500 shadow-xl shadow-brand-500/20">
-          <Zap className="w-7 h-7 text-white" />
-        </div>
         <div>
-          <h1 className="font-heading text-2xl font-bold text-surface-50 tracking-tight">
-            Welcome back
+          <h1 className="text-sm font-bold tracking-[0.2em] text-neutral-50 uppercase mb-6">
+            JourneyMan
           </h1>
-          <p className="text-sm text-surface-500 mt-1">
-            Sign in to your JourneyMan account
+          <h2 className="text-2xl font-bold text-neutral-50 tracking-tight">
+            Welcome back
+          </h2>
+          <p className="text-sm text-neutral-500 mt-1">
+            Sign in to your account
           </p>
         </div>
       </div>
 
-      {/* Form */}
-      <div className="rounded-2xl border border-surface-800/50 bg-surface-800/20 backdrop-blur-xl p-6 space-y-5">
+      <div className="rounded-xl border border-neutral-800 bg-neutral-900 p-6 space-y-5">
         <div>
-          <label className="block text-xs text-surface-500 uppercase tracking-wider mb-2">
+          <label className="block text-xs text-neutral-500 uppercase tracking-wider mb-2">
             Email address
           </label>
           <Input
@@ -40,10 +38,10 @@ export default function LoginPage() {
 
         <div>
           <div className="flex items-center justify-between mb-2">
-            <label className="block text-xs text-surface-500 uppercase tracking-wider">
+            <label className="block text-xs text-neutral-500 uppercase tracking-wider">
               Password
             </label>
-            <a href="#" className="text-xs text-brand-400 hover:text-brand-300 transition-colors">
+            <a href="#" className="text-xs text-neutral-400 hover:text-neutral-200 transition-colors">
               Forgot password?
             </a>
           </div>
@@ -56,7 +54,7 @@ export default function LoginPage() {
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-surface-500 hover:text-surface-300 transition-colors"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-300 transition-colors"
             >
               {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
             </button>
@@ -72,10 +70,9 @@ export default function LoginPage() {
         </Button>
       </div>
 
-      {/* Footer */}
-      <p className="text-center text-xs text-surface-600">
+      <p className="text-center text-xs text-neutral-600">
         Don&apos;t have an account?{' '}
-        <a href="#" className="text-brand-400 hover:text-brand-300 transition-colors">
+        <a href="#" className="text-neutral-400 hover:text-neutral-200 transition-colors">
           Contact Sales
         </a>
       </p>

@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { cn } from '@/lib/utils';
-import { getInitials, getDepartmentColor } from '@/lib/utils';
+import { getInitials } from '@/lib/utils';
 
 interface AvatarProps extends React.HTMLAttributes<HTMLDivElement> {
   name: string;
+  emoji?: string;
   department?: string;
   size?: 'sm' | 'md' | 'lg' | 'xl';
   src?: string;
@@ -16,9 +17,15 @@ const sizeClasses = {
   xl: 'w-16 h-16 text-lg',
 };
 
-function Avatar({ name, department, size = 'md', src, className, ...props }: AvatarProps) {
+const emojiSizes = {
+  sm: 'text-base',
+  md: 'text-lg',
+  lg: 'text-xl',
+  xl: 'text-2xl',
+};
+
+function Avatar({ name, emoji, department, size = 'md', src, className, ...props }: AvatarProps) {
   const initials = getInitials(name);
-  const gradient = department ? getDepartmentColor(department) : 'from-brand-500 to-brand-700';
 
   if (src) {
     return (
@@ -35,12 +42,26 @@ function Avatar({ name, department, size = 'md', src, className, ...props }: Ava
     );
   }
 
+  if (emoji) {
+    return (
+      <div
+        className={cn(
+          'relative rounded-full shrink-0 flex items-center justify-center bg-neutral-800 border border-neutral-700',
+          sizeClasses[size],
+          className
+        )}
+        {...props}
+      >
+        <span className={emojiSizes[size]}>{emoji}</span>
+      </div>
+    );
+  }
+
   return (
     <div
       className={cn(
-        'relative rounded-full shrink-0 flex items-center justify-center font-heading font-semibold text-white bg-gradient-to-br shadow-lg',
+        'relative rounded-full shrink-0 flex items-center justify-center font-semibold text-neutral-300 bg-neutral-800 border border-neutral-700',
         sizeClasses[size],
-        gradient,
         className
       )}
       {...props}

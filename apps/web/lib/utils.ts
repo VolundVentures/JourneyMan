@@ -29,41 +29,26 @@ export function getInitials(name: string): string {
     .slice(0, 2);
 }
 
-export function getDepartmentColor(department: string): string {
-  const colors: Record<string, string> = {
-    Operations: 'from-brand-500 to-brand-700',
-    Executive: 'from-violet-500 to-violet-700',
-    Sales: 'from-accent-500 to-accent-700',
-    'Customer Success': 'from-success-500 to-emerald-700',
-    Marketing: 'from-pink-500 to-pink-700',
-    HR: 'from-amber-500 to-amber-700',
-    Finance: 'from-teal-500 to-teal-700',
-    Strategy: 'from-indigo-500 to-indigo-700',
-  };
-  return colors[department] || 'from-surface-500 to-surface-700';
-}
-
-export function getStatusColor(status: string): string {
-  const colors: Record<string, string> = {
-    active: 'text-success-500 bg-success-500/10',
-    onboarding: 'text-brand-400 bg-brand-500/10',
-    supervised: 'text-warning-500 bg-warning-500/10',
-    paused: 'text-surface-400 bg-surface-500/10',
-    terminated: 'text-destructive-500 bg-destructive-500/10',
-  };
-  return colors[status] || 'text-surface-400 bg-surface-500/10';
-}
-
 export function getTaskStatusColor(status: string): string {
   const colors: Record<string, string> = {
-    queued: 'text-surface-400 bg-surface-500/10',
-    planning: 'text-brand-400 bg-brand-500/10',
-    in_progress: 'text-accent-400 bg-accent-500/10',
-    awaiting_approval: 'text-warning-500 bg-warning-500/10',
-    awaiting_input: 'text-amber-400 bg-amber-500/10',
-    escalated: 'text-destructive-400 bg-destructive-500/10',
-    completed: 'text-success-500 bg-success-500/10',
-    failed: 'text-destructive-500 bg-destructive-500/10',
+    queued: 'text-neutral-500 bg-neutral-800',
+    planning: 'text-neutral-300 bg-neutral-800',
+    in_progress: 'text-neutral-200 bg-neutral-800',
+    awaiting_approval: 'text-amber-400 bg-amber-950/50',
+    awaiting_input: 'text-neutral-300 bg-neutral-800',
+    escalated: 'text-red-400 bg-red-950/50',
+    completed: 'text-emerald-400 bg-emerald-950/50',
+    failed: 'text-red-400 bg-red-950/50',
   };
-  return colors[status] || 'text-surface-400 bg-surface-500/10';
+  return colors[status] || 'text-neutral-400 bg-neutral-800';
 }
+
+// Emoji avatars for AI employees
+export const employeeEmojis: Record<string, string> = {
+  'emp-001': '🗺️',  // Atlas - Operations
+  'emp-002': '✨',  // Nova - Executive
+  'emp-003': '🎯',  // Apex - Sales
+  'emp-004': '🔮',  // Sage - Research
+  'emp-005': '🔥',  // Ember - CS
+  'emp-006': '⚡',  // Flux - Content
+};

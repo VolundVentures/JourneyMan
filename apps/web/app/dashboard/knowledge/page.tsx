@@ -7,7 +7,6 @@ import {
   Link2,
   Edit3,
   Search,
-  MoreVertical,
   Archive,
   Trash2,
   Eye,
@@ -26,12 +25,6 @@ const sourceIcons: Record<string, React.ElementType> = {
   manual: Edit3,
 };
 
-const sourceColors: Record<string, string> = {
-  upload: 'text-brand-400 bg-brand-500/10',
-  sync: 'text-accent-400 bg-accent-500/10',
-  manual: 'text-warning-400 bg-warning-500/10',
-};
-
 export default function KnowledgePage() {
   const [search, setSearch] = useState('');
 
@@ -45,8 +38,8 @@ export default function KnowledgePage() {
     <div className="space-y-6 animate-fade-in">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="font-heading text-2xl font-bold text-surface-50">Knowledge Base</h1>
-          <p className="mt-1 text-sm text-surface-400">
+          <h1 className="text-2xl font-bold text-neutral-50">Knowledge Base</h1>
+          <p className="mt-1 text-sm text-neutral-400">
             {mockKnowledgeItems.length} documents powering your AI employees
           </p>
         </div>
@@ -57,16 +50,16 @@ export default function KnowledgePage() {
       </div>
 
       {/* Upload zone */}
-      <div className="rounded-xl border-2 border-dashed border-surface-700 bg-surface-800/20 p-8 text-center hover:border-brand-500/30 hover:bg-brand-500/5 transition-all duration-300 cursor-pointer group">
+      <div className="rounded-xl border-2 border-dashed border-neutral-700 bg-neutral-900/50 p-8 text-center hover:border-neutral-600 transition-colors cursor-pointer group">
         <div className="flex flex-col items-center gap-3">
-          <div className="w-14 h-14 rounded-xl bg-surface-800 flex items-center justify-center group-hover:bg-brand-500/10 transition-colors">
-            <Upload className="w-7 h-7 text-surface-500 group-hover:text-brand-400 transition-colors" />
+          <div className="w-14 h-14 rounded-xl bg-neutral-800 flex items-center justify-center group-hover:bg-neutral-700 transition-colors">
+            <Upload className="w-7 h-7 text-neutral-500 group-hover:text-neutral-300 transition-colors" />
           </div>
           <div>
-            <p className="text-sm font-medium text-surface-300">
+            <p className="text-sm font-medium text-neutral-300">
               Drop files here or click to upload
             </p>
-            <p className="text-xs text-surface-500 mt-1">
+            <p className="text-xs text-neutral-500 mt-1">
               PDF, DOCX, TXT, MD, HTML, CSV, Excel — up to 50MB each
             </p>
           </div>
@@ -81,7 +74,7 @@ export default function KnowledgePage() {
 
       {/* Search */}
       <div className="relative max-w-md">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-surface-500" />
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-500" />
         <Input
           placeholder="Search knowledge..."
           value={search}
@@ -94,26 +87,25 @@ export default function KnowledgePage() {
       <div className="space-y-3">
         {filtered.map((item) => {
           const SourceIcon = sourceIcons[item.sourceType] || FileText;
-          const sourceColor = sourceColors[item.sourceType] || 'text-surface-400 bg-surface-800';
 
           return (
             <div
               key={item.id}
-              className="rounded-xl border border-surface-800/50 bg-surface-800/30 p-4 hover:bg-surface-800/50 transition-colors group"
+              className="rounded-xl border border-neutral-800 bg-neutral-900 p-4 hover:bg-neutral-800/80 transition-colors group"
             >
               <div className="flex items-start gap-3">
-                <div className={cn('rounded-lg p-2 shrink-0', sourceColor)}>
+                <div className="rounded-lg p-2 shrink-0 bg-neutral-800 text-neutral-400">
                   <SourceIcon className="w-4 h-4" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
-                    <h3 className="font-medium text-surface-200 truncate">{item.title}</h3>
+                    <h3 className="font-medium text-neutral-200 truncate">{item.title}</h3>
                     <Badge variant={item.status === 'active' ? 'success' : 'secondary'}>
                       {item.status}
                     </Badge>
                   </div>
-                  <p className="text-xs text-surface-500 mt-1 line-clamp-1">{item.content}</p>
-                  <div className="flex items-center gap-3 mt-2 text-xs text-surface-500">
+                  <p className="text-xs text-neutral-500 mt-1 line-clamp-1">{item.content}</p>
+                  <div className="flex items-center gap-3 mt-2 text-xs text-neutral-500">
                     <span>Source: {item.sourceType}</span>
                     {item.sourceRef && <span className="truncate max-w-[200px]">{item.sourceRef}</span>}
                     <span>Updated {formatRelativeTime(item.updatedAt)}</span>
@@ -123,13 +115,13 @@ export default function KnowledgePage() {
                   </div>
                 </div>
                 <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <Button variant="ghost" size="icon" className="h-8 w-8 text-surface-500 hover:text-surface-300">
+                  <Button variant="ghost" size="icon" className="h-8 w-8 text-neutral-500 hover:text-neutral-300">
                     <Eye className="w-4 h-4" />
                   </Button>
-                  <Button variant="ghost" size="icon" className="h-8 w-8 text-surface-500 hover:text-surface-300">
+                  <Button variant="ghost" size="icon" className="h-8 w-8 text-neutral-500 hover:text-neutral-300">
                     <Archive className="w-4 h-4" />
                   </Button>
-                  <Button variant="ghost" size="icon" className="h-8 w-8 text-surface-500 hover:text-destructive-400">
+                  <Button variant="ghost" size="icon" className="h-8 w-8 text-neutral-500 hover:text-red-400">
                     <Trash2 className="w-4 h-4" />
                   </Button>
                 </div>
