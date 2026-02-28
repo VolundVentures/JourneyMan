@@ -34,3 +34,46 @@
     border-radius: 9999px;
   }
 }
+
+/* Slider thumb styling */
+input[type='range'].slider-thumb::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fafafa;
+  cursor: pointer;
+  border: 2px solid #262626;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+input[type='range'].slider-thumb::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fafafa;
+  cursor: pointer;
+  border: 2px solid #262626;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Typing animation for live feeds */
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.animate-blink {
+  animation: blink 1s step-end infinite;
+}
+
+/* Pulse animation for live indicators */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.2); }
+}
+
+.animate-pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}

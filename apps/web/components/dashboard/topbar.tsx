@@ -1,13 +1,42 @@
 'use client';
 
-import { Bell, Menu, Search, ChevronRight } from 'lucide-react';
+import { Menu, Search, ChevronRight } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { Avatar } from '@/components/ui/avatar';
+import { NotificationCenter } from '@/components/dashboard/notification-center';
 
 interface TopbarProps {
   onMenuClick: () => void;
+  onCommandBarOpen?: () => void;
 }
+
+const routeLabels: Record<string, string> = {
+  employees: 'Employees',
+  hire: 'Hire New Employee',
+  approvals: 'Approvals',
+  escalations: 'Escalations',
+  knowledge: 'Knowledge Base',
+  settings: 'Settings',
+  'mission-control': 'Mission Control',
+  timeline: 'Timeline',
+  'org-chart': 'Org Chart',
+  reviews: 'Reviews',
+  handoffs: 'Handoffs',
+  incidents: 'Incidents',
+  inbox: 'Inbox',
+  contacts: 'Contacts',
+  templates: 'Templates',
+  phone: 'Phone',
+  analytics: 'Analytics',
+  reports: 'Reports',
+  sops: 'SOPs',
+  integrations: 'Integrations',
+  schedules: 'Schedules',
+  automations: 'Automations',
+  'audit-log': 'Audit Log',
+  notifications: 'Notifications',
+};
 
 function getBreadcrumbs(pathname: string): { label: string; href?: string }[] {
   const segments = pathname.split('/').filter(Boolean);
@@ -17,24 +46,58 @@ function getBreadcrumbs(pathname: string): { label: string; href?: string }[] {
     crumbs.push({ label: 'Dashboard', href: '/dashboard' });
 
     if (segments[1]) {
-      const labels: Record<string, string> = {
-        employees: 'Employees',
-        hire: 'Hire New Employee',
-        approvals: 'Approvals',
-        escalations: 'Escalations',
-        knowledge: 'Knowledge Base',
-        settings: 'Settings',
-      };
-      crumbs.push({ label: labels[segments[1]] || segments[1] });
+      crumbs.push({ label: routeLabels[segments[1]] || segments[1] });
 
-      if (segments[1] === 'settings' && segments[2] === 'integrations') {
+      if (segments[1] === 'settings' && segments[2]) {
         crumbs[crumbs.length - 1].href = '/dashboard/settings';
-        crumbs.push({ label: 'Integrations' });
+        const settingsLabels: Record<string, string> = {
+          integrations: 'Integrations',
+          'api-keys': 'API Keys',
+          roles: 'Roles',
+          policies: 'Policies',
+          compliance: 'Compliance',
+          sso: 'SSO',
+          branding: 'Branding',
+          billing: 'Billing',
+        };
+        crumbs.push({ label: settingsLabels[segments[2]] || segments[2] });
       }
 
       if (segments[1] === 'employees' && segments[2]) {
         crumbs[crumbs.length - 1].href = '/dashboard/employees';
         crumbs.push({ label: 'Employee Profile' });
+        if (segments[3]) {
+          const subLabels: Record<string, string> = {
+            onboarding: 'Onboarding',
+            live: 'Live View',
+            reviews: 'Reviews',
+            phone: 'Phone',
+          };
+          crumbs.push({ label: subLabels[segments[3]] || segments[3] });
+        }
+      }
+
+      if (segments[1] === 'analytics' && segments[2]) {
+        crumbs[crumbs.length - 1].href = '/dashboard/analytics';
+        const analyticsLabels: Record<string, string> = {
+          costs: 'Cost Analysis',
+          communications: 'Communications',
+        };
+        crumbs.push({ label: analyticsLabels[segments[2]] || segments[2] });
+      }
+
+      if (segments[1] === 'knowledge' && segments[2]) {
+        crumbs[crumbs.length - 1].href = '/dashboard/knowledge';
+        const knowledgeLabels: Record<string, string> = {
+          graph: 'Knowledge Graph',
+          extracted: 'Extracted Knowledge',
+        };
+        crumbs.push({ label: knowledgeLabels[segments[2]] || 'Document' });
+      }
+
+      if (segments[1] === 'contacts' && segments[2]) {
+        crumbs[crumbs.length - 1].href = '/dashboard/contacts';
+        crumbs.push({ label: 'Contact Profile' });
       }
     }
   }
@@ -45,6 +108,10 @@ function getBreadcrumbs(pathname: string): { label: string; href?: string }[] {
 export function Topbar({ onMenuClick }: TopbarProps) {
   const pathname = usePathname();
   const crumbs = getBreadcrumbs(pathname);
+
+  const openCommandBar = () => {
+    window.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', metaKey: true }));
+  };
 
   return (
     <header className="sticky top-0 z-30 h-14 shrink-0 flex items-center border-b border-neutral-800 bg-neutral-950/90 backdrop-blur-sm px-4 lg:px-6">
@@ -76,9 +143,12 @@ export function Topbar({ onMenuClick }: TopbarProps) {
       </nav>
 
       <div className="flex-1 flex justify-center px-4">
-        <button className="flex items-center gap-2.5 w-full max-w-md px-3 py-1.5 rounded-lg bg-neutral-900 border border-neutral-800 text-neutral-500 hover:text-neutral-400 hover:border-neutral-700 transition-colors text-sm">
+        <button
+          onClick={openCommandBar}
+          className="flex items-center gap-2.5 w-full max-w-md px-3 py-1.5 rounded-lg bg-neutral-900 border border-neutral-800 text-neutral-500 hover:text-neutral-400 hover:border-neutral-700 transition-colors text-sm"
+        >
           <Search className="w-4 h-4" />
-          <span className="flex-1 text-left">Search...</span>
+          <span className="flex-1 text-left">Search or jump to...</span>
           <kbd className="hidden md:inline-flex items-center gap-0.5 rounded border border-neutral-700 bg-neutral-800 px-1.5 py-0.5 text-[10px] font-mono text-neutral-500">
             ⌘K
           </kbd>
@@ -86,10 +156,7 @@ export function Topbar({ onMenuClick }: TopbarProps) {
       </div>
 
       <div className="flex items-center gap-3">
-        <button className="relative p-2 rounded-lg text-neutral-400 hover:text-neutral-200 hover:bg-neutral-800 transition-colors">
-          <Bell className="w-5 h-5" />
-          <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-neutral-50" />
-        </button>
+        <NotificationCenter />
         <div className="hidden sm:block">
           <Avatar name="Zakaria Sabti" size="sm" />
         </div>

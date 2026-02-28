@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import { Sidebar } from '@/components/dashboard/sidebar';
 import { Topbar } from '@/components/dashboard/topbar';
+import { CommandPalette } from '@/components/dashboard/command-palette';
+import { ToastProvider } from '@/components/ui/toast';
 
 export default function DashboardLayout({
   children,
@@ -12,16 +14,19 @@ export default function DashboardLayout({
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="flex h-screen overflow-hidden bg-neutral-950">
-      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <Topbar onMenuClick={() => setSidebarOpen(true)} />
-        <main className="flex-1 overflow-y-auto scrollbar-thin">
-          <div className="p-6 lg:p-8 max-w-[1600px] mx-auto">
-            {children}
-          </div>
-        </main>
+    <ToastProvider>
+      <div className="flex h-screen overflow-hidden bg-neutral-950">
+        <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+        <div className="flex-1 flex flex-col overflow-hidden">
+          <Topbar onMenuClick={() => setSidebarOpen(true)} />
+          <main className="flex-1 overflow-y-auto scrollbar-thin">
+            <div className="p-6 lg:p-8 max-w-[1600px] mx-auto">
+              {children}
+            </div>
+          </main>
+        </div>
+        <CommandPalette />
       </div>
-    </div>
+    </ToastProvider>
   );
 }
