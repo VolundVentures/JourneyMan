@@ -2,4 +2,4 @@ packages:
   - apps/*
   - packages/*
 
-onlyBuiltDependencies: '["@prisma/engines","prisma","better-sqlite3","esbuild","sharp"]'
+onlyBuiltDependencies: '["@prisma/engines","prisma","esbuild","sharp"]'

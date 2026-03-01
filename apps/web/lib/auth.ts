@@ -1,73 +1,31 @@
-import NextAuth from 'next-auth';
-import Credentials from 'next-auth/providers/credentials';
-import { PrismaAdapter } from '@auth/prisma-adapter';
-import { compare } from 'bcryptjs';
+import { createClient } from '@/lib/supabase/server';
 import { db } from '@/lib/db';
 
-export const { handlers, auth, signIn, signOut } = NextAuth({
-  secret: process.env.AUTH_SECRET,
-  adapter: PrismaAdapter(db),
-  session: { strategy: 'jwt' },
-  pages: {
-    signIn: '/login',
-  },
-  providers: [
-    Credentials({
-      name: 'credentials',
-      credentials: {
-        email: { label: 'Email', type: 'email' },
-        password: { label: 'Password', type: 'password' },
-      },
-      async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) return null;
+/**
+ * Get the current authenticated user with their app profile.
+ * Call this from server components and API routes.
+ */
+export async function auth() {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-        const user = await db.user.findUnique({
-          where: { email: credentials.email as string },
-        });
+  if (!user) return null;
 
-        if (!user || !user.password) return null;
+  // Fetch the app-level user profile
+  const profile = await db.user.findUnique({
+    where: { id: user.id },
+    include: { organization: true },
+  });
 
-        const isValid = await compare(
-          credentials.password as string,
-          user.password
-        );
-
-        if (!isValid) return null;
-
-        return {
-          id: user.id,
-          email: user.email,
-          name: user.name,
-          image: user.avatarUrl,
-        };
-      },
-    }),
-  ],
-  callbacks: {
-    async jwt({ token, user }) {
-      if (user) {
-        token.id = user.id;
-      }
-      if (token.email) {
-        const dbUser = await db.user.findUnique({
-          where: { email: token.email },
-          select: { id: true, role: true, orgId: true },
-        });
-        if (dbUser) {
-          token.id = dbUser.id;
-          token.role = dbUser.role;
-          token.orgId = dbUser.orgId;
-        }
-      }
-      return token;
-    },
-    async session({ session, token }) {
-      if (session.user) {
-        session.user.id = token.id as string;
-        (session.user as unknown as Record<string, unknown>).role = token.role;
-        (session.user as unknown as Record<string, unknown>).orgId = token.orgId;
-      }
-      return session;
-    },
-  },
-});
+  return {
+    id: user.id,
+    email: user.email!,
+    name: profile?.name ?? user.user_metadata?.name ?? null,
+    role: profile?.role ?? 'member',
+    orgId: profile?.orgId ?? null,
+    avatarUrl: profile?.avatarUrl ?? null,
+    organization: profile?.organization ?? null,
+  };
+}

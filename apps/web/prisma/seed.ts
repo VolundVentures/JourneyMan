@@ -1,8 +1,7 @@
 import { PrismaClient } from '../lib/generated/prisma/client';
-import { PrismaBetterSqlite3 } from '@prisma/adapter-better-sqlite3';
-import { hash } from 'bcryptjs';
+import { PrismaPg } from '@prisma/adapter-pg';
 
-const adapter = new PrismaBetterSqlite3({ url: process.env.DATABASE_URL || 'file:./dev.db' });
+const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL! });
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
@@ -14,21 +13,22 @@ async function main() {
       name: 'Volund Ventures',
       slug: 'volund-ventures',
       plan: 'professional',
-      settings: JSON.stringify({ timezone: 'America/New_York' }),
+      settings: { timezone: 'America/New_York' },
     },
   });
 
-  // Create users
-  const passwordHash = await hash('password', 12);
+  // Note: Users are created via Supabase Auth signup flow.
+  // For seeding, create users with placeholder IDs that match
+  // the Supabase auth user UUIDs after you create them in the dashboard.
 
   const zakaria = await prisma.user.upsert({
     where: { email: 'zakaria@volundventures.com' },
     update: {},
     create: {
+      id: '00000000-0000-0000-0000-000000000001', // Replace with Supabase auth user UUID
       orgId: org.id,
       email: 'zakaria@volundventures.com',
       name: 'Zakaria Sabti',
-      password: passwordHash,
       role: 'admin',
     },
   });
@@ -37,10 +37,10 @@ async function main() {
     where: { email: 'sara@volundventures.com' },
     update: {},
     create: {
+      id: '00000000-0000-0000-0000-000000000002',
       orgId: org.id,
       email: 'sara@volundventures.com',
       name: 'Sara Lindström',
-      password: passwordHash,
       role: 'manager',
     },
   });
@@ -49,16 +49,16 @@ async function main() {
     where: { email: 'james@volundventures.com' },
     update: {},
     create: {
+      id: '00000000-0000-0000-0000-000000000003',
       orgId: org.id,
       email: 'james@volundventures.com',
       name: 'James Chen',
-      password: passwordHash,
       role: 'member',
     },
   });
 
   // Create AI employees
-  const defaultConfig = JSON.stringify({
+  const defaultConfig = {
     communicationTone: 'professional',
     proactivityLevel: 'medium',
     autonomyMode: 'semi-autonomous',
@@ -67,7 +67,7 @@ async function main() {
     confidenceThresholds: { execute: 0.85, recommend: 0.7, escalateBelow: 0.5 },
     languages: ['English'],
     priorityHierarchy: ['urgent', 'high', 'medium', 'low'],
-  });
+  };
 
   const employees = [
     { name: 'Atlas', roleTitle: 'Operations Manager', department: 'Operations', status: 'active', autonomyScore: 88, tasksCompleted: 847, escalationRate: 4.2 },
@@ -139,7 +139,7 @@ async function main() {
       employeeRole: 'Sales Development Rep',
       taskId: 'task-2',
       actionType: 'send_proposal',
-      proposedAction: JSON.stringify({ recipient: 'CloudVault Inc.', value: 48000 }),
+      proposedAction: { recipient: 'CloudVault Inc.', value: 48000 },
       reasoning: 'CloudVault has shown strong interest after 3 demo calls. Proposing $48k annual contract.',
       confidenceScore: 0.91,
       status: 'pending',
@@ -157,7 +157,7 @@ async function main() {
       employeeName: 'Nova',
       employeeRole: 'Sales Development Rep',
       reason: 'Prospect asked about GDPR compliance — requires legal review',
-      context: JSON.stringify({ prospect: 'CloudVault Inc.', question: 'GDPR data processing agreement' }),
+      context: { prospect: 'CloudVault Inc.', question: 'GDPR data processing agreement' },
       recommendation: 'Loop in legal team for DPA review before proceeding',
       urgency: 'high',
       status: 'open',
@@ -192,7 +192,7 @@ async function main() {
   console.log(`  Users: ${zakaria.name}, ${sara.name}, ${james.name}`);
   console.log(`  Employees: ${employees.map((e) => e.name).join(', ')}`);
   console.log(`  Tasks: ${taskData.length}`);
-  console.log(`  Login: zakaria@volundventures.com / password`);
+  console.log('  Note: Create auth users via the signup page, then update seed UUIDs if needed');
 }
 
 main()

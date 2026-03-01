@@ -1,6 +1,12 @@
 import { NextResponse } from 'next/server';
-import { hash } from 'bcryptjs';
+import { createClient } from '@supabase/supabase-js';
 import { db } from '@/lib/db';
+
+// Use service role key for admin operations (creating users server-side)
+const supabaseAdmin = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
+);
 
 export async function POST(req: Request) {
   try {
@@ -13,13 +19,14 @@ export async function POST(req: Request) {
       );
     }
 
-    if (password.length < 8) {
+    if (password.length < 6) {
       return NextResponse.json(
-        { error: 'Password must be at least 8 characters' },
+        { error: 'Password must be at least 6 characters' },
         { status: 400 }
       );
     }
 
+    // Check if user already exists in our app database
     const existingUser = await db.user.findUnique({
       where: { email },
     });
@@ -31,7 +38,21 @@ export async function POST(req: Request) {
       );
     }
 
-    const passwordHash = await hash(password, 12);
+    // Create user in Supabase Auth
+    const { data: authData, error: authError } =
+      await supabaseAdmin.auth.admin.createUser({
+        email,
+        password,
+        email_confirm: true,
+        user_metadata: { name },
+      });
+
+    if (authError) {
+      return NextResponse.json(
+        { error: authError.message },
+        { status: 400 }
+      );
+    }
 
     // Create organization if company name provided
     let orgId: string | undefined;
@@ -51,11 +72,12 @@ export async function POST(req: Request) {
       orgId = org.id;
     }
 
+    // Create user profile in our app database
     const user = await db.user.create({
       data: {
+        id: authData.user.id,
         email,
         name,
-        password: passwordHash,
         role: orgId ? 'admin' : 'member',
         orgId,
       },

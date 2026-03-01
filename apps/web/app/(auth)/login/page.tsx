@@ -4,11 +4,12 @@ import { useState } from 'react';
 import { ArrowRight, Eye, EyeOff, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { createClient } from '@/lib/supabase/client';
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState('zakaria@volundventures.com');
-  const [password, setPassword] = useState('password');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -18,31 +19,19 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      // Get CSRF token
-      const csrfRes = await fetch('/api/auth/csrf');
-      const { csrfToken } = await csrfRes.json();
-
-      // Sign in via NextAuth credentials callback
-      const res = await fetch('/api/auth/callback/credentials', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({
-          csrfToken,
-          email,
-          password,
-          redirect: 'false',
-          json: 'true',
-        }),
-        redirect: 'follow',
+      const supabase = createClient();
+      const { error: authError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
       });
 
-      const url = new URL(res.url);
-      if (url.searchParams.get('error')) {
+      if (authError) {
         setError('Invalid email or password');
         setLoading(false);
-      } else {
-        window.location.href = '/dashboard';
+        return;
       }
+
+      window.location.href = '/dashboard';
     } catch {
       setError('Something went wrong. Please try again.');
       setLoading(false);

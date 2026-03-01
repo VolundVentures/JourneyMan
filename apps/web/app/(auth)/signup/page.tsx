@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { ArrowRight, Eye, EyeOff, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { createClient } from '@/lib/supabase/client';
 
 export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -21,13 +22,16 @@ export default function SignupPage() {
     setLoading(true);
 
     try {
+      const name = `${firstName} ${lastName}`.trim();
+
+      // Sign up via API route (creates Supabase user + app profile)
       const res = await fetch('/api/auth/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           email,
           password,
-          name: `${firstName} ${lastName}`.trim(),
+          name,
           company: company || undefined,
         }),
       });
@@ -41,29 +45,19 @@ export default function SignupPage() {
       }
 
       // Auto sign-in after signup
-      const csrfRes = await fetch('/api/auth/csrf');
-      const { csrfToken } = await csrfRes.json();
-
-      const signInRes = await fetch('/api/auth/callback/credentials', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({
-          csrfToken,
-          email,
-          password,
-          redirect: 'false',
-          json: 'true',
-        }),
-        redirect: 'follow',
+      const supabase = createClient();
+      const { error: signInError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
       });
 
-      const url = new URL(signInRes.url);
-      if (url.searchParams.get('error')) {
+      if (signInError) {
         setError('Account created but sign-in failed. Please log in manually.');
         setLoading(false);
-      } else {
-        window.location.href = '/dashboard';
+        return;
       }
+
+      window.location.href = '/dashboard';
     } catch {
       setError('Something went wrong. Please try again.');
       setLoading(false);
@@ -157,7 +151,7 @@ export default function SignupPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              minLength={8}
+              minLength={6}
             />
             <button
               type="button"
@@ -168,7 +162,7 @@ export default function SignupPage() {
             </button>
           </div>
           <p className="mt-1.5 text-xs text-neutral-400">
-            Must be at least 8 characters
+            Must be at least 6 characters
           </p>
         </div>
 

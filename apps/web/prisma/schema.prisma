@@ -4,47 +4,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-}
-
-// ============================================
-// AUTH (NextAuth.js compatible)
-// ============================================
-
-model Account {
-  id                String  @id @default(cuid())
-  userId            String
-  type              String
-  provider          String
-  providerAccountId String
-  refresh_token     String?
-  access_token      String?
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String?
-  session_state     String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([provider, providerAccountId])
-}
-
-model Session {
-  id           String   @id @default(cuid())
-  sessionToken String   @unique
-  userId       String
-  expires      DateTime
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
-model VerificationToken {
-  identifier String
-  token      String   @unique
-  expires    DateTime
-
-  @@unique([identifier, token])
+  provider = "postgresql"
 }
 
 // ============================================
@@ -56,7 +16,7 @@ model Organization {
   name      String
   slug      String   @unique
   plan      String   @default("starter") // starter | professional | enterprise
-  settings  String   @default("{}") // JSON
+  settings  Json     @default("{}")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -73,21 +33,17 @@ model Organization {
 }
 
 model User {
-  id        String   @id @default(cuid())
+  id        String   @id // Supabase auth user UUID
   orgId     String?
   email     String   @unique
   name      String?
-  password  String?
   role      String   @default("member") // admin | manager | member
   avatarUrl String?
-  settings  String   @default("{}") // JSON
-  emailVerified DateTime?
+  settings  Json     @default("{}")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   organization Organization? @relation(fields: [orgId], references: [id])
-  accounts     Account[]
-  sessions     Session[]
 }
 
 model Employee {
@@ -106,8 +62,8 @@ model Employee {
   phoneNumber  String?
   slackUserId  String?
 
-  // Configuration (JSON)
-  config String @default("{}") // EmployeeConfig JSON
+  // Configuration
+  config Json @default("{}")
 
   // Performance
   autonomyScore   Float @default(0)
@@ -143,8 +99,8 @@ model Task {
   status         String   @default("queued") // queued | planning | in_progress | awaiting_approval | awaiting_input | escalated | completed | failed
   priority       Int      @default(50) // 0-100
   confidenceScore Float?
-  plan           String?  // JSON
-  result         String?  // JSON
+  plan           Json?
+  result         Json?
   assignedBy     String?
   assignedByName String?
   dueAt          DateTime?
@@ -169,10 +125,10 @@ model Approval {
   employeeRole    String?
   taskId          String?
   actionType      String
-  proposedAction  String   @default("{}") // JSON
+  proposedAction  Json     @default("{}")
   reasoning       String
   confidenceScore Float
-  context         String?  // JSON
+  context         Json?
   status          String   @default("pending") // pending | approved | modified | rejected
   resolvedBy      String?
   resolutionFeedback String?
@@ -193,7 +149,7 @@ model Escalation {
   employeeRole   String?
   taskId         String?
   reason         String
-  context        String   @default("{}") // JSON
+  context        Json     @default("{}")
   recommendation String?
   urgency        String   @default("medium") // low | medium | high | critical
   status         String   @default("open") // open | resolved | dismissed
@@ -222,7 +178,7 @@ model Message {
   toAddress   String?
   subject     String?
   body        String
-  metadata    String   @default("{}") // JSON
+  metadata    Json     @default("{}")
   taskId      String?
   createdAt   DateTime @default(now())
 
@@ -243,7 +199,7 @@ model KnowledgeItem {
   content     String
   contentHash String
   chunkIndex  Int      @default(0)
-  metadata    String   @default("{}") // JSON
+  metadata    Json     @default("{}")
   status      String   @default("active") // active | deprecated | archived
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
@@ -260,7 +216,7 @@ model Integration {
   orgId        String
   employeeId   String?
   provider     String
-  scopes       String   @default("[]") // JSON array
+  scopes       Json     @default("[]")
   status       String   @default("active") // active | expired | revoked
   lastSyncedAt DateTime?
   createdAt    DateTime @default(now())
@@ -281,7 +237,7 @@ model Handoff {
   toEmployeeId     String
   toEmployeeName   String
   reason           String
-  contextPackage   String   @default("{}") // JSON
+  contextPackage   Json     @default("{}")
   status           String   @default("pending") // pending | accepted | rejected | completed
   approvedBy       String?
   createdAt        DateTime @default(now())
@@ -305,12 +261,12 @@ model Contact {
   company            String?
   companyId          String?
   title              String?
-  labels             String   @default("[]") // JSON array
+  labels             Json     @default("[]")
   interactionCount   Int      @default(0)
   lastInteractionAt  DateTime?
   sentimentScore     Float?
-  assignedEmployeeIds String  @default("[]") // JSON array
-  metadata           String   @default("{}") // JSON
+  assignedEmployeeIds Json    @default("[]")
+  metadata           Json     @default("{}")
   createdAt          DateTime @default(now())
   updatedAt          DateTime @updatedAt
 
@@ -324,7 +280,7 @@ model Company {
   domain     String?
   industry   String?
   size       String?
-  contactIds String   @default("[]") // JSON array
+  contactIds Json     @default("[]")
   dealValue  Float?
   stage      String?
   createdAt  DateTime @default(now())
@@ -346,9 +302,9 @@ model AuditLog {
   resourceType  String
   resourceId    String
   resourceName  String?
-  details       String   @default("{}") // JSON
-  previousState String?  // JSON
-  newState      String?  // JSON
+  details       Json     @default("{}")
+  previousState Json?
+  newState      Json?
   ipAddress     String?
   severity      String   @default("info") // info | warning | critical
   timestamp     DateTime @default(now())
