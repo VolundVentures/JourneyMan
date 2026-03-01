@@ -105,7 +105,7 @@ export default function SettingsPage() {
               <p className="text-sm text-neutral-700">Pause All AI Employees</p>
               <p className="text-xs text-neutral-500">Immediately stop all AI employee activity</p>
             </div>
-            <Button variant="outline" size="sm" className="border-amber-200 text-amber-600 hover:bg-amber-950/30">
+            <Button variant="outline" size="sm" className="border-amber-200 text-amber-600 hover:bg-amber-50">
               Pause All
             </Button>
           </div>

@@ -107,7 +107,7 @@ export default function EmployeeProfilePage() {
               <Button variant="outline" size="sm"><Play className="w-4 h-4" />Resume</Button>
             ) : null}
             <Button variant="ghost" size="sm"><Settings className="w-4 h-4" /></Button>
-            <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-300 hover:bg-red-950/30">
+            <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-500 hover:bg-red-50">
               <Trash2 className="w-4 h-4" />
             </Button>
           </div>
@@ -314,7 +314,7 @@ export default function EmployeeProfilePage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
                   <label className="block text-xs text-neutral-500 uppercase tracking-wider mb-2">Communication Tone</label>
-                  <select className="w-full rounded-lg border border-neutral-300 bg-neutral-100 px-3 py-2 text-sm text-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-400">
+                  <select className="w-full rounded-lg border border-neutral-300 bg-white px-3 py-2 text-sm text-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-400">
                     <option value="professional" selected={employee.config.communicationTone === 'professional'}>Professional</option>
                     <option value="casual" selected={employee.config.communicationTone === 'casual'}>Casual</option>
                     <option value="formal" selected={employee.config.communicationTone === 'formal'}>Formal</option>
@@ -323,7 +323,7 @@ export default function EmployeeProfilePage() {
 
                 <div>
                   <label className="block text-xs text-neutral-500 uppercase tracking-wider mb-2">Proactivity Level</label>
-                  <select className="w-full rounded-lg border border-neutral-300 bg-neutral-100 px-3 py-2 text-sm text-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-400">
+                  <select className="w-full rounded-lg border border-neutral-300 bg-white px-3 py-2 text-sm text-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-400">
                     <option value="low" selected={employee.config.proactivityLevel === 'low'}>Low</option>
                     <option value="medium" selected={employee.config.proactivityLevel === 'medium'}>Medium</option>
                     <option value="high" selected={employee.config.proactivityLevel === 'high'}>High</option>
@@ -332,7 +332,7 @@ export default function EmployeeProfilePage() {
 
                 <div>
                   <label className="block text-xs text-neutral-500 uppercase tracking-wider mb-2">Autonomy Mode</label>
-                  <select className="w-full rounded-lg border border-neutral-300 bg-neutral-100 px-3 py-2 text-sm text-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-400">
+                  <select className="w-full rounded-lg border border-neutral-300 bg-white px-3 py-2 text-sm text-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-400">
                     <option value="supervised" selected={employee.config.autonomyMode === 'supervised'}>Supervised</option>
                     <option value="semi-autonomous" selected={employee.config.autonomyMode === 'semi-autonomous'}>Semi-Autonomous</option>
                     <option value="autonomous" selected={employee.config.autonomyMode === 'autonomous'}>Autonomous</option>
