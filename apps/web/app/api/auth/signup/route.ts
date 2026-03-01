@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
-import { db } from '@/lib/db';
+import type { Database } from '@/lib/database.types';
 
 // Use service role key for admin operations (creating users server-side)
-const supabaseAdmin = createClient(
+const supabaseAdmin = createClient<Database>(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 );
@@ -27,9 +27,11 @@ export async function POST(req: Request) {
     }
 
     // Check if user already exists in our app database
-    const existingUser = await db.user.findUnique({
-      where: { email },
-    });
+    const { data: existingUser } = await supabaseAdmin
+      .from('users')
+      .select('id')
+      .eq('email', email)
+      .single();
 
     if (existingUser) {
       return NextResponse.json(
@@ -62,26 +64,44 @@ export async function POST(req: Request) {
         .replace(/[^a-z0-9]+/g, '-')
         .replace(/^-|-$/g, '');
 
-      const org = await db.organization.create({
-        data: {
+      const { data: org, error: orgError } = await supabaseAdmin
+        .from('organizations')
+        .insert({
           name: company,
           slug: `${slug}-${Date.now()}`,
           plan: 'starter',
-        },
-      });
+        })
+        .select('id')
+        .single();
+
+      if (orgError) {
+        return NextResponse.json(
+          { error: 'Failed to create organization' },
+          { status: 500 }
+        );
+      }
       orgId = org.id;
     }
 
     // Create user profile in our app database
-    const user = await db.user.create({
-      data: {
+    const { data: user, error: userError } = await supabaseAdmin
+      .from('users')
+      .insert({
         id: authData.user.id,
         email,
         name,
         role: orgId ? 'admin' : 'member',
-        orgId,
-      },
-    });
+        org_id: orgId,
+      })
+      .select('id, email, name')
+      .single();
+
+    if (userError) {
+      return NextResponse.json(
+        { error: 'Failed to create user profile' },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json({
       id: user.id,

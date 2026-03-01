@@ -13,19 +13,20 @@ export async function auth() {
 
   if (!user) return null;
 
-  // Fetch the app-level user profile
-  const profile = await db.user.findUnique({
-    where: { id: user.id },
-    include: { organization: true },
-  });
+  // Fetch the app-level user profile with organization
+  const { data: profile } = await db
+    .from('users')
+    .select('*, organization:organizations(*)')
+    .eq('id', user.id)
+    .single();
 
   return {
     id: user.id,
     email: user.email!,
     name: profile?.name ?? user.user_metadata?.name ?? null,
     role: profile?.role ?? 'member',
-    orgId: profile?.orgId ?? null,
-    avatarUrl: profile?.avatarUrl ?? null,
+    orgId: profile?.org_id ?? null,
+    avatarUrl: profile?.avatar_url ?? null,
     organization: profile?.organization ?? null,
   };
 }

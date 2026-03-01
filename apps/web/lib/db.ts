@@ -1,15 +1,9 @@
-import { PrismaClient } from '@/lib/generated/prisma/client';
-import { PrismaPg } from '@prisma/adapter-pg';
+import { createClient } from '@supabase/supabase-js';
+import type { Database } from './database.types';
 
-function createPrismaClient() {
-  const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL! });
-  return new PrismaClient({ adapter });
-}
-
-const globalForPrisma = globalThis as unknown as {
-  prisma: PrismaClient | undefined;
-};
-
-export const db = globalForPrisma.prisma ?? createPrismaClient();
-
-if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = db;
+// Server-side Supabase client with service role key.
+// Bypasses RLS — use only in API routes and server components.
+export const db = createClient<Database>(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
+);
