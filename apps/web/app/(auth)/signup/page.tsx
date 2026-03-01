@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { ArrowRight, Eye, EyeOff, AlertCircle } from 'lucide-react';
-import { signIn } from 'next-auth/react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
@@ -42,13 +41,24 @@ export default function SignupPage() {
       }
 
       // Auto sign-in after signup
-      const result = await signIn('credentials', {
-        email,
-        password,
-        redirect: false,
+      const csrfRes = await fetch('/api/auth/csrf');
+      const { csrfToken } = await csrfRes.json();
+
+      const signInRes = await fetch('/api/auth/callback/credentials', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({
+          csrfToken,
+          email,
+          password,
+          redirect: 'false',
+          json: 'true',
+        }),
+        redirect: 'follow',
       });
 
-      if (result?.error) {
+      const url = new URL(signInRes.url);
+      if (url.searchParams.get('error')) {
         setError('Account created but sign-in failed. Please log in manually.');
         setLoading(false);
       } else {

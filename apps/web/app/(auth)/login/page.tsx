@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { ArrowRight, Eye, EyeOff, AlertCircle } from 'lucide-react';
-import { signIn } from 'next-auth/react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
@@ -18,17 +17,35 @@ export default function LoginPage() {
     setError('');
     setLoading(true);
 
-    const result = await signIn('credentials', {
-      email,
-      password,
-      redirect: false,
-    });
+    try {
+      // Get CSRF token
+      const csrfRes = await fetch('/api/auth/csrf');
+      const { csrfToken } = await csrfRes.json();
 
-    if (result?.error) {
-      setError('Invalid email or password');
+      // Sign in via NextAuth credentials callback
+      const res = await fetch('/api/auth/callback/credentials', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({
+          csrfToken,
+          email,
+          password,
+          redirect: 'false',
+          json: 'true',
+        }),
+        redirect: 'follow',
+      });
+
+      const url = new URL(res.url);
+      if (url.searchParams.get('error')) {
+        setError('Invalid email or password');
+        setLoading(false);
+      } else {
+        window.location.href = '/dashboard';
+      }
+    } catch {
+      setError('Something went wrong. Please try again.');
       setLoading(false);
-    } else {
-      window.location.href = '/dashboard';
     }
   };
 
