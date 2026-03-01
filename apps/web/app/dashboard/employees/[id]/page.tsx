@@ -40,8 +40,8 @@ export default function EmployeeProfilePage() {
   if (!employee) {
     return (
       <div className="flex flex-col items-center justify-center py-20">
-        <p className="text-neutral-400">Employee not found.</p>
-        <Link href="/dashboard/employees" className="mt-4 text-neutral-300 hover:text-white">
+        <p className="text-neutral-500">Employee not found.</p>
+        <Link href="/dashboard/employees" className="mt-4 text-neutral-600 hover:text-neutral-900">
           Back to Employees
         </Link>
       </div>
@@ -58,28 +58,28 @@ export default function EmployeeProfilePage() {
     <div className="space-y-6 animate-fade-in">
       <Link
         href="/dashboard/employees"
-        className="inline-flex items-center gap-1.5 text-sm text-neutral-500 hover:text-neutral-300 transition-colors"
+        className="inline-flex items-center gap-1.5 text-sm text-neutral-500 hover:text-neutral-600 transition-colors"
       >
         <ArrowLeft className="w-4 h-4" />
         Back to Employees
       </Link>
 
       {/* Header */}
-      <div className="rounded-xl border border-neutral-800 bg-neutral-900 p-6">
+      <div className="rounded-xl border border-neutral-200 bg-white p-6">
         <div className="flex flex-col md:flex-row md:items-start gap-6">
           <Avatar name={employee.name} emoji={emoji} size="xl" />
 
           <div className="flex-1 space-y-3">
             <div className="flex flex-col sm:flex-row sm:items-center gap-3">
-              <h1 className="text-2xl font-bold text-neutral-50">{employee.name}</h1>
+              <h1 className="text-2xl font-bold text-neutral-900">{employee.name}</h1>
               <StatusBadge status={employee.status} size="lg" />
             </div>
 
-            <p className="text-neutral-400">{employee.roleTitle} · {employee.department}</p>
+            <p className="text-neutral-500">{employee.roleTitle} · {employee.department}</p>
 
             <div className="flex flex-wrap items-center gap-4 text-sm text-neutral-500">
               {employee.reportsToName && (
-                <span>Reports to <span className="text-neutral-300">{employee.reportsToName}</span></span>
+                <span>Reports to <span className="text-neutral-600">{employee.reportsToName}</span></span>
               )}
               <span className="flex items-center gap-1">
                 <Calendar className="w-3.5 h-3.5" />
@@ -107,7 +107,7 @@ export default function EmployeeProfilePage() {
               <Button variant="outline" size="sm"><Play className="w-4 h-4" />Resume</Button>
             ) : null}
             <Button variant="ghost" size="sm"><Settings className="w-4 h-4" /></Button>
-            <Button variant="ghost" size="sm" className="text-red-400 hover:text-red-300 hover:bg-red-950/30">
+            <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-300 hover:bg-red-950/30">
               <Trash2 className="w-4 h-4" />
             </Button>
           </div>
@@ -130,12 +130,12 @@ export default function EmployeeProfilePage() {
               <p className="text-center py-12 text-neutral-500">No recent activity.</p>
             ) : (
               employeeActivities.map((activity) => (
-                <div key={activity.id} className="flex items-start gap-3 p-3 rounded-lg hover:bg-neutral-800/30 transition-colors">
-                  <div className="w-8 h-8 rounded-full bg-neutral-800 border border-neutral-700 flex items-center justify-center shrink-0">
-                    <Target className="w-4 h-4 text-neutral-400" />
+                <div key={activity.id} className="flex items-start gap-3 p-3 rounded-lg hover:bg-neutral-50 transition-colors">
+                  <div className="w-8 h-8 rounded-full bg-neutral-100 border border-neutral-300 flex items-center justify-center shrink-0">
+                    <Target className="w-4 h-4 text-neutral-500" />
                   </div>
                   <div className="flex-1">
-                    <p className="text-sm text-neutral-300">{activity.description}</p>
+                    <p className="text-sm text-neutral-600">{activity.description}</p>
                     <p className="text-[10px] text-neutral-500 mt-0.5 font-mono">{formatRelativeTime(activity.timestamp)}</p>
                   </div>
                 </div>
@@ -145,10 +145,10 @@ export default function EmployeeProfilePage() {
         </TabsContent>
 
         <TabsContent value="tasks">
-          <div className="rounded-xl border border-neutral-800 overflow-hidden">
+          <div className="rounded-xl border border-neutral-200 overflow-hidden">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-neutral-800">
+                <tr className="border-b border-neutral-200">
                   <th className="text-left px-4 py-3 text-xs font-medium text-neutral-500 uppercase tracking-wider">Task</th>
                   <th className="text-left px-4 py-3 text-xs font-medium text-neutral-500 uppercase tracking-wider">Status</th>
                   <th className="text-left px-4 py-3 text-xs font-medium text-neutral-500 uppercase tracking-wider">Priority</th>
@@ -159,9 +159,9 @@ export default function EmployeeProfilePage() {
               </thead>
               <tbody>
                 {employeeTasks.map((task) => (
-                  <tr key={task.id} className="border-b border-neutral-800/50 hover:bg-neutral-800/30 transition-colors">
+                  <tr key={task.id} className="border-b border-neutral-200 hover:bg-neutral-50 transition-colors">
                     <td className="px-4 py-3">
-                      <p className="text-sm text-neutral-200">{task.title}</p>
+                      <p className="text-sm text-neutral-700">{task.title}</p>
                       {task.description && (
                         <p className="text-xs text-neutral-500 mt-0.5 truncate max-w-xs">{task.description}</p>
                       )}
@@ -176,7 +176,7 @@ export default function EmployeeProfilePage() {
                         <div className="w-16">
                           <Progress value={task.priority} />
                         </div>
-                        <span className="font-mono text-xs text-neutral-400">{task.priority}</span>
+                        <span className="font-mono text-xs text-neutral-500">{task.priority}</span>
                       </div>
                     </td>
                     <td className="px-4 py-3">
@@ -186,8 +186,8 @@ export default function EmployeeProfilePage() {
                       {task.confidenceScore ? (
                         <span className={cn(
                           'font-mono text-sm',
-                          task.confidenceScore >= 0.85 ? 'text-emerald-400' :
-                          task.confidenceScore >= 0.60 ? 'text-amber-400' : 'text-red-400'
+                          task.confidenceScore >= 0.85 ? 'text-emerald-600' :
+                          task.confidenceScore >= 0.60 ? 'text-amber-600' : 'text-red-600'
                         )}>
                           {Math.round(task.confidenceScore * 100)}%
                         </span>
@@ -209,33 +209,33 @@ export default function EmployeeProfilePage() {
           {performance ? (
             <div className="space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div className="rounded-xl border border-neutral-800 bg-neutral-900 p-4">
+                <div className="rounded-xl border border-neutral-200 bg-white p-4">
                   <p className="text-xs text-neutral-500 uppercase tracking-wider">Tasks This Week</p>
-                  <p className="mt-2 text-2xl font-bold text-neutral-100">{performance.tasksCompletedWeek}</p>
+                  <p className="mt-2 text-2xl font-bold text-neutral-800">{performance.tasksCompletedWeek}</p>
                   <div className="mt-1 flex items-center gap-1">
                     <TrendingUp className="w-3 h-3 text-emerald-500" />
                     <span className="text-xs text-emerald-500">+12% vs last week</span>
                   </div>
                 </div>
-                <div className="rounded-xl border border-neutral-800 bg-neutral-900 p-4">
+                <div className="rounded-xl border border-neutral-200 bg-white p-4">
                   <p className="text-xs text-neutral-500 uppercase tracking-wider">Autonomy Rate</p>
-                  <p className="mt-2 text-2xl font-bold text-neutral-100">
+                  <p className="mt-2 text-2xl font-bold text-neutral-800">
                     {Math.round(performance.autonomousCompletionRate * 100)}%
                   </p>
                   <Progress value={performance.autonomousCompletionRate * 100} className="mt-2" />
                 </div>
-                <div className="rounded-xl border border-neutral-800 bg-neutral-900 p-4">
+                <div className="rounded-xl border border-neutral-200 bg-white p-4">
                   <p className="text-xs text-neutral-500 uppercase tracking-wider">Avg Response</p>
-                  <p className="mt-2 text-2xl font-bold text-neutral-100">
+                  <p className="mt-2 text-2xl font-bold text-neutral-800">
                     {(performance.avgResponseTimeMs / 1000).toFixed(1)}s
                   </p>
                   <p className="mt-1 text-xs text-neutral-500">p95: {(performance.avgResponseTimeP95Ms / 1000).toFixed(1)}s</p>
                 </div>
-                <div className="rounded-xl border border-neutral-800 bg-neutral-900 p-4">
+                <div className="rounded-xl border border-neutral-200 bg-white p-4">
                   <p className="text-xs text-neutral-500 uppercase tracking-wider">Escalation Rate</p>
                   <p className={cn(
                     'mt-2 text-2xl font-bold',
-                    performance.escalationRate <= 0.05 ? 'text-emerald-400' : 'text-amber-400'
+                    performance.escalationRate <= 0.05 ? 'text-emerald-600' : 'text-amber-600'
                   )}>
                     {Math.round(performance.escalationRate * 100)}%
                   </p>
@@ -246,28 +246,28 @@ export default function EmployeeProfilePage() {
                 </div>
               </div>
 
-              <div className="rounded-xl border border-neutral-800 bg-neutral-900 p-6">
-                <h3 className="text-lg font-semibold text-neutral-200 mb-4">Performance Summary</h3>
+              <div className="rounded-xl border border-neutral-200 bg-white p-6">
+                <h3 className="text-lg font-semibold text-neutral-700 mb-4">Performance Summary</h3>
                 <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
                   <div>
                     <p className="text-xs text-neutral-500">Accuracy Rate</p>
-                    <p className="mt-1 font-mono text-lg text-neutral-200">{Math.round(performance.accuracyRate * 100)}%</p>
+                    <p className="mt-1 font-mono text-lg text-neutral-700">{Math.round(performance.accuracyRate * 100)}%</p>
                   </div>
                   <div>
                     <p className="text-xs text-neutral-500">Manager Satisfaction</p>
-                    <p className="mt-1 font-mono text-lg text-neutral-200">{performance.managerSatisfactionScore}/5.0</p>
+                    <p className="mt-1 font-mono text-lg text-neutral-700">{performance.managerSatisfactionScore}/5.0</p>
                   </div>
                   <div>
                     <p className="text-xs text-neutral-500">Cost Per Task</p>
-                    <p className="mt-1 font-mono text-lg text-neutral-200">${performance.costPerTask.toFixed(2)}</p>
+                    <p className="mt-1 font-mono text-lg text-neutral-700">${performance.costPerTask.toFixed(2)}</p>
                   </div>
                   <div>
                     <p className="text-xs text-neutral-500">Tasks Today</p>
-                    <p className="mt-1 font-mono text-lg text-neutral-200">{performance.tasksCompletedToday}</p>
+                    <p className="mt-1 font-mono text-lg text-neutral-700">{performance.tasksCompletedToday}</p>
                   </div>
                   <div>
                     <p className="text-xs text-neutral-500">Tasks This Month</p>
-                    <p className="mt-1 font-mono text-lg text-neutral-200">{performance.tasksCompletedMonth}</p>
+                    <p className="mt-1 font-mono text-lg text-neutral-700">{performance.tasksCompletedMonth}</p>
                   </div>
                 </div>
               </div>
@@ -286,18 +286,18 @@ export default function EmployeeProfilePage() {
 
             <div className="space-y-3">
               {mockMemories.map((memory) => (
-                <div key={memory.id} className="rounded-xl border border-neutral-800 bg-neutral-900 p-4 hover:bg-neutral-800/80 transition-colors">
+                <div key={memory.id} className="rounded-xl border border-neutral-200 bg-white p-4 hover:bg-neutral-100 transition-colors">
                   <div className="flex items-start justify-between gap-4">
                     <div className="space-y-1.5">
                       <div className="flex items-center gap-2">
                         <Badge variant="default">{memory.category}</Badge>
                         <span className="text-xs text-neutral-500 font-medium">{memory.subject}</span>
                       </div>
-                      <p className="text-sm text-neutral-300 leading-relaxed">{memory.content}</p>
+                      <p className="text-sm text-neutral-600 leading-relaxed">{memory.content}</p>
                     </div>
                     <div className="text-right shrink-0">
                       <p className="font-mono text-xs text-neutral-500">{Math.round(memory.confidence * 100)}% conf.</p>
-                      <p className="text-[10px] text-neutral-600 mt-0.5">{memory.sourceCount} sources</p>
+                      <p className="text-[10px] text-neutral-400 mt-0.5">{memory.sourceCount} sources</p>
                     </div>
                   </div>
                 </div>
@@ -308,13 +308,13 @@ export default function EmployeeProfilePage() {
 
         <TabsContent value="config">
           <div className="max-w-2xl space-y-6">
-            <div className="rounded-xl border border-neutral-800 bg-neutral-900 p-6 space-y-5">
-              <h3 className="text-lg font-semibold text-neutral-200">Behavioral Settings</h3>
+            <div className="rounded-xl border border-neutral-200 bg-white p-6 space-y-5">
+              <h3 className="text-lg font-semibold text-neutral-700">Behavioral Settings</h3>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
                   <label className="block text-xs text-neutral-500 uppercase tracking-wider mb-2">Communication Tone</label>
-                  <select className="w-full rounded-lg border border-neutral-700 bg-neutral-800 px-3 py-2 text-sm text-neutral-200 focus:outline-none focus:ring-2 focus:ring-neutral-500">
+                  <select className="w-full rounded-lg border border-neutral-300 bg-neutral-100 px-3 py-2 text-sm text-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-400">
                     <option value="professional" selected={employee.config.communicationTone === 'professional'}>Professional</option>
                     <option value="casual" selected={employee.config.communicationTone === 'casual'}>Casual</option>
                     <option value="formal" selected={employee.config.communicationTone === 'formal'}>Formal</option>
@@ -323,7 +323,7 @@ export default function EmployeeProfilePage() {
 
                 <div>
                   <label className="block text-xs text-neutral-500 uppercase tracking-wider mb-2">Proactivity Level</label>
-                  <select className="w-full rounded-lg border border-neutral-700 bg-neutral-800 px-3 py-2 text-sm text-neutral-200 focus:outline-none focus:ring-2 focus:ring-neutral-500">
+                  <select className="w-full rounded-lg border border-neutral-300 bg-neutral-100 px-3 py-2 text-sm text-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-400">
                     <option value="low" selected={employee.config.proactivityLevel === 'low'}>Low</option>
                     <option value="medium" selected={employee.config.proactivityLevel === 'medium'}>Medium</option>
                     <option value="high" selected={employee.config.proactivityLevel === 'high'}>High</option>
@@ -332,7 +332,7 @@ export default function EmployeeProfilePage() {
 
                 <div>
                   <label className="block text-xs text-neutral-500 uppercase tracking-wider mb-2">Autonomy Mode</label>
-                  <select className="w-full rounded-lg border border-neutral-700 bg-neutral-800 px-3 py-2 text-sm text-neutral-200 focus:outline-none focus:ring-2 focus:ring-neutral-500">
+                  <select className="w-full rounded-lg border border-neutral-300 bg-neutral-100 px-3 py-2 text-sm text-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-400">
                     <option value="supervised" selected={employee.config.autonomyMode === 'supervised'}>Supervised</option>
                     <option value="semi-autonomous" selected={employee.config.autonomyMode === 'semi-autonomous'}>Semi-Autonomous</option>
                     <option value="autonomous" selected={employee.config.autonomyMode === 'autonomous'}>Autonomous</option>
@@ -341,16 +341,16 @@ export default function EmployeeProfilePage() {
 
                 <div>
                   <label className="block text-xs text-neutral-500 uppercase tracking-wider mb-2">Timezone</label>
-                  <Input value={employee.config.workingHours.timezone} readOnly className="bg-neutral-800" />
+                  <Input value={employee.config.workingHours.timezone} readOnly className="bg-neutral-100" />
                 </div>
               </div>
 
               <div>
                 <label className="block text-xs text-neutral-500 uppercase tracking-wider mb-2">Working Hours</label>
                 <div className="flex items-center gap-3">
-                  <Input value={employee.config.workingHours.start} className="w-24 bg-neutral-800" readOnly />
+                  <Input value={employee.config.workingHours.start} className="w-24 bg-neutral-100" readOnly />
                   <span className="text-neutral-500">to</span>
-                  <Input value={employee.config.workingHours.end} className="w-24 bg-neutral-800" readOnly />
+                  <Input value={employee.config.workingHours.end} className="w-24 bg-neutral-100" readOnly />
                 </div>
               </div>
 
@@ -358,24 +358,24 @@ export default function EmployeeProfilePage() {
                 <label className="block text-xs text-neutral-500 uppercase tracking-wider mb-2">Confidence Thresholds</label>
                 <div className="grid grid-cols-3 gap-4">
                   <div>
-                    <p className="text-xs text-neutral-400 mb-1">Execute</p>
+                    <p className="text-xs text-neutral-500 mb-1">Execute</p>
                     <div className="flex items-center gap-2">
                       <Progress value={employee.config.confidenceThresholds.execute * 100} className="flex-1" indicatorClassName="bg-emerald-500" />
-                      <span className="font-mono text-xs text-neutral-300">{Math.round(employee.config.confidenceThresholds.execute * 100)}%</span>
+                      <span className="font-mono text-xs text-neutral-600">{Math.round(employee.config.confidenceThresholds.execute * 100)}%</span>
                     </div>
                   </div>
                   <div>
-                    <p className="text-xs text-neutral-400 mb-1">Recommend</p>
+                    <p className="text-xs text-neutral-500 mb-1">Recommend</p>
                     <div className="flex items-center gap-2">
                       <Progress value={employee.config.confidenceThresholds.recommend * 100} className="flex-1" indicatorClassName="bg-amber-500" />
-                      <span className="font-mono text-xs text-neutral-300">{Math.round(employee.config.confidenceThresholds.recommend * 100)}%</span>
+                      <span className="font-mono text-xs text-neutral-600">{Math.round(employee.config.confidenceThresholds.recommend * 100)}%</span>
                     </div>
                   </div>
                   <div>
-                    <p className="text-xs text-neutral-400 mb-1">Escalate Below</p>
+                    <p className="text-xs text-neutral-500 mb-1">Escalate Below</p>
                     <div className="flex items-center gap-2">
                       <Progress value={employee.config.confidenceThresholds.escalateBelow * 100} className="flex-1" indicatorClassName="bg-red-500" />
-                      <span className="font-mono text-xs text-neutral-300">{Math.round(employee.config.confidenceThresholds.escalateBelow * 100)}%</span>
+                      <span className="font-mono text-xs text-neutral-600">{Math.round(employee.config.confidenceThresholds.escalateBelow * 100)}%</span>
                     </div>
                   </div>
                 </div>
@@ -390,7 +390,7 @@ export default function EmployeeProfilePage() {
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-neutral-800">
+              <div className="pt-4 border-t border-neutral-200">
                 <Button>Save Configuration</Button>
               </div>
             </div>

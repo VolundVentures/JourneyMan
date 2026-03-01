@@ -15,7 +15,7 @@ export default function DashboardLayout({
 
   return (
     <ToastProvider>
-      <div className="flex h-screen overflow-hidden bg-neutral-950">
+      <div className="flex h-screen overflow-hidden bg-white">
         <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
         <div className="flex-1 flex flex-col overflow-hidden">
           <Topbar onMenuClick={() => setSidebarOpen(true)} />

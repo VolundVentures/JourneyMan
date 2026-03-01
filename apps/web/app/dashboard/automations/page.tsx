@@ -116,7 +116,7 @@ export default function AutomationsPage() {
     <div className="space-y-6 animate-fade-in">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-neutral-50 flex items-center gap-3">
+          <h1 className="text-2xl font-bold text-neutral-900 flex items-center gap-3">
             <Zap className="w-6 h-6" />
             Standing Instructions
           </h1>
@@ -152,22 +152,22 @@ export default function AutomationsPage() {
 
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
-                    <h3 className="text-sm font-semibold text-neutral-100">{rule.name}</h3>
+                    <h3 className="text-sm font-semibold text-neutral-800">{rule.name}</h3>
                     <Badge variant="secondary" className="text-[10px]">{rule.category}</Badge>
                   </div>
 
-                  <div className="bg-neutral-800/50 rounded-lg p-3 mb-3">
+                  <div className="bg-neutral-100 rounded-lg p-3 mb-3">
                     <div className="flex items-center gap-2 text-xs">
                       <span className="text-neutral-500 font-semibold uppercase">WHEN</span>
-                      <span className="text-amber-400">{rule.trigger}</span>
+                      <span className="text-amber-600">{rule.trigger}</span>
                     </div>
                     <div className="flex items-center gap-2 text-xs mt-2">
-                      <ArrowRight className="w-3 h-3 text-neutral-600" />
+                      <ArrowRight className="w-3 h-3 text-neutral-500" />
                       <span className="text-lg">{employeeEmojis[rule.employeeId]}</span>
-                      <span className="text-neutral-400 font-medium">{rule.employeeName}</span>
+                      <span className="text-neutral-500 font-medium">{rule.employeeName}</span>
                       <span className="text-neutral-500">should</span>
                     </div>
-                    <p className="text-sm text-neutral-300 mt-1 ml-5">{rule.instruction}</p>
+                    <p className="text-sm text-neutral-600 mt-1 ml-5">{rule.instruction}</p>
                   </div>
 
                   <div className="flex items-center gap-4 text-xs text-neutral-500">

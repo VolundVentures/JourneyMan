@@ -41,11 +41,11 @@ export function ActivityFeed({ activities, limit = 6 }: ActivityFeedProps) {
   return (
     <div className="space-y-1">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-semibold text-neutral-200">Recent Activity</h3>
+        <h3 className="text-lg font-semibold text-neutral-700">Recent Activity</h3>
         {activities.length > limit && (
           <button
             onClick={() => setExpanded(!expanded)}
-            className="flex items-center gap-1 text-xs text-neutral-500 hover:text-neutral-300 transition-colors"
+            className="flex items-center gap-1 text-xs text-neutral-500 hover:text-neutral-600 transition-colors"
           >
             {expanded ? 'Show Less' : `Show All (${activities.length})`}
             {expanded ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
@@ -54,7 +54,7 @@ export function ActivityFeed({ activities, limit = 6 }: ActivityFeedProps) {
       </div>
 
       <div className="relative">
-        <div className="absolute left-[19px] top-2 bottom-2 w-px bg-neutral-800" />
+        <div className="absolute left-[19px] top-2 bottom-2 w-px bg-neutral-200" />
 
         <div className="space-y-0.5">
           {displayed.map((activity, i) => {
@@ -65,21 +65,21 @@ export function ActivityFeed({ activities, limit = 6 }: ActivityFeedProps) {
               <div
                 key={activity.id}
                 className={cn(
-                  'relative flex items-start gap-3 rounded-lg px-2 py-2.5 transition-colors hover:bg-neutral-800/30',
+                  'relative flex items-start gap-3 rounded-lg px-2 py-2.5 transition-colors hover:bg-neutral-50',
                   i === 0 && 'animate-slide-up'
                 )}
               >
-                <div className="relative z-10 flex items-center justify-center w-[38px] h-[38px] rounded-full bg-neutral-900 border border-neutral-800 shrink-0">
+                <div className="relative z-10 flex items-center justify-center w-[38px] h-[38px] rounded-full bg-white border border-neutral-200 shrink-0">
                   {emoji ? (
                     <span className="text-sm">{emoji}</span>
                   ) : (
-                    <IconComponent className="w-4 h-4 text-neutral-400" />
+                    <IconComponent className="w-4 h-4 text-neutral-500" />
                   )}
                 </div>
 
                 <div className="flex-1 min-w-0 pt-1">
-                  <p className="text-sm text-neutral-300">
-                    <span className="font-medium text-neutral-200">{activity.employeeName}</span>
+                  <p className="text-sm text-neutral-600">
+                    <span className="font-medium text-neutral-700">{activity.employeeName}</span>
                     {' · '}
                     {activity.description}
                   </p>

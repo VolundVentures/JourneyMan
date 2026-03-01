@@ -118,7 +118,7 @@ export default function SOPsPage() {
     <div className="space-y-6 animate-fade-in">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-neutral-50 flex items-center gap-3">
+          <h1 className="text-2xl font-bold text-neutral-900 flex items-center gap-3">
             <FileText className="w-6 h-6" />
             Standard Operating Procedures
           </h1>
@@ -145,7 +145,7 @@ export default function SOPsPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
         {filtered.map((sop) => (
           <Card key={sop.id} className={cn(
-            'hover:border-neutral-700 transition-all cursor-pointer',
+            'hover:border-neutral-300 transition-all cursor-pointer',
             sop.status === 'draft' && 'border-dashed'
           )}>
             <CardHeader className="pb-3">
@@ -175,7 +175,7 @@ export default function SOPsPage() {
                     <div>
                       <div className="flex justify-between text-xs mb-1">
                         <span className="text-neutral-500">Compliance</span>
-                        <span className="text-neutral-300">{sop.complianceRate}%</span>
+                        <span className="text-neutral-600">{sop.complianceRate}%</span>
                       </div>
                       <Progress
                         value={sop.complianceRate}

@@ -36,10 +36,10 @@ const icons: Record<ToastType, React.ComponentType<{ className?: string }>> = {
 };
 
 const styles: Record<ToastType, string> = {
-  success: 'border-emerald-800/50 bg-emerald-950/50 text-emerald-400',
-  error: 'border-red-800/50 bg-red-950/50 text-red-400',
-  warning: 'border-amber-800/50 bg-amber-950/50 text-amber-400',
-  info: 'border-blue-800/50 bg-blue-950/50 text-blue-400',
+  success: 'border-emerald-200 bg-emerald-50 text-emerald-600',
+  error: 'border-red-200 bg-red-50 text-red-600',
+  warning: 'border-amber-200 bg-amber-50 text-amber-600',
+  info: 'border-blue-200 bg-blue-50 text-blue-600',
 };
 
 export function ToastProvider({ children }: { children: React.ReactNode }) {
@@ -73,14 +73,14 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
             >
               <Icon className="w-5 h-5 shrink-0 mt-0.5" />
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-neutral-50">{toast.title}</p>
+                <p className="text-sm font-medium text-neutral-900">{toast.title}</p>
                 {toast.description && (
                   <p className="text-xs mt-1 opacity-80">{toast.description}</p>
                 )}
               </div>
               <button
                 onClick={() => removeToast(toast.id)}
-                className="p-0.5 rounded text-neutral-500 hover:text-neutral-300"
+                className="p-0.5 rounded text-neutral-400 hover:text-neutral-600"
               >
                 <X className="w-3.5 h-3.5" />
               </button>

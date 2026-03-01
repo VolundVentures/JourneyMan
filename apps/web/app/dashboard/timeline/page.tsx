@@ -25,7 +25,7 @@ export default function TimelinePage() {
     <div className="space-y-6 animate-fade-in">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-neutral-50 flex items-center gap-3">
+          <h1 className="text-2xl font-bold text-neutral-900 flex items-center gap-3">
             <Calendar className="w-6 h-6" />
             Timeline
           </h1>
@@ -45,7 +45,7 @@ export default function TimelinePage() {
         <CardContent className="pt-6 overflow-x-auto">
           <div className="min-w-[800px]">
             {/* Header row */}
-            <div className="flex border-b border-neutral-800 pb-2 mb-4">
+            <div className="flex border-b border-neutral-200 pb-2 mb-4">
               <div className="w-40 shrink-0" />
               {days.map((day) => (
                 <div key={day} className="flex-1 text-center text-xs font-semibold text-neutral-500 uppercase">
@@ -61,12 +61,12 @@ export default function TimelinePage() {
             {tasksByEmployee.map(({ employee, tasks, utilization }) => {
               const emoji = employeeEmojis[employee.id] || '🤖';
               return (
-                <div key={employee.id} className="flex items-center py-3 border-b border-neutral-800/50 last:border-0">
+                <div key={employee.id} className="flex items-center py-3 border-b border-neutral-200 last:border-0">
                   <div className="w-40 shrink-0 flex items-center gap-2">
                     <span className="text-lg">{emoji}</span>
                     <div>
-                      <p className="text-sm font-medium text-neutral-200">{employee.name}</p>
-                      <p className="text-[10px] text-neutral-600">{employee.department}</p>
+                      <p className="text-sm font-medium text-neutral-700">{employee.name}</p>
+                      <p className="text-[10px] text-neutral-400">{employee.department}</p>
                     </div>
                   </div>
 
@@ -90,7 +90,7 @@ export default function TimelinePage() {
                               </div>
                             ))
                           ) : (
-                            <div className="flex-1 h-8 rounded bg-neutral-900/50 border border-neutral-800/30" />
+                            <div className="flex-1 h-8 rounded bg-white/50 border border-neutral-200" />
                           )}
                         </div>
                       );
@@ -120,19 +120,19 @@ export default function TimelinePage() {
       {/* Legend */}
       <div className="flex items-center gap-4 text-xs text-neutral-500">
         <span className="flex items-center gap-1.5">
-          <span className="w-3 h-3 rounded bg-emerald-950/50 border border-emerald-800/50" />
+          <span className="w-3 h-3 rounded bg-emerald-50 border border-emerald-200" />
           Completed
         </span>
         <span className="flex items-center gap-1.5">
-          <span className="w-3 h-3 rounded bg-neutral-800 border border-neutral-700/50" />
+          <span className="w-3 h-3 rounded bg-neutral-100 border border-neutral-300" />
           In Progress
         </span>
         <span className="flex items-center gap-1.5">
-          <span className="w-3 h-3 rounded bg-amber-950/50 border border-amber-800/50" />
+          <span className="w-3 h-3 rounded bg-amber-50 border border-amber-200" />
           Awaiting Approval
         </span>
         <span className="flex items-center gap-1.5">
-          <span className="w-3 h-3 rounded bg-red-950/50 border border-red-800/50" />
+          <span className="w-3 h-3 rounded bg-red-50 border border-red-200" />
           Escalated
         </span>
       </div>

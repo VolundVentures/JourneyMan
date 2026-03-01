@@ -52,11 +52,11 @@ const mockLiveFeeds: Record<string, ActivityLine[]> = {
 };
 
 const lineColors: Record<string, string> = {
-  completed: 'text-emerald-400',
-  deciding: 'text-amber-400',
-  escalation: 'text-red-400',
-  working: 'text-neutral-300',
-  thinking: 'text-blue-400',
+  completed: 'text-emerald-600',
+  deciding: 'text-amber-600',
+  escalation: 'text-red-600',
+  working: 'text-neutral-600',
+  thinking: 'text-blue-600',
 };
 
 const lineIcons: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -76,7 +76,7 @@ export default function MissionControlPage() {
     <div className="space-y-6 animate-fade-in">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-neutral-50 flex items-center gap-3">
+          <h1 className="text-2xl font-bold text-neutral-900 flex items-center gap-3">
             <Radio className="w-6 h-6" />
             Mission Control
           </h1>
@@ -84,7 +84,7 @@ export default function MissionControlPage() {
             Real-time monitoring of your entire AI workforce
           </p>
         </div>
-        <Badge variant="outline" className="animate-pulse-dot text-emerald-400 border-emerald-800">
+        <Badge variant="outline" className="animate-pulse-dot text-emerald-600 border-emerald-200">
           LIVE
         </Badge>
       </div>
@@ -102,7 +102,7 @@ export default function MissionControlPage() {
               key={emp.id}
               className={cn(
                 'cursor-pointer transition-all',
-                isSelected ? 'ring-1 ring-neutral-600' : 'hover:border-neutral-700'
+                isSelected ? 'ring-1 ring-neutral-300' : 'hover:border-neutral-300'
               )}
               onClick={() => setSelectedEmployee(isSelected ? null : emp.id)}
             >
@@ -125,21 +125,21 @@ export default function MissionControlPage() {
               </CardHeader>
               <CardContent>
                 {/* Terminal-like feed */}
-                <div className="bg-neutral-950 rounded-lg p-3 font-mono text-xs space-y-1.5 max-h-40 overflow-y-auto scrollbar-thin">
+                <div className="bg-white rounded-lg p-3 font-mono text-xs space-y-1.5 max-h-40 overflow-y-auto scrollbar-thin">
                   {feed.map((line) => {
                     const Icon = lineIcons[line.type];
                     return (
                       <div key={line.id} className={cn('flex items-start gap-2', lineColors[line.type])}>
-                        <span className="text-neutral-600 shrink-0">{line.time}</span>
+                        <span className="text-neutral-400 shrink-0">{line.time}</span>
                         <Icon className="w-3 h-3 mt-0.5 shrink-0" />
                         <span className="flex-1">{line.text}</span>
                         {line.confidence !== undefined && (
-                          <span className="text-neutral-600 shrink-0">{Math.round(line.confidence * 100)}%</span>
+                          <span className="text-neutral-400 shrink-0">{Math.round(line.confidence * 100)}%</span>
                         )}
                       </div>
                     );
                   })}
-                  <div className="flex items-center gap-2 text-neutral-600">
+                  <div className="flex items-center gap-2 text-neutral-400">
                     <span className="w-1.5 h-3 bg-neutral-500 animate-blink" />
                   </div>
                 </div>
@@ -151,7 +151,7 @@ export default function MissionControlPage() {
 
       {/* Expanded Employee View with Intervention */}
       {selectedEmployee && (
-        <Card className="border-neutral-700">
+        <Card className="border-neutral-300">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-base">
               <Eye className="w-4 h-4" />
@@ -162,17 +162,17 @@ export default function MissionControlPage() {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
               {/* Full Activity Log */}
               <div className="lg:col-span-2">
-                <div className="bg-neutral-950 rounded-lg p-4 font-mono text-xs space-y-2 max-h-64 overflow-y-auto scrollbar-thin">
+                <div className="bg-white rounded-lg p-4 font-mono text-xs space-y-2 max-h-64 overflow-y-auto scrollbar-thin">
                   {(mockLiveFeeds[selectedEmployee] || []).map((line) => {
                     const Icon = lineIcons[line.type];
                     return (
                       <div key={line.id} className={cn('flex items-start gap-2', lineColors[line.type])}>
-                        <span className="text-neutral-600 shrink-0 w-16">{line.time}</span>
+                        <span className="text-neutral-400 shrink-0 w-16">{line.time}</span>
                         <Icon className="w-3.5 h-3.5 mt-0.5 shrink-0" />
                         <div className="flex-1">
                           <span>{line.text}</span>
                           {line.confidence !== undefined && (
-                            <span className="ml-2 text-neutral-600">({Math.round(line.confidence * 100)}% confidence)</span>
+                            <span className="ml-2 text-neutral-400">({Math.round(line.confidence * 100)}% confidence)</span>
                           )}
                         </div>
                       </div>

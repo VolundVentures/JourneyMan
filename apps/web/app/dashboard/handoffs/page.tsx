@@ -30,10 +30,10 @@ const mockHandoffs: Handoff[] = [
 ];
 
 const statusColors: Record<string, string> = {
-  pending: 'text-amber-400 bg-amber-950/50',
-  approved: 'text-blue-400 bg-blue-950/50',
-  redirected: 'text-purple-400 bg-purple-950/50',
-  completed: 'text-emerald-400 bg-emerald-950/50',
+  pending: 'text-amber-600 bg-amber-50',
+  approved: 'text-blue-600 bg-blue-50',
+  redirected: 'text-purple-600 bg-purple-50',
+  completed: 'text-emerald-600 bg-emerald-50',
 };
 
 export default function HandoffsPage() {
@@ -45,7 +45,7 @@ export default function HandoffsPage() {
     <div className="space-y-6 animate-fade-in">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-neutral-50 flex items-center gap-3">
+          <h1 className="text-2xl font-bold text-neutral-900 flex items-center gap-3">
             <ArrowLeftRight className="w-6 h-6" />
             Employee Handoffs
           </h1>
@@ -64,7 +64,7 @@ export default function HandoffsPage() {
             onClick={() => setFilter(f)}
             className={cn(
               'px-3 py-1.5 rounded-lg text-sm font-medium transition-colors',
-              filter === f ? 'bg-neutral-800 text-neutral-50' : 'text-neutral-500 hover:text-neutral-300'
+              filter === f ? 'bg-neutral-100 text-neutral-900' : 'text-neutral-500 hover:text-neutral-600'
             )}
           >
             {f.charAt(0).toUpperCase() + f.slice(1)}
@@ -75,7 +75,7 @@ export default function HandoffsPage() {
       <div className="space-y-4">
         {filtered.map((handoff) => (
           <Card key={handoff.id} className={cn(
-            handoff.status === 'pending' && handoff.priority === 'high' && 'border-amber-900/50'
+            handoff.status === 'pending' && handoff.priority === 'high' && 'border-amber-200'
           )}>
             <CardContent className="pt-6">
               <div className="flex items-start gap-4">
@@ -85,7 +85,7 @@ export default function HandoffsPage() {
                     <span className="text-2xl">{employeeEmojis[handoff.fromEmployeeId]}</span>
                     <p className="text-xs text-neutral-500 mt-1">{handoff.fromEmployeeName}</p>
                   </div>
-                  <ArrowRight className="w-5 h-5 text-neutral-600" />
+                  <ArrowRight className="w-5 h-5 text-neutral-400" />
                   <div className="text-center">
                     <span className="text-2xl">{employeeEmojis[handoff.toEmployeeId]}</span>
                     <p className="text-xs text-neutral-500 mt-1">{handoff.toEmployeeName}</p>
@@ -95,14 +95,14 @@ export default function HandoffsPage() {
                 {/* Details */}
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
-                    <h3 className="text-sm font-semibold text-neutral-100">{handoff.taskTitle}</h3>
+                    <h3 className="text-sm font-semibold text-neutral-800">{handoff.taskTitle}</h3>
                     <Badge className={statusColors[handoff.status]}>{handoff.status}</Badge>
                     {handoff.priority === 'high' && <Badge variant="destructive" className="text-[10px]">High Priority</Badge>}
                   </div>
-                  <p className="text-xs text-neutral-400 mb-2">{handoff.reason}</p>
-                  <div className="bg-neutral-800/50 rounded-lg p-3">
+                  <p className="text-xs text-neutral-500 mb-2">{handoff.reason}</p>
+                  <div className="bg-neutral-100 rounded-lg p-3">
                     <p className="text-xs text-neutral-500 font-semibold uppercase tracking-wider mb-1">Context Package</p>
-                    <p className="text-sm text-neutral-300">{handoff.contextSummary}</p>
+                    <p className="text-sm text-neutral-600">{handoff.contextSummary}</p>
                   </div>
                 </div>
 

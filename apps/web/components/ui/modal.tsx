@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 import { cva, type VariantProps } from 'class-variance-authority';
 
 const modalOverlayVariants = cva(
-  'fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4',
+  'fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4',
   {
     variants: {
       animate: {
@@ -21,7 +21,7 @@ const modalOverlayVariants = cva(
 );
 
 const modalContentVariants = cva(
-  'relative w-full bg-neutral-900 border border-neutral-800 rounded-xl shadow-2xl flex flex-col max-h-[90vh]',
+  'relative w-full bg-white border border-neutral-200 rounded-xl shadow-2xl flex flex-col max-h-[90vh]',
   {
     variants: {
       size: {
@@ -85,7 +85,7 @@ function ModalHeader({ className, children, onClose, ...props }: React.HTMLAttri
       {onClose && (
         <button
           onClick={onClose}
-          className="p-1.5 rounded-lg text-neutral-500 hover:text-neutral-200 hover:bg-neutral-800 transition-colors"
+          className="p-1.5 rounded-lg text-neutral-400 hover:text-neutral-700 hover:bg-neutral-100 transition-colors"
         >
           <X className="w-4 h-4" />
         </button>
@@ -95,11 +95,11 @@ function ModalHeader({ className, children, onClose, ...props }: React.HTMLAttri
 }
 
 function ModalTitle({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
-  return <h2 className={cn('text-lg font-semibold text-neutral-50', className)} {...props} />;
+  return <h2 className={cn('text-lg font-semibold text-neutral-900', className)} {...props} />;
 }
 
 function ModalDescription({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
-  return <p className={cn('text-sm text-neutral-400 mt-1', className)} {...props} />;
+  return <p className={cn('text-sm text-neutral-500 mt-1', className)} {...props} />;
 }
 
 function ModalBody({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {

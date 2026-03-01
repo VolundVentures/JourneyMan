@@ -16,7 +16,7 @@ const sizeConfig = {
 };
 
 const colorConfig = {
-  default: 'stroke-neutral-50',
+  default: 'stroke-neutral-900',
   success: 'stroke-emerald-400',
   warning: 'stroke-amber-400',
   danger: 'stroke-red-400',
@@ -41,7 +41,7 @@ export function Gauge({ value, max = 100, size = 'md', label, color = 'default',
             r={radius}
             fill="none"
             strokeWidth={config.strokeWidth}
-            className="stroke-neutral-800"
+            className="stroke-neutral-200"
           />
           <circle
             cx={config.dimension / 2}
@@ -56,7 +56,7 @@ export function Gauge({ value, max = 100, size = 'md', label, color = 'default',
           />
         </svg>
         <div className="absolute inset-0 flex items-center justify-center">
-          <span className={cn('font-bold text-neutral-50', config.fontSize)}>
+          <span className={cn('font-bold text-neutral-900', config.fontSize)}>
             {Math.round(percentage * 100)}%
           </span>
         </div>

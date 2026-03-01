@@ -8,7 +8,7 @@ export function Skeleton({ className, variant = 'default', ...props }: SkeletonP
   return (
     <div
       className={cn(
-        'animate-pulse bg-neutral-800 rounded',
+        'animate-pulse bg-neutral-200 rounded',
         variant === 'circular' && 'rounded-full',
         variant === 'text' && 'h-4 rounded',
         className
@@ -20,7 +20,7 @@ export function Skeleton({ className, variant = 'default', ...props }: SkeletonP
 
 export function SkeletonCard({ className }: { className?: string }) {
   return (
-    <div className={cn('rounded-xl border border-neutral-800 bg-neutral-900 p-6 space-y-4', className)}>
+    <div className={cn('rounded-xl border border-neutral-200 bg-white p-6 space-y-4', className)}>
       <div className="flex items-center gap-3">
         <Skeleton variant="circular" className="w-10 h-10" />
         <div className="space-y-2 flex-1">
@@ -39,8 +39,8 @@ export function SkeletonCard({ className }: { className?: string }) {
 
 export function SkeletonTable({ rows = 5 }: { rows?: number }) {
   return (
-    <div className="rounded-xl border border-neutral-800 bg-neutral-900 overflow-hidden">
-      <div className="border-b border-neutral-800 p-4">
+    <div className="rounded-xl border border-neutral-200 bg-white overflow-hidden">
+      <div className="border-b border-neutral-200 p-4">
         <div className="flex gap-4">
           {[1, 2, 3, 4].map((i) => (
             <Skeleton key={i} variant="text" className="flex-1 h-3" />
@@ -48,7 +48,7 @@ export function SkeletonTable({ rows = 5 }: { rows?: number }) {
         </div>
       </div>
       {Array.from({ length: rows }).map((_, i) => (
-        <div key={i} className="border-b border-neutral-800/50 p-4 last:border-0">
+        <div key={i} className="border-b border-neutral-200/50 p-4 last:border-0">
           <div className="flex gap-4">
             {[1, 2, 3, 4].map((j) => (
               <Skeleton key={j} variant="text" className="flex-1 h-3" />

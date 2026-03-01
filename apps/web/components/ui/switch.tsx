@@ -28,7 +28,7 @@ export function Switch({ checked, onCheckedChange, disabled = false, className, 
       onClick={() => onCheckedChange(!checked)}
       className={cn(
         'relative inline-flex shrink-0 cursor-pointer rounded-full transition-colors duration-200',
-        checked ? 'bg-neutral-50' : 'bg-neutral-700',
+        checked ? 'bg-neutral-900' : 'bg-neutral-300',
         disabled && 'opacity-50 cursor-not-allowed',
         s.track,
         className
@@ -37,7 +37,7 @@ export function Switch({ checked, onCheckedChange, disabled = false, className, 
       <span
         className={cn(
           'pointer-events-none inline-block rounded-full shadow-sm transition-transform duration-200',
-          checked ? `${s.translate} bg-neutral-900` : 'translate-x-0.5 bg-neutral-400',
+          checked ? `${s.translate} bg-white` : 'translate-x-0.5 bg-neutral-400',
           s.thumb,
           'mt-0.5'
         )}

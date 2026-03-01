@@ -12,10 +12,10 @@ export default function LoginPage() {
     <div className="space-y-8 animate-slide-up">
       <div className="text-center space-y-4">
         <div>
-          <h1 className="text-sm font-bold tracking-[0.2em] text-neutral-50 uppercase mb-6">
+          <h1 className="text-sm font-bold tracking-[0.2em] text-neutral-900 uppercase mb-6">
             JourneyMan
           </h1>
-          <h2 className="text-2xl font-bold text-neutral-50 tracking-tight">
+          <h2 className="text-2xl font-bold text-neutral-900 tracking-tight">
             Welcome back
           </h2>
           <p className="text-sm text-neutral-500 mt-1">
@@ -24,7 +24,7 @@ export default function LoginPage() {
         </div>
       </div>
 
-      <div className="rounded-xl border border-neutral-800 bg-neutral-900 p-6 space-y-5">
+      <div className="rounded-xl border border-neutral-200 bg-white p-6 space-y-5">
         <div>
           <label className="block text-xs text-neutral-500 uppercase tracking-wider mb-2">
             Email address
@@ -41,7 +41,7 @@ export default function LoginPage() {
             <label className="block text-xs text-neutral-500 uppercase tracking-wider">
               Password
             </label>
-            <a href="#" className="text-xs text-neutral-400 hover:text-neutral-200 transition-colors">
+            <a href="#" className="text-xs text-neutral-500 hover:text-neutral-700 transition-colors">
               Forgot password?
             </a>
           </div>
@@ -54,7 +54,7 @@ export default function LoginPage() {
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-300 transition-colors"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-600 transition-colors"
             >
               {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
             </button>
@@ -70,9 +70,9 @@ export default function LoginPage() {
         </Button>
       </div>
 
-      <p className="text-center text-xs text-neutral-600">
+      <p className="text-center text-xs text-neutral-400">
         Don&apos;t have an account?{' '}
-        <a href="#" className="text-neutral-400 hover:text-neutral-200 transition-colors">
+        <a href="#" className="text-neutral-500 hover:text-neutral-700 transition-colors">
           Contact Sales
         </a>
       </p>

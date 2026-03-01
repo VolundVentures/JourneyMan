@@ -39,14 +39,14 @@ const mockAuditLog: AuditEntry[] = [
 ];
 
 const actionTypeColors: Record<string, string> = {
-  create: 'bg-emerald-950/50 text-emerald-400',
-  update: 'bg-blue-950/50 text-blue-400',
-  delete: 'bg-red-950/50 text-red-400',
-  approve: 'bg-emerald-950/50 text-emerald-400',
-  reject: 'bg-red-950/50 text-red-400',
-  escalate: 'bg-amber-950/50 text-amber-400',
-  login: 'bg-neutral-800 text-neutral-400',
-  config_change: 'bg-purple-950/50 text-purple-400',
+  create: 'bg-emerald-50 text-emerald-600',
+  update: 'bg-blue-50 text-blue-600',
+  delete: 'bg-red-50 text-red-600',
+  approve: 'bg-emerald-50 text-emerald-600',
+  reject: 'bg-red-50 text-red-600',
+  escalate: 'bg-amber-50 text-amber-600',
+  login: 'bg-neutral-100 text-neutral-400',
+  config_change: 'bg-purple-50 text-purple-600',
 };
 
 export default function AuditLogPage() {
@@ -82,13 +82,13 @@ export default function AuditLogPage() {
         <div className="flex items-center gap-2">
           <span className={cn(
             'text-xs px-1.5 py-0.5 rounded',
-            entry.actorType === 'user' ? 'bg-blue-950/50 text-blue-400' :
-            entry.actorType === 'employee' ? 'bg-emerald-950/50 text-emerald-400' :
-            'bg-neutral-800 text-neutral-500'
+            entry.actorType === 'user' ? 'bg-blue-50 text-blue-600' :
+            entry.actorType === 'employee' ? 'bg-emerald-50 text-emerald-600' :
+            'bg-neutral-100 text-neutral-500'
           )}>
             {entry.actorType}
           </span>
-          <span className="text-sm text-neutral-200">{entry.actor}</span>
+          <span className="text-sm text-neutral-700">{entry.actor}</span>
         </div>
       ),
     },
@@ -106,7 +106,7 @@ export default function AuditLogPage() {
       key: 'details',
       header: 'Details',
       render: (entry: AuditEntry) => (
-        <span className="text-sm text-neutral-400 line-clamp-1">{entry.details}</span>
+        <span className="text-sm text-neutral-500 line-clamp-1">{entry.details}</span>
       ),
     },
     {
@@ -127,7 +127,7 @@ export default function AuditLogPage() {
     <div className="space-y-6 animate-fade-in">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-neutral-50 flex items-center gap-3">
+          <h1 className="text-2xl font-bold text-neutral-900 flex items-center gap-3">
             <Clock className="w-6 h-6" />
             Audit Log
           </h1>

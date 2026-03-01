@@ -24,10 +24,10 @@ const mockThoughts = [
 ];
 
 const lineColors = {
-  completed: 'text-emerald-400',
-  deciding: 'text-amber-400',
-  thinking: 'text-blue-400',
-  working: 'text-neutral-300',
+  completed: 'text-emerald-600',
+  deciding: 'text-amber-600',
+  thinking: 'text-blue-600',
+  working: 'text-neutral-600',
 };
 
 const lineIcons = {
@@ -51,14 +51,14 @@ export default function EmployeeLivePage() {
   return (
     <div className="space-y-6 animate-fade-in">
       <div>
-        <Link href={`/dashboard/employees/${employee.id}`} className="flex items-center gap-1 text-sm text-neutral-500 hover:text-neutral-300 mb-4">
+        <Link href={`/dashboard/employees/${employee.id}`} className="flex items-center gap-1 text-sm text-neutral-500 hover:text-neutral-600 mb-4">
           <ArrowLeft className="w-4 h-4" /> Back to profile
         </Link>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <span className="text-3xl">{emoji}</span>
             <div>
-              <h1 className="text-2xl font-bold text-neutral-50 flex items-center gap-2">
+              <h1 className="text-2xl font-bold text-neutral-900 flex items-center gap-2">
                 {employee.name}
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse-dot" />
               </h1>
@@ -78,10 +78,10 @@ export default function EmployeeLivePage() {
       </div>
 
       {currentTask && (
-        <Card className="border-neutral-700">
+        <Card className="border-neutral-300">
           <CardContent className="py-4 flex items-center gap-3">
             <Badge variant="secondary" className="text-[10px]">Current Task</Badge>
-            <span className="text-sm text-neutral-200">{currentTask.title}</span>
+            <span className="text-sm text-neutral-700">{currentTask.title}</span>
             <Badge variant="outline" className="text-[10px]">{currentTask.status}</Badge>
           </CardContent>
         </Card>
@@ -93,28 +93,28 @@ export default function EmployeeLivePage() {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-base">
-                <Radio className="w-4 h-4 text-emerald-400" />
+                <Radio className="w-4 h-4 text-emerald-600" />
                 Live Activity Stream
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="bg-neutral-950 rounded-lg p-4 font-mono text-xs space-y-2 max-h-96 overflow-y-auto scrollbar-thin">
+              <div className="bg-white rounded-lg p-4 font-mono text-xs space-y-2 max-h-96 overflow-y-auto scrollbar-thin">
                 {mockThoughts.map((thought) => {
                   const Icon = lineIcons[thought.type];
                   return (
                     <div key={thought.id} className={cn('flex items-start gap-2', lineColors[thought.type])}>
-                      <span className="text-neutral-600 shrink-0 w-16">{thought.time}</span>
+                      <span className="text-neutral-400 shrink-0 w-16">{thought.time}</span>
                       <Icon className="w-3.5 h-3.5 mt-0.5 shrink-0" />
                       <div className="flex-1">
                         <span>{thought.text}</span>
                         {thought.confidence !== null && (
-                          <span className="ml-2 text-neutral-600">({Math.round(thought.confidence * 100)}%)</span>
+                          <span className="ml-2 text-neutral-400">({Math.round(thought.confidence * 100)}%)</span>
                         )}
                       </div>
                     </div>
                   );
                 })}
-                <div className="flex items-center gap-2 text-neutral-600 mt-2">
+                <div className="flex items-center gap-2 text-neutral-400 mt-2">
                   <span className="w-1.5 h-4 bg-neutral-500 animate-blink" />
                   <span className="text-[10px]">Waiting for next action...</span>
                 </div>
@@ -158,7 +158,7 @@ export default function EmployeeLivePage() {
               <div className="space-y-1.5 pt-2">
                 <p className="text-xs text-neutral-500">Quick commands:</p>
                 {['Redo last action', 'Skip this step', 'Escalate to me'].map((cmd) => (
-                  <button key={cmd} className="w-full text-left px-3 py-1.5 rounded text-xs text-neutral-400 hover:bg-neutral-800 hover:text-neutral-200 transition-colors">
+                  <button key={cmd} className="w-full text-left px-3 py-1.5 rounded text-xs text-neutral-500 hover:bg-neutral-100 hover:text-neutral-700 transition-colors">
                     {cmd}
                   </button>
                 ))}
@@ -171,21 +171,21 @@ export default function EmployeeLivePage() {
               <CardTitle className="text-base">Stats</CardTitle>
             </CardHeader>
             <CardContent className="space-y-2 text-xs">
-              <div className="flex justify-between text-neutral-400">
+              <div className="flex justify-between text-neutral-500">
                 <span>Session duration</span>
-                <span className="text-neutral-200 font-mono">2h 34m</span>
+                <span className="text-neutral-700 font-mono">2h 34m</span>
               </div>
-              <div className="flex justify-between text-neutral-400">
+              <div className="flex justify-between text-neutral-500">
                 <span>Tasks completed today</span>
-                <span className="text-neutral-200 font-mono">7</span>
+                <span className="text-neutral-700 font-mono">7</span>
               </div>
-              <div className="flex justify-between text-neutral-400">
+              <div className="flex justify-between text-neutral-500">
                 <span>Avg confidence</span>
-                <span className="text-neutral-200 font-mono">84%</span>
+                <span className="text-neutral-700 font-mono">84%</span>
               </div>
-              <div className="flex justify-between text-neutral-400">
+              <div className="flex justify-between text-neutral-500">
                 <span>Escalations today</span>
-                <span className="text-neutral-200 font-mono">1</span>
+                <span className="text-neutral-700 font-mono">1</span>
               </div>
             </CardContent>
           </Card>

@@ -64,7 +64,7 @@ export default function DashboardPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-neutral-50">
+          <h1 className="text-3xl font-bold text-neutral-900">
             Your AI Workforce
           </h1>
           <p className="mt-2 text-neutral-500">
@@ -127,28 +127,28 @@ export default function DashboardPage() {
                 <div>
                   <div className="flex justify-between text-xs mb-1">
                     <span className="text-neutral-500">Task Success</span>
-                    <span className="text-neutral-300">{Math.round(taskSuccessRate)}%</span>
+                    <span className="text-neutral-600">{Math.round(taskSuccessRate)}%</span>
                   </div>
                   <Progress value={taskSuccessRate} indicatorClassName="bg-emerald-400" />
                 </div>
                 <div>
                   <div className="flex justify-between text-xs mb-1">
                     <span className="text-neutral-500">Approval Speed</span>
-                    <span className="text-neutral-300">{approvalSpeed}%</span>
+                    <span className="text-neutral-600">{approvalSpeed}%</span>
                   </div>
                   <Progress value={approvalSpeed} indicatorClassName="bg-blue-400" />
                 </div>
                 <div>
                   <div className="flex justify-between text-xs mb-1">
                     <span className="text-neutral-500">Escalation Load</span>
-                    <span className="text-neutral-300">{escalationLoad}%</span>
+                    <span className="text-neutral-600">{escalationLoad}%</span>
                   </div>
                   <Progress value={escalationLoad} indicatorClassName="bg-amber-400" />
                 </div>
                 <div>
                   <div className="flex justify-between text-xs mb-1">
                     <span className="text-neutral-500">Uptime</span>
-                    <span className="text-neutral-300">{uptime}%</span>
+                    <span className="text-neutral-600">{uptime}%</span>
                   </div>
                   <Progress value={uptime} indicatorClassName="bg-neutral-300" />
                 </div>
@@ -168,10 +168,10 @@ export default function DashboardPage() {
           <CardContent>
             <div className="space-y-2">
               {tickerEvents.map((event, i) => (
-                <div key={i} className="flex items-center gap-3 py-1.5 text-sm border-b border-neutral-800/50 last:border-0">
+                <div key={i} className="flex items-center gap-3 py-1.5 text-sm border-b border-neutral-200 last:border-0">
                   <span className="text-base shrink-0">{event.emoji}</span>
-                  <span className="flex-1 text-neutral-300">{event.text}</span>
-                  <span className="text-xs text-neutral-600 shrink-0">{event.time}</span>
+                  <span className="flex-1 text-neutral-600">{event.text}</span>
+                  <span className="text-xs text-neutral-400 shrink-0">{event.time}</span>
                 </div>
               ))}
             </div>
@@ -195,7 +195,7 @@ export default function DashboardPage() {
               return (
                 <div key={employee.id} className="flex items-center gap-3">
                   <span className="text-base w-6 text-center">{emoji}</span>
-                  <span className="text-sm text-neutral-300 w-24 truncate">{employee.name}</span>
+                  <span className="text-sm text-neutral-600 w-24 truncate">{employee.name}</span>
                   <div className="flex-1">
                     <Progress
                       value={utilization}
@@ -216,7 +216,7 @@ export default function DashboardPage() {
 
       {/* Employee grid */}
       <div>
-        <h2 className="text-xl font-semibold text-neutral-100 mb-4">
+        <h2 className="text-xl font-semibold text-neutral-800 mb-4">
           AI Employees
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
@@ -231,7 +231,7 @@ export default function DashboardPage() {
       </div>
 
       {/* Activity Feed */}
-      <div className="border-t border-neutral-800 pt-8">
+      <div className="border-t border-neutral-200 pt-8">
         <ActivityFeed activities={mockActivities} />
       </div>
     </div>

@@ -57,7 +57,7 @@ export default function IntegrationsPage() {
     <div className="space-y-6 animate-fade-in">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-neutral-50 flex items-center gap-3">
+          <h1 className="text-2xl font-bold text-neutral-900 flex items-center gap-3">
             <Plug className="w-6 h-6" />
             Integrations
           </h1>
@@ -80,7 +80,7 @@ export default function IntegrationsPage() {
           {categories.map((cat) => (
             <button key={cat} onClick={() => setCategoryFilter(cat)} className={cn(
               'px-2.5 py-1 rounded-lg text-xs font-medium transition-colors',
-              categoryFilter === cat ? 'bg-neutral-800 text-neutral-50' : 'text-neutral-600 hover:text-neutral-400'
+              categoryFilter === cat ? 'bg-neutral-100 text-neutral-900' : 'text-neutral-400 hover:text-neutral-500'
             )}>
               {cat}
             </button>
@@ -91,17 +91,17 @@ export default function IntegrationsPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
         {displayed.map((integration) => (
           <Card key={integration.id} className={cn(
-            'hover:border-neutral-700 transition-all',
-            integration.status === 'error' && 'border-red-900/30'
+            'hover:border-neutral-300 transition-all',
+            integration.status === 'error' && 'border-red-200'
           )}>
             <CardContent className="pt-6">
               <div className="flex items-start gap-3">
                 <span className="text-2xl">{integration.icon}</span>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
-                    <h3 className="text-sm font-semibold text-neutral-100">{integration.name}</h3>
-                    {integration.status === 'connected' && <CheckCircle className="w-4 h-4 text-emerald-400" />}
-                    {integration.status === 'error' && <AlertTriangle className="w-4 h-4 text-red-400" />}
+                    <h3 className="text-sm font-semibold text-neutral-800">{integration.name}</h3>
+                    {integration.status === 'connected' && <CheckCircle className="w-4 h-4 text-emerald-600" />}
+                    {integration.status === 'error' && <AlertTriangle className="w-4 h-4 text-red-600" />}
                   </div>
                   <Badge variant="secondary" className="text-[10px] mb-2">{integration.category}</Badge>
                   <p className="text-xs text-neutral-500">{integration.description}</p>
@@ -113,7 +113,7 @@ export default function IntegrationsPage() {
                         <span>{integration.dataVolume}</span>
                       </div>
                       {integration.errorRate !== undefined && integration.errorRate > 0 && (
-                        <div className="flex items-center gap-2 text-red-400">
+                        <div className="flex items-center gap-2 text-red-600">
                           <AlertTriangle className="w-3 h-3" />
                           <span>{integration.errorRate}% error rate</span>
                         </div>
@@ -124,7 +124,7 @@ export default function IntegrationsPage() {
                   {integration.status === 'available' && integration.features && (
                     <div className="mt-3 flex flex-wrap gap-1">
                       {integration.features.map((f) => (
-                        <span key={f} className="text-[10px] px-1.5 py-0.5 rounded bg-neutral-800 text-neutral-500">{f}</span>
+                        <span key={f} className="text-[10px] px-1.5 py-0.5 rounded bg-neutral-100 text-neutral-500">{f}</span>
                       ))}
                     </div>
                   )}

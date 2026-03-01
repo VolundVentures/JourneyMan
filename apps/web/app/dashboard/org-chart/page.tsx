@@ -73,14 +73,14 @@ function OrgNodeCard({ node, level = 0 }: { node: OrgNode; level?: number }) {
   return (
     <div className="flex flex-col items-center">
       <Card className={cn(
-        'w-48 transition-all hover:border-neutral-600',
-        node.type === 'human' ? 'border-blue-900/50' : 'border-neutral-800'
+        'w-48 transition-all hover:border-neutral-300',
+        node.type === 'human' ? 'border-blue-200' : 'border-neutral-200'
       )}>
         <CardContent className="p-4 text-center">
           <div className="text-2xl mb-2">
             {node.type === 'ai' ? node.emoji : '👤'}
           </div>
-          <p className="text-sm font-semibold text-neutral-100">{node.name}</p>
+          <p className="text-sm font-semibold text-neutral-800">{node.name}</p>
           <p className="text-xs text-neutral-500 mt-0.5">{node.role}</p>
           <div className="mt-2 flex items-center justify-center gap-1.5">
             <Badge variant={node.type === 'human' ? 'outline' : 'secondary'} className="text-[10px]">
@@ -100,11 +100,11 @@ function OrgNodeCard({ node, level = 0 }: { node: OrgNode; level?: number }) {
 
       {node.children.length > 0 && (
         <>
-          <div className="w-px h-6 bg-neutral-800" />
+          <div className="w-px h-6 bg-neutral-100" />
           <div className="flex items-start gap-8">
             {node.children.map((child, i) => (
               <div key={child.id} className="flex flex-col items-center">
-                <div className="w-px h-6 bg-neutral-800" />
+                <div className="w-px h-6 bg-neutral-100" />
                 <OrgNodeCard node={child} level={level + 1} />
               </div>
             ))}
@@ -123,7 +123,7 @@ export default function OrgChartPage() {
     <div className="space-y-6 animate-fade-in">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-neutral-50 flex items-center gap-3">
+          <h1 className="text-2xl font-bold text-neutral-900 flex items-center gap-3">
             <GitBranch className="w-6 h-6" />
             Organization Chart
           </h1>
@@ -133,12 +133,12 @@ export default function OrgChartPage() {
         </div>
         <div className="flex items-center gap-4 text-sm">
           <div className="flex items-center gap-1.5">
-            <Users className="w-4 h-4 text-blue-400" />
-            <span className="text-neutral-400">{humanCount} Humans</span>
+            <Users className="w-4 h-4 text-blue-600" />
+            <span className="text-neutral-500">{humanCount} Humans</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <Briefcase className="w-4 h-4 text-emerald-400" />
-            <span className="text-neutral-400">{aiCount} AI Employees</span>
+            <Briefcase className="w-4 h-4 text-emerald-600" />
+            <span className="text-neutral-500">{aiCount} AI Employees</span>
           </div>
         </div>
       </div>

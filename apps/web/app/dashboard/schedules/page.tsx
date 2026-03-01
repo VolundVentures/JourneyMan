@@ -32,9 +32,9 @@ const mockSchedules: ScheduledResponsibility[] = [
 ];
 
 const statusIcons = {
-  success: <CheckCircle className="w-4 h-4 text-emerald-400" />,
-  partial: <AlertTriangle className="w-4 h-4 text-amber-400" />,
-  failed: <AlertTriangle className="w-4 h-4 text-red-400" />,
+  success: <CheckCircle className="w-4 h-4 text-emerald-600" />,
+  partial: <AlertTriangle className="w-4 h-4 text-amber-600" />,
+  failed: <AlertTriangle className="w-4 h-4 text-red-600" />,
 };
 
 export default function SchedulesPage() {
@@ -42,7 +42,7 @@ export default function SchedulesPage() {
     <div className="space-y-6 animate-fade-in">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-neutral-50 flex items-center gap-3">
+          <h1 className="text-2xl font-bold text-neutral-900 flex items-center gap-3">
             <Calendar className="w-6 h-6" />
             Recurring Responsibilities
           </h1>
@@ -58,13 +58,13 @@ export default function SchedulesPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {mockSchedules.map((schedule) => (
-          <Card key={schedule.id} className="hover:border-neutral-700 transition-all">
+          <Card key={schedule.id} className="hover:border-neutral-300 transition-all">
             <CardContent className="pt-6">
               <div className="flex items-start gap-3">
                 <span className="text-2xl">{employeeEmojis[schedule.employeeId]}</span>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
-                    <h3 className="text-sm font-semibold text-neutral-100">{schedule.title}</h3>
+                    <h3 className="text-sm font-semibold text-neutral-800">{schedule.title}</h3>
                     {schedule.lastStatus && statusIcons[schedule.lastStatus]}
                   </div>
                   <p className="text-xs text-neutral-500 mb-3">{schedule.description}</p>
@@ -72,7 +72,7 @@ export default function SchedulesPage() {
                   <div className="space-y-2 text-xs">
                     <div className="flex items-center gap-2">
                       <RefreshCw className="w-3 h-3 text-neutral-600" />
-                      <span className="text-neutral-400">{schedule.recurrence}</span>
+                      <span className="text-neutral-500">{schedule.recurrence}</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <Clock className="w-3 h-3 text-neutral-600" />

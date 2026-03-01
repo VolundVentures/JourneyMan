@@ -100,13 +100,13 @@ const typeIcons: Record<Notification['type'], React.ComponentType<{ className?: 
 };
 
 const typeColors: Record<Notification['type'], string> = {
-  approval_requested: 'text-amber-400',
-  escalation_created: 'text-red-400',
-  task_completed: 'text-emerald-400',
-  status_change: 'text-blue-400',
-  system_alert: 'text-red-400',
-  handoff_pending: 'text-neutral-400',
-  milestone: 'text-amber-400',
+  approval_requested: 'text-amber-600',
+  escalation_created: 'text-red-600',
+  task_completed: 'text-emerald-600',
+  status_change: 'text-blue-600',
+  system_alert: 'text-red-600',
+  handoff_pending: 'text-neutral-500',
+  milestone: 'text-amber-600',
 };
 
 export function NotificationCenter() {
@@ -151,39 +151,39 @@ export function NotificationCenter() {
     <div ref={ref} className="relative">
       <button
         onClick={() => setOpen(!open)}
-        className="relative p-2 rounded-lg text-neutral-400 hover:text-neutral-200 hover:bg-neutral-800 transition-colors"
+        className="relative p-2 rounded-lg text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100 transition-colors"
       >
         <Bell className="w-5 h-5" />
         {unreadCount > 0 && (
-          <span className="absolute top-1 right-1 w-4 h-4 rounded-full bg-neutral-50 text-neutral-900 text-[9px] font-bold flex items-center justify-center">
+          <span className="absolute top-1 right-1 w-4 h-4 rounded-full bg-neutral-900 text-neutral-50 text-[9px] font-bold flex items-center justify-center">
             {unreadCount}
           </span>
         )}
       </button>
 
       {open && (
-        <div className="absolute top-full right-0 mt-2 w-96 rounded-xl border border-neutral-800 bg-neutral-900 shadow-2xl animate-fade-in z-50 overflow-hidden">
-          <div className="flex items-center justify-between px-4 py-3 border-b border-neutral-800">
-            <h3 className="text-sm font-semibold text-neutral-50">Notifications</h3>
+        <div className="absolute top-full right-0 mt-2 w-96 rounded-xl border border-neutral-200 bg-white shadow-2xl animate-fade-in z-50 overflow-hidden">
+          <div className="flex items-center justify-between px-4 py-3 border-b border-neutral-200">
+            <h3 className="text-sm font-semibold text-neutral-900">Notifications</h3>
             <div className="flex items-center gap-2">
               {unreadCount > 0 && (
                 <button
                   onClick={markAllRead}
-                  className="text-[10px] text-neutral-500 hover:text-neutral-300 transition-colors"
+                  className="text-[10px] text-neutral-500 hover:text-neutral-600 transition-colors"
                 >
                   Mark all read
                 </button>
               )}
               <button
                 onClick={() => setOpen(false)}
-                className="p-1 rounded text-neutral-500 hover:text-neutral-300 hover:bg-neutral-800"
+                className="p-1 rounded text-neutral-500 hover:text-neutral-600 hover:bg-neutral-100"
               >
                 <X className="w-3.5 h-3.5" />
               </button>
             </div>
           </div>
 
-          <div className="flex border-b border-neutral-800">
+          <div className="flex border-b border-neutral-200">
             {tabs.map((t) => (
               <button
                 key={t.key}
@@ -191,8 +191,8 @@ export function NotificationCenter() {
                 className={cn(
                   'flex-1 py-2 text-xs font-medium transition-colors border-b-2',
                   tab === t.key
-                    ? 'text-neutral-50 border-neutral-50'
-                    : 'text-neutral-500 border-transparent hover:text-neutral-300'
+                    ? 'text-neutral-900 border-neutral-900'
+                    : 'text-neutral-500 border-transparent hover:text-neutral-600'
                 )}
               >
                 {t.label}
@@ -203,7 +203,7 @@ export function NotificationCenter() {
           <div className="max-h-[400px] overflow-y-auto scrollbar-thin">
             {filtered.length === 0 ? (
               <div className="py-12 text-center">
-                <Archive className="w-8 h-8 text-neutral-700 mx-auto mb-2" />
+                <Archive className="w-8 h-8 text-neutral-400 mx-auto mb-2" />
                 <p className="text-sm text-neutral-500">No notifications</p>
               </div>
             ) : (
@@ -214,9 +214,9 @@ export function NotificationCenter() {
                     key={notif.id}
                     onClick={() => markRead(notif.id)}
                     className={cn(
-                      'flex items-start gap-3 w-full px-4 py-3 text-left border-b border-neutral-800/50 last:border-0 transition-colors',
-                      notif.read ? 'bg-transparent' : 'bg-neutral-800/30',
-                      'hover:bg-neutral-800/50'
+                      'flex items-start gap-3 w-full px-4 py-3 text-left border-b border-neutral-200 last:border-0 transition-colors',
+                      notif.read ? 'bg-transparent' : 'bg-neutral-50',
+                      'hover:bg-neutral-100'
                     )}
                   >
                     <div className={cn('mt-0.5 shrink-0', typeColors[notif.type])}>
@@ -224,7 +224,7 @@ export function NotificationCenter() {
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
-                        <p className={cn('text-sm font-medium truncate', notif.read ? 'text-neutral-400' : 'text-neutral-50')}>
+                        <p className={cn('text-sm font-medium truncate', notif.read ? 'text-neutral-500' : 'text-neutral-900')}>
                           {notif.title}
                         </p>
                         {!notif.read && (
@@ -233,8 +233,8 @@ export function NotificationCenter() {
                       </div>
                       <p className="text-xs text-neutral-500 mt-0.5 line-clamp-2">{notif.description}</p>
                       <div className="flex items-center gap-1.5 mt-1.5">
-                        <Clock className="w-3 h-3 text-neutral-600" />
-                        <span className="text-[10px] text-neutral-600">{formatRelativeTime(notif.timestamp)}</span>
+                        <Clock className="w-3 h-3 text-neutral-400" />
+                        <span className="text-[10px] text-neutral-400">{formatRelativeTime(notif.timestamp)}</span>
                       </div>
                     </div>
                   </button>
@@ -243,10 +243,10 @@ export function NotificationCenter() {
             )}
           </div>
 
-          <div className="border-t border-neutral-800 p-2">
+          <div className="border-t border-neutral-200 p-2">
             <a
               href="/dashboard/notifications"
-              className="flex items-center justify-center gap-1 py-1.5 text-xs text-neutral-500 hover:text-neutral-300 transition-colors rounded-lg hover:bg-neutral-800"
+              className="flex items-center justify-center gap-1 py-1.5 text-xs text-neutral-500 hover:text-neutral-600 transition-colors rounded-lg hover:bg-neutral-100"
             >
               View all notifications <ChevronRight className="w-3 h-3" />
             </a>

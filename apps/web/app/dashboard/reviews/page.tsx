@@ -67,12 +67,12 @@ const mockReviews: ReviewSummary[] = [
 ];
 
 const gradeColors: Record<string, string> = {
-  'A+': 'text-emerald-400 bg-emerald-950/50',
-  'A': 'text-emerald-400 bg-emerald-950/50',
-  'B+': 'text-blue-400 bg-blue-950/50',
-  'B': 'text-blue-400 bg-blue-950/50',
-  'C': 'text-amber-400 bg-amber-950/50',
-  'D': 'text-red-400 bg-red-950/50',
+  'A+': 'text-emerald-600 bg-emerald-50',
+  'A': 'text-emerald-600 bg-emerald-50',
+  'B+': 'text-blue-600 bg-blue-50',
+  'B': 'text-blue-600 bg-blue-50',
+  'C': 'text-amber-600 bg-amber-50',
+  'D': 'text-red-600 bg-red-50',
 };
 
 export default function ReviewsPage() {
@@ -80,7 +80,7 @@ export default function ReviewsPage() {
     <div className="space-y-6 animate-fade-in">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-neutral-50 flex items-center gap-3">
+          <h1 className="text-2xl font-bold text-neutral-900 flex items-center gap-3">
             <BarChart3 className="w-6 h-6" />
             Performance Reviews
           </h1>
@@ -113,7 +113,7 @@ export default function ReviewsPage() {
                   {/* Employee info + grade */}
                   <div className="text-center shrink-0">
                     <span className="text-3xl">{emoji}</span>
-                    <p className="text-sm font-semibold text-neutral-200 mt-1">{employee.name}</p>
+                    <p className="text-sm font-semibold text-neutral-700 mt-1">{employee.name}</p>
                     <p className="text-xs text-neutral-500">{employee.roleTitle}</p>
                     <div className={cn('mt-2 text-2xl font-bold rounded-lg px-3 py-1', gradeColors[review.overallGrade])}>
                       {review.overallGrade}
@@ -122,7 +122,7 @@ export default function ReviewsPage() {
 
                   <div className="flex-1 min-w-0">
                     {/* Headline */}
-                    <p className="text-sm text-neutral-300 mb-4 italic">&ldquo;{review.headline}&rdquo;</p>
+                    <p className="text-sm text-neutral-600 mb-4 italic">&ldquo;{review.headline}&rdquo;</p>
 
                     {/* Categories */}
                     <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 mb-4">
@@ -131,9 +131,9 @@ export default function ReviewsPage() {
                           <div className="flex items-center justify-between">
                             <span className="text-xs text-neutral-500">{cat.name}</span>
                             <div className="flex items-center gap-1">
-                              <span className="text-xs font-mono text-neutral-300">{cat.score}</span>
-                              {cat.trend === 'up' && <TrendingUp className="w-3 h-3 text-emerald-400" />}
-                              {cat.trend === 'down' && <TrendingDown className="w-3 h-3 text-red-400" />}
+                              <span className="text-xs font-mono text-neutral-600">{cat.score}</span>
+                              {cat.trend === 'up' && <TrendingUp className="w-3 h-3 text-emerald-600" />}
+                              {cat.trend === 'down' && <TrendingDown className="w-3 h-3 text-red-600" />}
                             </div>
                           </div>
                           <Progress
@@ -149,8 +149,8 @@ export default function ReviewsPage() {
                       <p className="text-xs font-semibold text-neutral-500 uppercase tracking-wider mb-2">Key Highlights</p>
                       <ul className="space-y-1">
                         {review.highlights.map((h, i) => (
-                          <li key={i} className="flex items-start gap-2 text-xs text-neutral-400">
-                            <Star className="w-3 h-3 text-amber-400 mt-0.5 shrink-0" />
+                          <li key={i} className="flex items-start gap-2 text-xs text-neutral-500">
+                            <Star className="w-3 h-3 text-amber-600 mt-0.5 shrink-0" />
                             {h}
                           </li>
                         ))}

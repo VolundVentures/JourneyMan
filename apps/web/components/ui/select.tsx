@@ -44,10 +44,10 @@ export function Select({ options, value, onChange, placeholder = 'Select...', cl
         onClick={() => setOpen(!open)}
         className={cn(
           'flex items-center justify-between w-full h-10 px-3 py-2 rounded-lg border text-sm transition-colors',
-          'border-neutral-700 bg-neutral-800/50 text-neutral-50',
-          'hover:border-neutral-600 focus:outline-none focus:ring-2 focus:ring-neutral-500',
+          'border-neutral-300 bg-white text-neutral-900',
+          'hover:border-neutral-400 focus:outline-none focus:ring-2 focus:ring-neutral-400',
           disabled && 'opacity-50 cursor-not-allowed',
-          !selected && 'text-neutral-500'
+          !selected && 'text-neutral-400'
         )}
       >
         <span className="truncate">{selected ? selected.label : placeholder}</span>
@@ -55,7 +55,7 @@ export function Select({ options, value, onChange, placeholder = 'Select...', cl
       </button>
 
       {open && (
-        <div className="absolute z-50 w-full mt-1 rounded-lg border border-neutral-700 bg-neutral-900 shadow-xl animate-fade-in overflow-hidden">
+        <div className="absolute z-50 w-full mt-1 rounded-lg border border-neutral-200 bg-white shadow-xl animate-fade-in overflow-hidden">
           <div className="max-h-60 overflow-y-auto scrollbar-thin py-1">
             {options.map((option) => (
               <button
@@ -68,8 +68,8 @@ export function Select({ options, value, onChange, placeholder = 'Select...', cl
                 className={cn(
                   'flex items-center gap-2.5 w-full px-3 py-2 text-sm text-left transition-colors',
                   option.value === value
-                    ? 'bg-neutral-800 text-neutral-50'
-                    : 'text-neutral-300 hover:bg-neutral-800/50 hover:text-neutral-100'
+                    ? 'bg-neutral-100 text-neutral-900'
+                    : 'text-neutral-600 hover:bg-neutral-50 hover:text-neutral-800'
                 )}
               >
                 {option.icon && <span className="shrink-0">{option.icon}</span>}
@@ -79,7 +79,7 @@ export function Select({ options, value, onChange, placeholder = 'Select...', cl
                     <p className="text-xs text-neutral-500 truncate">{option.description}</p>
                   )}
                 </div>
-                {option.value === value && <Check className="w-4 h-4 text-neutral-400 shrink-0" />}
+                {option.value === value && <Check className="w-4 h-4 text-neutral-500 shrink-0" />}
               </button>
             ))}
           </div>

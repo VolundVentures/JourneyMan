@@ -59,13 +59,13 @@ export default function OnboardingPage() {
   return (
     <div className="space-y-6 animate-fade-in">
       <div>
-        <Link href={`/dashboard/employees/${employee.id}`} className="flex items-center gap-1 text-sm text-neutral-500 hover:text-neutral-300 mb-4">
+        <Link href={`/dashboard/employees/${employee.id}`} className="flex items-center gap-1 text-sm text-neutral-500 hover:text-neutral-600 mb-4">
           <ArrowLeft className="w-4 h-4" /> Back to profile
         </Link>
         <div className="flex items-center gap-4">
           <span className="text-4xl">{emoji}</span>
           <div>
-            <h1 className="text-2xl font-bold text-neutral-50">
+            <h1 className="text-2xl font-bold text-neutral-900">
               Onboarding: {employee.name}
             </h1>
             <p className="text-sm text-neutral-500 mt-1">
@@ -74,7 +74,7 @@ export default function OnboardingPage() {
           </div>
           <div className="ml-auto flex items-center gap-3">
             <div className="text-right">
-              <p className="text-2xl font-bold text-neutral-50">{overallProgress}%</p>
+              <p className="text-2xl font-bold text-neutral-900">{overallProgress}%</p>
               <p className="text-xs text-neutral-500">Complete</p>
             </div>
             <Progress value={overallProgress} className="w-32" indicatorClassName="bg-emerald-400" />
@@ -93,24 +93,24 @@ export default function OnboardingPage() {
                 onClick={() => setActiveStep(step.id)}
                 className={cn(
                   'flex items-center gap-3 w-full p-3 rounded-lg text-left transition-colors',
-                  activeStep === step.id ? 'bg-neutral-800 text-neutral-50' : 'text-neutral-400 hover:bg-neutral-900',
+                  activeStep === step.id ? 'bg-neutral-100 text-neutral-900' : 'text-neutral-500 hover:bg-neutral-50',
                 )}
               >
                 <div className="relative shrink-0">
                   {step.status === 'completed' ? (
-                    <CheckCircle className="w-5 h-5 text-emerald-400" />
+                    <CheckCircle className="w-5 h-5 text-emerald-600" />
                   ) : step.status === 'in_progress' ? (
                     <div className="w-5 h-5 rounded-full border-2 border-amber-400 flex items-center justify-center">
                       <div className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
                     </div>
                   ) : (
-                    <Circle className="w-5 h-5 text-neutral-700" />
+                    <Circle className="w-5 h-5 text-neutral-400" />
                   )}
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium truncate">{step.title}</p>
                   {step.status === 'in_progress' && (
-                    <p className="text-[10px] text-amber-400">{step.progress}%</p>
+                    <p className="text-[10px] text-amber-600">{step.progress}%</p>
                   )}
                 </div>
               </button>
@@ -132,20 +132,20 @@ export default function OnboardingPage() {
           <CardContent>
             <div className="space-y-4">
               {calibrationTasks.map((task) => (
-                <div key={task.id} className="flex items-center gap-4 p-4 rounded-lg border border-neutral-800 bg-neutral-900/50">
+                <div key={task.id} className="flex items-center gap-4 p-4 rounded-lg border border-neutral-200 bg-white/50">
                   <div className="shrink-0">
                     {task.status === 'graded' && task.grade === 'pass' ? (
-                      <CheckCircle className="w-5 h-5 text-emerald-400" />
+                      <CheckCircle className="w-5 h-5 text-emerald-600" />
                     ) : task.status === 'pending_review' ? (
-                      <div className="w-5 h-5 rounded-full bg-amber-950/50 border border-amber-800 flex items-center justify-center">
-                        <span className="text-[10px] text-amber-400">!</span>
+                      <div className="w-5 h-5 rounded-full bg-amber-50 border border-amber-800 flex items-center justify-center">
+                        <span className="text-[10px] text-amber-600">!</span>
                       </div>
                     ) : (
-                      <Circle className="w-5 h-5 text-neutral-700" />
+                      <Circle className="w-5 h-5 text-neutral-400" />
                     )}
                   </div>
                   <div className="flex-1">
-                    <p className="text-sm font-medium text-neutral-200">{task.title}</p>
+                    <p className="text-sm font-medium text-neutral-700">{task.title}</p>
                     {task.feedback && (
                       <p className="text-xs text-neutral-500 mt-0.5">{task.feedback}</p>
                     )}
@@ -174,7 +174,7 @@ export default function OnboardingPage() {
                 </div>
               ))}
 
-              <div className="border-t border-neutral-800 pt-4">
+              <div className="border-t border-neutral-200 pt-4">
                 <p className="text-xs text-neutral-500 mb-2">Add feedback for this calibration round:</p>
                 <div className="flex gap-2">
                   <Input

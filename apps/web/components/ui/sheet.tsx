@@ -34,20 +34,20 @@ export function Sheet({ open, onClose, children, side = 'right', className }: Sh
 
   return (
     <>
-      <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm animate-fade-in" onClick={onClose} />
+      <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm animate-fade-in" onClick={onClose} />
       <div
         className={cn(
-          'fixed top-0 z-50 h-full w-full max-w-md bg-neutral-900 border-neutral-800 shadow-2xl flex flex-col',
+          'fixed top-0 z-50 h-full w-full max-w-md bg-white border-neutral-200 shadow-2xl flex flex-col',
           'transition-transform duration-300 ease-out',
           side === 'right' ? 'right-0 border-l' : 'left-0 border-r',
           className
         )}
       >
-        <div className="flex items-center justify-between p-4 border-b border-neutral-800">
+        <div className="flex items-center justify-between p-4 border-b border-neutral-200">
           <div className="flex-1" />
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-neutral-500 hover:text-neutral-200 hover:bg-neutral-800 transition-colors"
+            className="p-1.5 rounded-lg text-neutral-400 hover:text-neutral-700 hover:bg-neutral-100 transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
@@ -65,7 +65,7 @@ function SheetHeader({ className, ...props }: React.HTMLAttributes<HTMLDivElemen
 }
 
 function SheetTitle({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
-  return <h2 className={cn('text-lg font-semibold text-neutral-50', className)} {...props} />;
+  return <h2 className={cn('text-lg font-semibold text-neutral-900', className)} {...props} />;
 }
 
 function SheetBody({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {

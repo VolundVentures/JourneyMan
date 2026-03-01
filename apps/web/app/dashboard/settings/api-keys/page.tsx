@@ -33,7 +33,7 @@ export default function APIKeysPage() {
     <div className="space-y-6 animate-fade-in">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-neutral-50 flex items-center gap-3">
+          <h1 className="text-2xl font-bold text-neutral-900 flex items-center gap-3">
             <Hash className="w-6 h-6" />
             API Keys
           </h1>
@@ -54,27 +54,27 @@ export default function APIKeysPage() {
               <div className="flex items-start gap-4">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-2">
-                    <h3 className="text-sm font-semibold text-neutral-100">{key.name}</h3>
+                    <h3 className="text-sm font-semibold text-neutral-800">{key.name}</h3>
                     <Badge variant={key.status === 'active' ? 'default' : key.status === 'expired' ? 'secondary' : 'destructive'} className="text-[10px]">
                       {key.status}
                     </Badge>
                   </div>
 
                   <div className="flex items-center gap-2 mb-3">
-                    <code className="text-xs font-mono text-neutral-400 bg-neutral-800 px-2 py-1 rounded">
+                    <code className="text-xs font-mono text-neutral-500 bg-neutral-100 px-2 py-1 rounded">
                       {showKey === key.id ? `${key.prefix}••••••••••••••••••••••••` : `${key.prefix}••••••••`}
                     </code>
-                    <button onClick={() => setShowKey(showKey === key.id ? null : key.id)} className="p-1 text-neutral-500 hover:text-neutral-300">
+                    <button onClick={() => setShowKey(showKey === key.id ? null : key.id)} className="p-1 text-neutral-500 hover:text-neutral-600">
                       {showKey === key.id ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
                     </button>
-                    <button className="p-1 text-neutral-500 hover:text-neutral-300">
+                    <button className="p-1 text-neutral-500 hover:text-neutral-600">
                       <Copy className="w-3.5 h-3.5" />
                     </button>
                   </div>
 
                   <div className="flex flex-wrap gap-1 mb-3">
                     {key.scopes.map((scope) => (
-                      <span key={scope} className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-neutral-800 text-neutral-500">{scope}</span>
+                      <span key={scope} className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-neutral-100 text-neutral-500">{scope}</span>
                     ))}
                   </div>
 
@@ -91,7 +91,7 @@ export default function APIKeysPage() {
                     <Button variant="outline" size="sm">
                       <RefreshCw className="w-3 h-3" /> Rotate
                     </Button>
-                    <Button variant="ghost" size="sm" className="text-red-400 hover:text-red-300">
+                    <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-500">
                       <Trash2 className="w-3 h-3" />
                     </Button>
                   </div>

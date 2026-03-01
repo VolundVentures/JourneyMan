@@ -33,9 +33,9 @@ const mockContacts: Contact[] = [
 ];
 
 const sentimentBadge = {
-  positive: 'bg-emerald-950/50 text-emerald-400',
-  neutral: 'bg-neutral-800 text-neutral-400',
-  negative: 'bg-red-950/50 text-red-400',
+  positive: 'bg-emerald-50 text-emerald-600',
+  neutral: 'bg-neutral-100 text-neutral-400',
+  negative: 'bg-red-50 text-red-600',
 };
 
 export default function ContactsPage() {
@@ -51,19 +51,19 @@ export default function ContactsPage() {
   const columns = [
     { key: 'name', header: 'Name', sortable: true, render: (c: Contact) => (
       <div>
-        <p className="text-sm font-medium text-neutral-200">{c.name}</p>
+        <p className="text-sm font-medium text-neutral-700">{c.name}</p>
         <p className="text-xs text-neutral-500">{c.email}</p>
       </div>
     )},
     { key: 'company', header: 'Company', sortable: true, render: (c: Contact) => (
       <div className="flex items-center gap-2">
         <Building2 className="w-3.5 h-3.5 text-neutral-600" />
-        <span className="text-sm text-neutral-300">{c.company}</span>
+        <span className="text-sm text-neutral-600">{c.company}</span>
       </div>
     )},
-    { key: 'role', header: 'Role', render: (c: Contact) => <span className="text-sm text-neutral-400">{c.role}</span> },
+    { key: 'role', header: 'Role', render: (c: Contact) => <span className="text-sm text-neutral-500">{c.role}</span> },
     { key: 'sentiment', header: 'Sentiment', render: (c: Contact) => <Badge className={sentimentBadge[c.sentiment]}>{c.sentiment}</Badge> },
-    { key: 'interactionCount', header: 'Interactions', sortable: true, render: (c: Contact) => <span className="text-sm font-mono text-neutral-300">{c.interactionCount}</span> },
+    { key: 'interactionCount', header: 'Interactions', sortable: true, render: (c: Contact) => <span className="text-sm font-mono text-neutral-600">{c.interactionCount}</span> },
     { key: 'assignedEmployee', header: 'Managed By', render: (c: Contact) => <Badge variant="secondary" className="text-[10px]">{c.assignedEmployee}</Badge> },
   ];
 
@@ -71,7 +71,7 @@ export default function ContactsPage() {
     <div className="space-y-6 animate-fade-in">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-neutral-50 flex items-center gap-3">
+          <h1 className="text-2xl font-bold text-neutral-900 flex items-center gap-3">
             <Users className="w-6 h-6" />
             Contacts
           </h1>

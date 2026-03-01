@@ -36,7 +36,7 @@ function TabsList({ className, ...props }: React.HTMLAttributes<HTMLDivElement>)
   return (
     <div
       className={cn(
-        'inline-flex items-center gap-1 border-b border-neutral-800 pb-px',
+        'inline-flex items-center gap-1 border-b border-neutral-200 pb-px',
         className
       )}
       role="tablist"
@@ -60,8 +60,8 @@ function TabsTrigger({ value, className, ...props }: TabsTriggerProps) {
       className={cn(
         'relative px-4 py-2 text-sm font-medium transition-colors',
         isActive
-          ? 'text-neutral-50 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:bg-neutral-50'
-          : 'text-neutral-500 hover:text-neutral-300',
+          ? 'text-neutral-900 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:bg-neutral-900'
+          : 'text-neutral-500 hover:text-neutral-700',
         className
       )}
       onClick={() => setActiveTab(value)}

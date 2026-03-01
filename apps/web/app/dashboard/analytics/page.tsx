@@ -37,7 +37,7 @@ export default function AnalyticsPage() {
   return (
     <div className="space-y-8 animate-fade-in">
       <div>
-        <h1 className="text-2xl font-bold text-neutral-50 flex items-center gap-3">
+        <h1 className="text-2xl font-bold text-neutral-900 flex items-center gap-3">
           <BarChart3 className="w-6 h-6" />
           Analytics
         </h1>
@@ -91,7 +91,7 @@ export default function AnalyticsPage() {
               {departmentData.map((dept) => (
                 <div key={dept.name} className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium text-neutral-200">{dept.name}</span>
+                    <span className="text-sm font-medium text-neutral-700">{dept.name}</span>
                     <div className="flex items-center gap-4 text-xs text-neutral-500">
                       <span>{dept.tasks} tasks</span>
                       <span>{dept.autonomy}% auto</span>
@@ -101,7 +101,7 @@ export default function AnalyticsPage() {
                   <div className="flex gap-1 h-2">
                     <div className="bg-emerald-500/40 rounded-l" style={{ width: `${dept.autonomy}%` }} />
                     <div className="bg-amber-500/40" style={{ width: `${dept.escalation}%` }} />
-                    <div className="bg-neutral-800 rounded-r flex-1" />
+                    <div className="bg-neutral-100 rounded-r flex-1" />
                   </div>
                 </div>
               ))}
@@ -125,24 +125,24 @@ export default function AnalyticsPage() {
                   <div key={entry.employee.id} className="flex items-center gap-3 py-2">
                     <span className={cn(
                       'w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold',
-                      i === 0 ? 'bg-amber-400/20 text-amber-400' :
-                      i === 1 ? 'bg-neutral-400/20 text-neutral-400' :
+                      i === 0 ? 'bg-amber-400/20 text-amber-600' :
+                      i === 1 ? 'bg-neutral-400/20 text-neutral-500' :
                       i === 2 ? 'bg-amber-700/20 text-amber-700' :
-                      'bg-neutral-800 text-neutral-600'
+                      'bg-neutral-100 text-neutral-400'
                     )}>
                       {i + 1}
                     </span>
                     <span className="text-lg">{emoji}</span>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-neutral-200">{entry.employee.name}</p>
+                      <p className="text-sm font-medium text-neutral-700">{entry.employee.name}</p>
                       <p className="text-xs text-neutral-500">{entry.employee.department}</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-sm font-bold text-neutral-200">{entry.tasksCompleted}</p>
+                      <p className="text-sm font-bold text-neutral-700">{entry.tasksCompleted}</p>
                       <p className="text-[10px] text-neutral-500">tasks</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-sm font-mono text-neutral-300">{entry.autonomyRate}%</p>
+                      <p className="text-sm font-mono text-neutral-600">{entry.autonomyRate}%</p>
                       <p className="text-[10px] text-neutral-500">auto</p>
                     </div>
                   </div>
@@ -171,15 +171,15 @@ export default function AnalyticsPage() {
               { icon: '🔄', title: 'Cross-training opportunity', detail: 'Sage and Flux have complementary skills. Cross-training could improve content-research pipeline by 30%.', confidence: 72, action: 'Create plan' },
               { icon: '💰', title: 'Cost optimization available', detail: 'Ember resolves 80% of tickets without escalation. Increasing confidence threshold from 0.7 to 0.8 could save $120/month.', confidence: 88, action: 'Adjust config' },
             ].map((insight, i) => (
-              <div key={i} className="p-4 rounded-lg border border-neutral-800 bg-neutral-900/50 space-y-2">
+              <div key={i} className="p-4 rounded-lg border border-neutral-200 bg-white/50 space-y-2">
                 <div className="flex items-start gap-2">
                   <span className="text-lg">{insight.icon}</span>
-                  <p className="text-sm font-medium text-neutral-200">{insight.title}</p>
+                  <p className="text-sm font-medium text-neutral-700">{insight.title}</p>
                 </div>
                 <p className="text-xs text-neutral-500">{insight.detail}</p>
                 <div className="flex items-center justify-between pt-1">
                   <Badge variant="secondary" className="text-[10px]">{insight.confidence}% confidence</Badge>
-                  <button className="text-xs text-neutral-400 hover:text-neutral-200 transition-colors">
+                  <button className="text-xs text-neutral-500 hover:text-neutral-700 transition-colors">
                     {insight.action} →
                   </button>
                 </div>

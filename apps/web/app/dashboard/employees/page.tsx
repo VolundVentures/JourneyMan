@@ -39,8 +39,8 @@ export default function EmployeesPage() {
   return (
     <div className="space-y-6 animate-fade-in">
       <div>
-        <h1 className="text-2xl font-bold text-neutral-50">Employees</h1>
-        <p className="mt-1 text-sm text-neutral-400">Manage your AI workforce</p>
+        <h1 className="text-2xl font-bold text-neutral-900">Employees</h1>
+        <p className="mt-1 text-sm text-neutral-500">Manage your AI workforce</p>
       </div>
 
       {/* Filters */}
@@ -63,8 +63,8 @@ export default function EmployeesPage() {
               className={cn(
                 'px-3 py-1.5 rounded-lg text-xs font-medium transition-colors',
                 statusFilter === status
-                  ? 'bg-neutral-800 text-neutral-50 border border-neutral-700'
-                  : 'text-neutral-400 hover:text-neutral-300 hover:bg-neutral-800 border border-transparent'
+                  ? 'bg-neutral-100 text-neutral-900 border border-neutral-300'
+                  : 'text-neutral-500 hover:text-neutral-600 hover:bg-neutral-100 border border-transparent'
               )}
             >
               {status === 'all' ? 'All' : status.charAt(0).toUpperCase() + status.slice(1)}
@@ -75,12 +75,12 @@ export default function EmployeesPage() {
           ))}
         </div>
 
-        <div className="flex items-center gap-1 ml-auto bg-neutral-800 rounded-lg p-0.5">
+        <div className="flex items-center gap-1 ml-auto bg-neutral-100 rounded-lg p-0.5">
           <button
             onClick={() => setView('grid')}
             className={cn(
               'p-1.5 rounded-md transition-colors',
-              view === 'grid' ? 'bg-neutral-700 text-neutral-200' : 'text-neutral-500 hover:text-neutral-300'
+              view === 'grid' ? 'bg-neutral-200 text-neutral-700' : 'text-neutral-500 hover:text-neutral-600'
             )}
           >
             <LayoutGrid className="w-4 h-4" />
@@ -89,7 +89,7 @@ export default function EmployeesPage() {
             onClick={() => setView('table')}
             className={cn(
               'p-1.5 rounded-md transition-colors',
-              view === 'table' ? 'bg-neutral-700 text-neutral-200' : 'text-neutral-500 hover:text-neutral-300'
+              view === 'table' ? 'bg-neutral-200 text-neutral-700' : 'text-neutral-500 hover:text-neutral-600'
             )}
           >
             <List className="w-4 h-4" />
@@ -109,10 +109,10 @@ export default function EmployeesPage() {
           ))}
         </div>
       ) : (
-        <div className="rounded-xl border border-neutral-800 overflow-hidden">
+        <div className="rounded-xl border border-neutral-200 overflow-hidden">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-neutral-800">
+              <tr className="border-b border-neutral-200">
                 <th className="text-left px-4 py-3 text-xs font-medium text-neutral-500 uppercase tracking-wider">Employee</th>
                 <th className="text-left px-4 py-3 text-xs font-medium text-neutral-500 uppercase tracking-wider">Department</th>
                 <th className="text-left px-4 py-3 text-xs font-medium text-neutral-500 uppercase tracking-wider">Status</th>
@@ -125,13 +125,13 @@ export default function EmployeesPage() {
               {filtered.map((employee) => (
                 <tr
                   key={employee.id}
-                  className="border-b border-neutral-800/50 hover:bg-neutral-800/30 transition-colors"
+                  className="border-b border-neutral-200 hover:bg-neutral-50 transition-colors"
                 >
                   <td className="px-4 py-3">
                     <Link href={`/dashboard/employees/${employee.id}`} className="flex items-center gap-3 group">
                       <Avatar name={employee.name} emoji={employeeEmojis[employee.id]} size="sm" />
                       <div>
-                        <p className="text-sm font-medium text-neutral-200 group-hover:text-white transition-colors">
+                        <p className="text-sm font-medium text-neutral-700 group-hover:text-neutral-900 transition-colors">
                           {employee.name}
                         </p>
                         <p className="text-xs text-neutral-500">{employee.roleTitle}</p>
@@ -145,15 +145,15 @@ export default function EmployeesPage() {
                     <StatusBadge status={employee.status} size="sm" />
                   </td>
                   <td className="px-4 py-3">
-                    <span className="font-mono text-sm text-neutral-300">{employee.tasksCompleted}</span>
+                    <span className="font-mono text-sm text-neutral-600">{employee.tasksCompleted}</span>
                   </td>
                   <td className="px-4 py-3">
-                    <span className="font-mono text-sm text-neutral-300">
+                    <span className="font-mono text-sm text-neutral-600">
                       {Math.round(employee.autonomyScore * 100)}%
                     </span>
                   </td>
                   <td className="px-4 py-3">
-                    <span className="text-sm text-neutral-400">{employee.reportsToName || '—'}</span>
+                    <span className="text-sm text-neutral-500">{employee.reportsToName || '—'}</span>
                   </td>
                 </tr>
               ))}

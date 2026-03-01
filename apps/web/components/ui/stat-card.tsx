@@ -55,7 +55,7 @@ export function StatCard({
   const trendNeutral = trend && trend.value === 0;
 
   return (
-    <div className="rounded-xl border border-neutral-800 bg-neutral-900 p-5 transition-colors hover:bg-neutral-900/80">
+    <div className="rounded-xl border border-neutral-200 bg-white p-5 transition-colors hover:bg-neutral-50">
       <div className="flex items-start justify-between">
         <div className="space-y-3">
           <p className="text-xs font-medium uppercase tracking-wider text-neutral-500">
@@ -63,20 +63,20 @@ export function StatCard({
           </p>
           <div className="flex items-baseline gap-1">
             {prefix && (
-              <span className="text-lg font-semibold text-neutral-400">{prefix}</span>
+              <span className="text-lg font-semibold text-neutral-500">{prefix}</span>
             )}
-            <span className="text-3xl font-bold text-neutral-50 tabular-nums">
+            <span className="text-3xl font-bold text-neutral-900 tabular-nums">
               <AnimatedCounter value={value} />
             </span>
             {suffix && (
-              <span className="text-lg font-semibold text-neutral-400">{suffix}</span>
+              <span className="text-lg font-semibold text-neutral-500">{suffix}</span>
             )}
           </div>
           {subtitle && (
             <p className="text-xs text-neutral-500">{subtitle}</p>
           )}
         </div>
-        <div className="rounded-lg p-2.5 bg-neutral-800 text-neutral-400">
+        <div className="rounded-lg p-2.5 bg-neutral-100 text-neutral-500">
           <Icon className="w-5 h-5" />
         </div>
       </div>

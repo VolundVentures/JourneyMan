@@ -69,7 +69,7 @@ export default function InboxPage() {
   return (
     <div className="space-y-6 animate-fade-in">
       <div>
-        <h1 className="text-2xl font-bold text-neutral-50 flex items-center gap-3">
+        <h1 className="text-2xl font-bold text-neutral-900 flex items-center gap-3">
           <Inbox className="w-6 h-6" />
           Unified Inbox
         </h1>
@@ -90,24 +90,24 @@ export default function InboxPage() {
                 className={cn(
                   'flex items-center gap-2 w-full px-3 py-2 rounded-lg text-sm transition-colors',
                   selectedFolder === folder.label
-                    ? 'bg-neutral-800 text-neutral-50'
-                    : 'text-neutral-400 hover:bg-neutral-900 hover:text-neutral-200'
+                    ? 'bg-neutral-100 text-neutral-900'
+                    : 'text-neutral-500 hover:bg-neutral-50 hover:text-neutral-700'
                 )}
               >
                 <FolderIcon className="w-4 h-4" />
                 <span className="flex-1 text-left">{folder.label}</span>
                 {folder.count > 0 && (
-                  <span className="text-[10px] font-mono bg-neutral-700 text-neutral-400 px-1.5 py-0.5 rounded-full">{folder.count}</span>
+                  <span className="text-[10px] font-mono bg-neutral-200 text-neutral-500 px-1.5 py-0.5 rounded-full">{folder.count}</span>
                 )}
               </button>
             );
           })}
 
-          <div className="border-t border-neutral-800 my-3" />
+          <div className="border-t border-neutral-200 my-3" />
 
-          <p className="px-3 text-[10px] font-semibold text-neutral-600 uppercase tracking-wider mb-1">By Employee</p>
+          <p className="px-3 text-[10px] font-semibold text-neutral-400 uppercase tracking-wider mb-1">By Employee</p>
           {['Nova', 'Apex', 'Atlas', 'Ember', 'Flux', 'Sage'].map((name) => (
-            <button key={name} className="flex items-center gap-2 w-full px-3 py-1.5 rounded-lg text-xs text-neutral-500 hover:bg-neutral-900 hover:text-neutral-300">
+            <button key={name} className="flex items-center gap-2 w-full px-3 py-1.5 rounded-lg text-xs text-neutral-500 hover:bg-neutral-50 hover:text-neutral-600">
               <span className="w-2 h-2 rounded-full bg-emerald-500/50" />
               {name}
             </button>
@@ -116,7 +116,7 @@ export default function InboxPage() {
 
         {/* Message List */}
         <Card className="lg:col-span-4 overflow-hidden flex flex-col">
-          <div className="p-3 border-b border-neutral-800">
+          <div className="p-3 border-b border-neutral-200">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-500" />
               <Input
@@ -135,23 +135,23 @@ export default function InboxPage() {
                   key={msg.id}
                   onClick={() => setSelectedMessage(msg)}
                   className={cn(
-                    'flex items-start gap-3 w-full p-3 text-left border-b border-neutral-800/50 transition-colors',
-                    selectedMessage?.id === msg.id ? 'bg-neutral-800' : 'hover:bg-neutral-800/50',
-                    !msg.read && 'bg-neutral-800/30'
+                    'flex items-start gap-3 w-full p-3 text-left border-b border-neutral-200 transition-colors',
+                    selectedMessage?.id === msg.id ? 'bg-neutral-100' : 'hover:bg-neutral-100/50',
+                    !msg.read && 'bg-neutral-50'
                   )}
                 >
-                  <ChannelIcon className="w-4 h-4 text-neutral-600 mt-0.5 shrink-0" />
+                  <ChannelIcon className="w-4 h-4 text-neutral-400 mt-0.5 shrink-0" />
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
-                      <span className={cn('text-sm font-medium truncate', msg.read ? 'text-neutral-400' : 'text-neutral-100')}>
+                      <span className={cn('text-sm font-medium truncate', msg.read ? 'text-neutral-500' : 'text-neutral-800')}>
                         {msg.from}
                       </span>
                       {!msg.read && <span className="w-1.5 h-1.5 rounded-full bg-blue-400 shrink-0" />}
-                      {msg.starred && <Star className="w-3 h-3 text-amber-400 shrink-0 fill-amber-400" />}
+                      {msg.starred && <Star className="w-3 h-3 text-amber-600 shrink-0 fill-amber-400" />}
                     </div>
-                    <p className="text-xs text-neutral-300 truncate">{msg.subject}</p>
-                    <p className="text-xs text-neutral-600 truncate mt-0.5">{msg.preview}</p>
-                    <span className="text-[10px] text-neutral-700 mt-1 inline-block">{formatRelativeTime(msg.timestamp)}</span>
+                    <p className="text-xs text-neutral-600 truncate">{msg.subject}</p>
+                    <p className="text-xs text-neutral-400 truncate mt-0.5">{msg.preview}</p>
+                    <span className="text-[10px] text-neutral-400 mt-1 inline-block">{formatRelativeTime(msg.timestamp)}</span>
                   </div>
                 </button>
               );
@@ -163,12 +163,12 @@ export default function InboxPage() {
         <Card className="lg:col-span-6 overflow-hidden flex flex-col">
           {selectedMessage ? (
             <>
-              <div className="p-4 border-b border-neutral-800">
+              <div className="p-4 border-b border-neutral-200">
                 <div className="flex items-center justify-between mb-2">
-                  <h2 className="text-lg font-semibold text-neutral-50">{selectedMessage.subject}</h2>
+                  <h2 className="text-lg font-semibold text-neutral-900">{selectedMessage.subject}</h2>
                   <div className="flex items-center gap-2">
                     <Button variant="ghost" size="icon">
-                      <Star className={cn('w-4 h-4', selectedMessage.starred ? 'text-amber-400 fill-amber-400' : 'text-neutral-500')} />
+                      <Star className={cn('w-4 h-4', selectedMessage.starred ? 'text-amber-600 fill-amber-400' : 'text-neutral-500')} />
                     </Button>
                     <Button variant="ghost" size="icon">
                       <Archive className="w-4 h-4 text-neutral-500" />
@@ -178,8 +178,8 @@ export default function InboxPage() {
                     </Button>
                   </div>
                 </div>
-                <div className="flex items-center gap-3 text-sm text-neutral-400">
-                  <span className="font-medium text-neutral-200">
+                <div className="flex items-center gap-3 text-sm text-neutral-500">
+                  <span className="font-medium text-neutral-700">
                     {selectedMessage.employeeId && (
                       <span className="mr-1">{employeeEmojis[selectedMessage.employeeId]}</span>
                     )}
@@ -187,7 +187,7 @@ export default function InboxPage() {
                   </span>
                   <ChevronRight className="w-3 h-3" />
                   <span>{selectedMessage.to}</span>
-                  <span className="text-neutral-600">·</span>
+                  <span className="text-neutral-400">·</span>
                   <Badge variant="outline" className="text-[10px]">{selectedMessage.channel}</Badge>
                   {selectedMessage.sentiment && (
                     <Badge variant={selectedMessage.sentiment === 'positive' ? 'default' : selectedMessage.sentiment === 'negative' ? 'destructive' : 'secondary'} className="text-[10px]">
@@ -197,7 +197,7 @@ export default function InboxPage() {
                 </div>
               </div>
               <div className="flex-1 p-4 overflow-y-auto scrollbar-thin">
-                <div className="text-sm text-neutral-300 leading-relaxed whitespace-pre-wrap">
+                <div className="text-sm text-neutral-600 leading-relaxed whitespace-pre-wrap">
                   {selectedMessage.preview}
                   {'\n\n'}
                   This is a preview of the full message content. In the live application, this would show the complete email/message thread with full formatting, attachments, and conversation history.
@@ -205,7 +205,7 @@ export default function InboxPage() {
                   The AI employee&apos;s reasoning for this communication would also be displayed here: why they chose this tone, what context they drew from, and their confidence level.
                 </div>
               </div>
-              <div className="p-4 border-t border-neutral-800">
+              <div className="p-4 border-t border-neutral-200">
                 <div className="flex items-center gap-2">
                   <Input placeholder="Reply or add guidance..." className="flex-1" />
                   <Button variant="ghost" size="icon">
@@ -219,7 +219,7 @@ export default function InboxPage() {
               </div>
             </>
           ) : (
-            <div className="flex-1 flex items-center justify-center text-neutral-600">
+            <div className="flex-1 flex items-center justify-center text-neutral-400">
               <div className="text-center">
                 <Mail className="w-12 h-12 mx-auto mb-3 opacity-30" />
                 <p className="text-sm">Select a message to view</p>

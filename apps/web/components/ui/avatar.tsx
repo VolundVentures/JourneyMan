@@ -46,7 +46,7 @@ function Avatar({ name, emoji, department, size = 'md', src, className, ...props
     return (
       <div
         className={cn(
-          'relative rounded-full shrink-0 flex items-center justify-center bg-neutral-800 border border-neutral-700',
+          'relative rounded-full shrink-0 flex items-center justify-center bg-neutral-100 border border-neutral-300',
           sizeClasses[size],
           className
         )}
@@ -60,7 +60,7 @@ function Avatar({ name, emoji, department, size = 'md', src, className, ...props
   return (
     <div
       className={cn(
-        'relative rounded-full shrink-0 flex items-center justify-center font-semibold text-neutral-300 bg-neutral-800 border border-neutral-700',
+        'relative rounded-full shrink-0 flex items-center justify-center font-semibold text-neutral-600 bg-neutral-100 border border-neutral-300',
         sizeClasses[size],
         className
       )}

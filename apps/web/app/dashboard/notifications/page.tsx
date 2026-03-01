@@ -42,13 +42,13 @@ const typeIcons: Record<string, React.ComponentType<{ className?: string }>> = {
 };
 
 const typeColors: Record<string, string> = {
-  approval_requested: 'text-amber-400',
-  escalation_created: 'text-red-400',
-  task_completed: 'text-emerald-400',
-  status_change: 'text-blue-400',
-  system_alert: 'text-red-400',
+  approval_requested: 'text-amber-600',
+  escalation_created: 'text-red-600',
+  task_completed: 'text-emerald-600',
+  status_change: 'text-blue-600',
+  system_alert: 'text-red-600',
   handoff_pending: 'text-neutral-400',
-  milestone: 'text-amber-400',
+  milestone: 'text-amber-600',
 };
 
 export default function NotificationsPage() {
@@ -56,7 +56,7 @@ export default function NotificationsPage() {
     <div className="space-y-6 animate-fade-in">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-neutral-50 flex items-center gap-3">
+          <h1 className="text-2xl font-bold text-neutral-900 flex items-center gap-3">
             <Bell className="w-6 h-6" />
             All Notifications
           </h1>
@@ -80,14 +80,14 @@ export default function NotificationsPage() {
         {allNotifications.map((notif) => {
           const Icon = typeIcons[notif.type];
           return (
-            <Card key={notif.id} className={cn(!notif.read && 'bg-neutral-800/20')}>
+            <Card key={notif.id} className={cn(!notif.read && 'bg-neutral-50')}>
               <CardContent className="py-4 flex items-center gap-4">
                 <div className={cn('shrink-0', typeColors[notif.type])}>
                   <Icon className="w-5 h-5" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
-                    <p className={cn('text-sm font-medium', notif.read ? 'text-neutral-400' : 'text-neutral-50')}>
+                    <p className={cn('text-sm font-medium', notif.read ? 'text-neutral-400' : 'text-neutral-900')}>
                       {notif.title}
                     </p>
                     {!notif.read && <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />}

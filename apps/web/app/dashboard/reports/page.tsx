@@ -27,10 +27,10 @@ const mockReports: Report[] = [
 ];
 
 const typeColors: Record<string, string> = {
-  weekly: 'bg-blue-950/50 text-blue-400',
-  monthly: 'bg-purple-950/50 text-purple-400',
-  quarterly: 'bg-amber-950/50 text-amber-400',
-  custom: 'bg-neutral-800 text-neutral-400',
+  weekly: 'bg-blue-50 text-blue-600',
+  monthly: 'bg-purple-50 text-purple-600',
+  quarterly: 'bg-amber-50 text-amber-600',
+  custom: 'bg-neutral-100 text-neutral-400',
 };
 
 export default function ReportsPage() {
@@ -38,7 +38,7 @@ export default function ReportsPage() {
     <div className="space-y-6 animate-fade-in">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-neutral-50 flex items-center gap-3">
+          <h1 className="text-2xl font-bold text-neutral-900 flex items-center gap-3">
             <FileText className="w-6 h-6" />
             Reports
           </h1>
@@ -54,7 +54,7 @@ export default function ReportsPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
         {mockReports.map((report) => (
-          <Card key={report.id} className="hover:border-neutral-700 transition-all">
+          <Card key={report.id} className="hover:border-neutral-300 transition-all">
             <CardHeader className="pb-3">
               <div className="flex items-center justify-between">
                 <Badge className={typeColors[report.type]}>{report.type}</Badge>

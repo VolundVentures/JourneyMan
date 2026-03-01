@@ -86,18 +86,18 @@ export function DataTable<T>({
   };
 
   return (
-    <div className={cn('rounded-xl border border-neutral-800 bg-neutral-900 overflow-hidden', className)}>
+    <div className={cn('rounded-xl border border-neutral-200 bg-white overflow-hidden', className)}>
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-neutral-800 bg-neutral-900/80">
+            <tr className="border-b border-neutral-200 bg-neutral-50/80">
               {selectable && (
                 <th className="w-10 px-4 py-3">
                   <input
                     type="checkbox"
                     checked={paged.length > 0 && paged.every((item) => selectedIds.has(getRowId(item)))}
                     onChange={toggleAll}
-                    className="rounded border-neutral-600 bg-neutral-800 text-neutral-50 focus:ring-neutral-500"
+                    className="rounded border-neutral-300 bg-white text-neutral-900 focus:ring-neutral-400"
                   />
                 </th>
               )}
@@ -106,7 +106,7 @@ export function DataTable<T>({
                   key={col.key}
                   className={cn(
                     'px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-neutral-500',
-                    col.sortable && 'cursor-pointer select-none hover:text-neutral-300',
+                    col.sortable && 'cursor-pointer select-none hover:text-neutral-600',
                     col.className
                   )}
                   onClick={() => col.sortable && toggleSort(col.key)}
@@ -138,9 +138,9 @@ export function DataTable<T>({
                     key={id}
                     onClick={() => onRowClick?.(item)}
                     className={cn(
-                      'border-b border-neutral-800/50 last:border-0 transition-colors',
+                      'border-b border-neutral-200 last:border-0 transition-colors',
                       onRowClick && 'cursor-pointer',
-                      selectedIds.has(id) ? 'bg-neutral-800/50' : 'hover:bg-neutral-800/30'
+                      selectedIds.has(id) ? 'bg-neutral-100' : 'hover:bg-neutral-50'
                     )}
                   >
                     {selectable && (
@@ -149,12 +149,12 @@ export function DataTable<T>({
                           type="checkbox"
                           checked={selectedIds.has(id)}
                           onChange={() => toggleRow(id)}
-                          className="rounded border-neutral-600 bg-neutral-800 text-neutral-50 focus:ring-neutral-500"
+                          className="rounded border-neutral-300 bg-white text-neutral-900 focus:ring-neutral-400"
                         />
                       </td>
                     )}
                     {columns.map((col) => (
-                      <td key={col.key} className={cn('px-4 py-3 text-neutral-300', col.className)}>
+                      <td key={col.key} className={cn('px-4 py-3 text-neutral-600', col.className)}>
                         {col.render
                           ? col.render(item)
                           : String((item as Record<string, unknown>)[col.key] ?? '')}
@@ -169,24 +169,24 @@ export function DataTable<T>({
       </div>
 
       {totalPages > 1 && (
-        <div className="flex items-center justify-between px-4 py-3 border-t border-neutral-800 text-sm text-neutral-500">
+        <div className="flex items-center justify-between px-4 py-3 border-t border-neutral-200 text-sm text-neutral-500">
           <span>
             {page * pageSize + 1}-{Math.min((page + 1) * pageSize, sorted.length)} of {sorted.length}
           </span>
           <div className="flex items-center gap-1">
-            <button onClick={() => setPage(0)} disabled={page === 0} className="p-1 rounded hover:bg-neutral-800 disabled:opacity-30">
+            <button onClick={() => setPage(0)} disabled={page === 0} className="p-1 rounded hover:bg-neutral-100 disabled:opacity-30">
               <ChevronsLeft className="w-4 h-4" />
             </button>
-            <button onClick={() => setPage(page - 1)} disabled={page === 0} className="p-1 rounded hover:bg-neutral-800 disabled:opacity-30">
+            <button onClick={() => setPage(page - 1)} disabled={page === 0} className="p-1 rounded hover:bg-neutral-100 disabled:opacity-30">
               <ChevronLeft className="w-4 h-4" />
             </button>
-            <span className="px-2 text-neutral-400">
+            <span className="px-2 text-neutral-500">
               {page + 1} / {totalPages}
             </span>
-            <button onClick={() => setPage(page + 1)} disabled={page >= totalPages - 1} className="p-1 rounded hover:bg-neutral-800 disabled:opacity-30">
+            <button onClick={() => setPage(page + 1)} disabled={page >= totalPages - 1} className="p-1 rounded hover:bg-neutral-100 disabled:opacity-30">
               <ChevronRight className="w-4 h-4" />
             </button>
-            <button onClick={() => setPage(totalPages - 1)} disabled={page >= totalPages - 1} className="p-1 rounded hover:bg-neutral-800 disabled:opacity-30">
+            <button onClick={() => setPage(totalPages - 1)} disabled={page >= totalPages - 1} className="p-1 rounded hover:bg-neutral-100 disabled:opacity-30">
               <ChevronsRight className="w-4 h-4" />
             </button>
           </div>

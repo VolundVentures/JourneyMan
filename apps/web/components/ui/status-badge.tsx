@@ -11,27 +11,27 @@ const statusConfig: Record<EmployeeStatus, { label: string; dotClass: string; ba
   active: {
     label: 'Active',
     dotClass: 'bg-emerald-500',
-    badgeClass: 'bg-emerald-950/50 text-emerald-400 border-emerald-900/50',
+    badgeClass: 'bg-emerald-50 text-emerald-600 border-emerald-200',
   },
   onboarding: {
     label: 'Onboarding',
     dotClass: 'bg-neutral-400',
-    badgeClass: 'bg-neutral-800 text-neutral-300 border-neutral-700',
+    badgeClass: 'bg-neutral-100 text-neutral-600 border-neutral-300',
   },
   supervised: {
     label: 'Supervised',
     dotClass: 'bg-amber-500',
-    badgeClass: 'bg-amber-950/50 text-amber-400 border-amber-900/50',
+    badgeClass: 'bg-amber-50 text-amber-600 border-amber-200',
   },
   paused: {
     label: 'Paused',
     dotClass: 'bg-neutral-600',
-    badgeClass: 'bg-neutral-800/50 text-neutral-500 border-neutral-800',
+    badgeClass: 'bg-neutral-50 text-neutral-500 border-neutral-200',
   },
   terminated: {
     label: 'Terminated',
     dotClass: 'bg-red-500',
-    badgeClass: 'bg-red-950/50 text-red-400 border-red-900/50',
+    badgeClass: 'bg-red-50 text-red-600 border-red-200',
   },
 };
 

@@ -27,7 +27,7 @@ export function Tooltip({ content, children, side = 'top', className }: TooltipP
         <div
           className={cn(
             'absolute z-50 px-2.5 py-1.5 text-xs font-medium rounded-md whitespace-nowrap',
-            'bg-neutral-800 text-neutral-200 border border-neutral-700 shadow-lg',
+            'bg-neutral-900 text-neutral-100 border border-neutral-700 shadow-lg',
             'animate-fade-in pointer-events-none',
             positionClasses[side],
             className

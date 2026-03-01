@@ -76,18 +76,18 @@ const mockIncidents: Incident[] = [
 ];
 
 const severityColors: Record<string, string> = {
-  critical: 'text-red-400 bg-red-950/50 border-red-900/50',
-  high: 'text-amber-400 bg-amber-950/50 border-amber-900/50',
-  medium: 'text-blue-400 bg-blue-950/50 border-blue-900/50',
-  low: 'text-neutral-400 bg-neutral-800 border-neutral-700',
+  critical: 'text-red-600 bg-red-50 border-red-200',
+  high: 'text-amber-600 bg-amber-50 border-amber-200',
+  medium: 'text-blue-600 bg-blue-50 border-blue-200',
+  low: 'text-neutral-500 bg-neutral-100 border-neutral-300',
 };
 
 const statusColors: Record<string, string> = {
-  open: 'text-red-400 bg-red-950/50',
-  investigating: 'text-amber-400 bg-amber-950/50',
-  mitigated: 'text-blue-400 bg-blue-950/50',
-  resolved: 'text-emerald-400 bg-emerald-950/50',
-  postmortem_complete: 'text-neutral-400 bg-neutral-800',
+  open: 'text-red-600 bg-red-50',
+  investigating: 'text-amber-600 bg-amber-50',
+  mitigated: 'text-blue-600 bg-blue-50',
+  resolved: 'text-emerald-600 bg-emerald-50',
+  postmortem_complete: 'text-neutral-500 bg-neutral-100',
 };
 
 export default function IncidentsPage() {
@@ -95,7 +95,7 @@ export default function IncidentsPage() {
     <div className="space-y-6 animate-fade-in">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-neutral-50 flex items-center gap-3">
+          <h1 className="text-2xl font-bold text-neutral-900 flex items-center gap-3">
             <Shield className="w-6 h-6" />
             Incident Management
           </h1>
@@ -111,25 +111,25 @@ export default function IncidentsPage() {
       <div className="space-y-4">
         {mockIncidents.map((incident) => (
           <Card key={incident.id} className={cn(
-            (incident.status === 'open' || incident.status === 'investigating') && 'border-amber-900/30'
+            (incident.status === 'open' || incident.status === 'investigating') && 'border-amber-200'
           )}>
             <CardContent className="pt-6">
               <div className="flex items-start gap-4">
                 <AlertTriangle className={cn(
                   'w-5 h-5 mt-0.5 shrink-0',
-                  incident.severity === 'critical' || incident.severity === 'high' ? 'text-amber-400' : 'text-neutral-500'
+                  incident.severity === 'critical' || incident.severity === 'high' ? 'text-amber-600' : 'text-neutral-500'
                 )} />
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
-                    <h3 className="text-sm font-semibold text-neutral-100">{incident.title}</h3>
+                    <h3 className="text-sm font-semibold text-neutral-800">{incident.title}</h3>
                     <Badge className={severityColors[incident.severity]}>{incident.severity}</Badge>
                     <Badge className={statusColors[incident.status]}>{incident.status.replace('_', ' ')}</Badge>
                   </div>
                   <p className="text-xs text-neutral-500 mb-2">{incident.description}</p>
 
-                  <div className="bg-neutral-800/50 rounded-lg p-3 mb-3">
+                  <div className="bg-neutral-100 rounded-lg p-3 mb-3">
                     <p className="text-xs text-neutral-500 font-semibold uppercase tracking-wider mb-1">Impact</p>
-                    <p className="text-sm text-neutral-300">{incident.impact}</p>
+                    <p className="text-sm text-neutral-600">{incident.impact}</p>
                   </div>
 
                   {/* Timeline */}
@@ -137,17 +137,17 @@ export default function IncidentsPage() {
                     <p className="text-xs text-neutral-500 font-semibold uppercase tracking-wider">Timeline</p>
                     {incident.timeline.map((event, i) => (
                       <div key={i} className="flex items-start gap-3 text-xs">
-                        <span className="text-neutral-600 font-mono w-12 shrink-0">{event.time}</span>
+                        <span className="text-neutral-400 font-mono w-12 shrink-0">{event.time}</span>
                         <div className="relative flex flex-col items-center shrink-0">
                           <div className={cn(
                             'w-2 h-2 rounded-full',
-                            i === incident.timeline.length - 1 ? 'bg-neutral-400' : 'bg-neutral-700'
+                            i === incident.timeline.length - 1 ? 'bg-neutral-400' : 'bg-neutral-200'
                           )} />
                           {i < incident.timeline.length - 1 && (
-                            <div className="w-px h-4 bg-neutral-800" />
+                            <div className="w-px h-4 bg-neutral-100" />
                           )}
                         </div>
-                        <span className="text-neutral-400">{event.event}</span>
+                        <span className="text-neutral-500">{event.event}</span>
                       </div>
                     ))}
                   </div>

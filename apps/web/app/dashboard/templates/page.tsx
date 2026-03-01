@@ -30,11 +30,11 @@ const mockTemplates: MessageTemplate[] = [
 ];
 
 const categoryColors: Record<string, string> = {
-  outreach: 'bg-blue-950/50 text-blue-400',
-  follow_up: 'bg-purple-950/50 text-purple-400',
-  response: 'bg-emerald-950/50 text-emerald-400',
-  escalation: 'bg-red-950/50 text-red-400',
-  internal: 'bg-neutral-800 text-neutral-400',
+  outreach: 'bg-blue-50 text-blue-600',
+  follow_up: 'bg-purple-50 text-purple-600',
+  response: 'bg-emerald-50 text-emerald-600',
+  escalation: 'bg-red-50 text-red-600',
+  internal: 'bg-neutral-100 text-neutral-500',
 };
 
 const channelIcons: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -57,7 +57,7 @@ export default function TemplatesPage() {
     <div className="space-y-6 animate-fade-in">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-neutral-50 flex items-center gap-3">
+          <h1 className="text-2xl font-bold text-neutral-900 flex items-center gap-3">
             <FileText className="w-6 h-6" />
             Message Templates
           </h1>
@@ -80,7 +80,7 @@ export default function TemplatesPage() {
           {['all', 'outreach', 'follow_up', 'response', 'escalation', 'internal'].map((cat) => (
             <button key={cat} onClick={() => setCategoryFilter(cat)} className={cn(
               'px-3 py-1.5 rounded-lg text-xs font-medium transition-colors',
-              categoryFilter === cat ? 'bg-neutral-800 text-neutral-50' : 'text-neutral-500 hover:text-neutral-300'
+              categoryFilter === cat ? 'bg-neutral-100 text-neutral-900' : 'text-neutral-500 hover:text-neutral-600'
             )}>
               {cat === 'all' ? 'All' : cat.replace('_', ' ')}
             </button>
@@ -90,27 +90,27 @@ export default function TemplatesPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
         {filtered.map((template) => (
-          <Card key={template.id} className="hover:border-neutral-700 transition-all">
+          <Card key={template.id} className="hover:border-neutral-300 transition-all">
             <CardHeader className="pb-3">
               <div className="flex items-center justify-between">
                 <Badge className={categoryColors[template.category]}>{template.category.replace('_', ' ')}</Badge>
                 <div className="flex items-center gap-1">
                   {template.channels.map((ch) => {
                     const Icon = channelIcons[ch];
-                    return <Icon key={ch} className="w-3.5 h-3.5 text-neutral-600" />;
+                    return <Icon key={ch} className="w-3.5 h-3.5 text-neutral-400" />;
                   })}
                 </div>
               </div>
               <CardTitle className="text-sm mt-2">{template.name}</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="bg-neutral-800/50 rounded-lg p-3 mb-3 font-mono text-xs text-neutral-400 line-clamp-3">
+              <div className="bg-neutral-100 rounded-lg p-3 mb-3 font-mono text-xs text-neutral-500 line-clamp-3">
                 {template.preview}
               </div>
 
               <div className="flex flex-wrap gap-1 mb-3">
                 {template.variables.map((v) => (
-                  <span key={v} className="text-[10px] px-1.5 py-0.5 rounded bg-neutral-800 text-neutral-500 font-mono">
+                  <span key={v} className="text-[10px] px-1.5 py-0.5 rounded bg-neutral-100 text-neutral-500 font-mono">
                     {`{{${v}}}`}
                   </span>
                 ))}

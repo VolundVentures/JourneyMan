@@ -30,10 +30,10 @@ const mockCalls: Call[] = [
 ];
 
 const statusColors: Record<string, string> = {
-  active: 'text-emerald-400 bg-emerald-950/50',
-  completed: 'text-blue-400 bg-blue-950/50',
-  missed: 'text-red-400 bg-red-950/50',
-  voicemail: 'text-amber-400 bg-amber-950/50',
+  active: 'text-emerald-600 bg-emerald-50',
+  completed: 'text-blue-600 bg-blue-50',
+  missed: 'text-red-600 bg-red-50',
+  voicemail: 'text-amber-600 bg-amber-50',
 };
 
 export default function PhonePage() {
@@ -43,7 +43,7 @@ export default function PhonePage() {
   return (
     <div className="space-y-6 animate-fade-in">
       <div>
-        <h1 className="text-2xl font-bold text-neutral-50 flex items-center gap-3">
+        <h1 className="text-2xl font-bold text-neutral-900 flex items-center gap-3">
           <Phone className="w-6 h-6" />
           Phone Management
         </h1>
@@ -55,25 +55,25 @@ export default function PhonePage() {
       {/* Active Calls */}
       {activeCalls.length > 0 && (
         <div>
-          <h2 className="text-sm font-semibold text-neutral-400 uppercase tracking-wider mb-3 flex items-center gap-2">
+          <h2 className="text-sm font-semibold text-neutral-500 uppercase tracking-wider mb-3 flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse-dot" />
             Active Calls
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {activeCalls.map((call) => (
-              <Card key={call.id} className="border-emerald-900/30">
+              <Card key={call.id} className="border-emerald-200">
                 <CardContent className="pt-6">
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-emerald-950/50 flex items-center justify-center text-2xl">
+                    <div className="w-12 h-12 rounded-full bg-emerald-50 flex items-center justify-center text-2xl">
                       {employeeEmojis[call.employeeId]}
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center gap-2">
-                        <p className="text-sm font-semibold text-neutral-100">{call.employeeName}</p>
+                        <p className="text-sm font-semibold text-neutral-800">{call.employeeName}</p>
                         <Badge className={statusColors.active}>Live</Badge>
                       </div>
-                      <p className="text-xs text-neutral-400">{call.direction === 'inbound' ? '← From' : '→ To'} {call.contact} ({call.company})</p>
-                      <p className="text-lg font-mono text-neutral-200 mt-1">{call.duration}</p>
+                      <p className="text-xs text-neutral-500">{call.direction === 'inbound' ? '← From' : '→ To'} {call.contact} ({call.company})</p>
+                      <p className="text-lg font-mono text-neutral-700 mt-1">{call.duration}</p>
                     </div>
                     <div className="flex gap-2">
                       <Button variant="outline" size="sm" title="Listen">
@@ -105,19 +105,19 @@ export default function PhonePage() {
         <CardContent>
           <div className="space-y-2">
             {recentCalls.map((call) => (
-              <div key={call.id} className="flex items-center gap-4 py-3 border-b border-neutral-800/50 last:border-0">
+              <div key={call.id} className="flex items-center gap-4 py-3 border-b border-neutral-200 last:border-0">
                 <span className="text-lg">{employeeEmojis[call.employeeId]}</span>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
-                    <span className="text-sm font-medium text-neutral-200">{call.contact}</span>
-                    <span className="text-xs text-neutral-600">{call.company}</span>
+                    <span className="text-sm font-medium text-neutral-700">{call.contact}</span>
+                    <span className="text-xs text-neutral-400">{call.company}</span>
                     <Badge className={cn('text-[10px]', statusColors[call.status])}>{call.status}</Badge>
                   </div>
                   {call.outcome && <p className="text-xs text-neutral-500 mt-0.5">{call.outcome}</p>}
                 </div>
                 <span className="text-xs text-neutral-500">{call.direction === 'inbound' ? '←' : '→'}</span>
-                <span className="text-xs font-mono text-neutral-400 w-12 text-right">{call.duration}</span>
-                <span className="text-xs text-neutral-600">
+                <span className="text-xs font-mono text-neutral-500 w-12 text-right">{call.duration}</span>
+                <span className="text-xs text-neutral-400">
                   {new Date(call.startTime).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
                 </span>
               </div>
