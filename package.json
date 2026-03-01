@@ -14,5 +14,14 @@
   "packageManager": "pnpm@10.29.3",
   "engines": {
     "node": ">=22"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@prisma/engines",
+      "prisma",
+      "better-sqlite3",
+      "esbuild",
+      "sharp"
+    ]
   }
 }
