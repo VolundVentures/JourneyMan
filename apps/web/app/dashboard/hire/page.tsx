@@ -221,7 +221,7 @@ export default function HirePage() {
                 value={roleDescription}
                 onChange={(e) => setRoleDescription(e.target.value)}
                 placeholder="e.g., I need someone to handle all inbound customer support emails, triage tickets, and resolve common issues without human intervention..."
-                className="w-full h-28 rounded-lg border border-neutral-300 bg-neutral-100 px-4 py-3 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-neutral-400 resize-none"
+                className="w-full h-28 rounded-lg border border-neutral-300 bg-white px-4 py-3 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-neutral-400 resize-none"
               />
               <Button className="mt-3" disabled={!roleDescription.trim()}>
                 <Sparkles className="w-4 h-4" />
@@ -490,7 +490,7 @@ export default function HirePage() {
                 <select
                   value={trialDays}
                   onChange={(e) => setTrialDays(e.target.value)}
-                  className="w-full max-w-xs rounded-lg border border-neutral-300 bg-neutral-100 px-3 py-2 text-sm text-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-400"
+                  className="w-full max-w-xs rounded-lg border border-neutral-300 bg-white px-3 py-2 text-sm text-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-400"
                 >
                   <option value="7">7 days</option>
                   <option value="14">14 days (recommended)</option>
