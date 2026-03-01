@@ -47,7 +47,7 @@ const typeColors: Record<string, string> = {
   task_completed: 'text-emerald-600',
   status_change: 'text-blue-600',
   system_alert: 'text-red-600',
-  handoff_pending: 'text-neutral-400',
+  handoff_pending: 'text-neutral-500',
   milestone: 'text-amber-600',
 };
 
@@ -87,7 +87,7 @@ export default function NotificationsPage() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
-                    <p className={cn('text-sm font-medium', notif.read ? 'text-neutral-400' : 'text-neutral-900')}>
+                    <p className={cn('text-sm font-medium', notif.read ? 'text-neutral-500' : 'text-neutral-900')}>
                       {notif.title}
                     </p>
                     {!notif.read && <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />}

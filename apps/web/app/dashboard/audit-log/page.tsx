@@ -45,7 +45,7 @@ const actionTypeColors: Record<string, string> = {
   approve: 'bg-emerald-50 text-emerald-600',
   reject: 'bg-red-50 text-red-600',
   escalate: 'bg-amber-50 text-amber-600',
-  login: 'bg-neutral-100 text-neutral-400',
+  login: 'bg-neutral-100 text-neutral-500',
   config_change: 'bg-purple-50 text-purple-600',
 };
 

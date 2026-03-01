@@ -97,7 +97,7 @@ export default function TemplatesPage() {
                 <div className="flex items-center gap-1">
                   {template.channels.map((ch) => {
                     const Icon = channelIcons[ch];
-                    return <Icon key={ch} className="w-3.5 h-3.5 text-neutral-400" />;
+                    return <Icon key={ch} className="w-3.5 h-3.5 text-neutral-500" />;
                   })}
                 </div>
               </div>

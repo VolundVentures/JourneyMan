@@ -80,7 +80,7 @@ export default function IntegrationsPage() {
           {categories.map((cat) => (
             <button key={cat} onClick={() => setCategoryFilter(cat)} className={cn(
               'px-2.5 py-1 rounded-lg text-xs font-medium transition-colors',
-              categoryFilter === cat ? 'bg-neutral-100 text-neutral-900' : 'text-neutral-400 hover:text-neutral-500'
+              categoryFilter === cat ? 'bg-neutral-100 text-neutral-900' : 'text-neutral-500 hover:text-neutral-500'
             )}>
               {cat}
             </button>

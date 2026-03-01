@@ -30,7 +30,7 @@ const typeColors: Record<string, string> = {
   weekly: 'bg-blue-50 text-blue-600',
   monthly: 'bg-purple-50 text-purple-600',
   quarterly: 'bg-amber-50 text-amber-600',
-  custom: 'bg-neutral-100 text-neutral-400',
+  custom: 'bg-neutral-100 text-neutral-500',
 };
 
 export default function ReportsPage() {

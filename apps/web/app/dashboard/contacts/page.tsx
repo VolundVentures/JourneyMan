@@ -34,7 +34,7 @@ const mockContacts: Contact[] = [
 
 const sentimentBadge = {
   positive: 'bg-emerald-50 text-emerald-600',
-  neutral: 'bg-neutral-100 text-neutral-400',
+  neutral: 'bg-neutral-100 text-neutral-500',
   negative: 'bg-red-50 text-red-600',
 };
 

@@ -110,14 +110,14 @@ export default function PhonePage() {
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
                     <span className="text-sm font-medium text-neutral-700">{call.contact}</span>
-                    <span className="text-xs text-neutral-400">{call.company}</span>
+                    <span className="text-xs text-neutral-500">{call.company}</span>
                     <Badge className={cn('text-[10px]', statusColors[call.status])}>{call.status}</Badge>
                   </div>
                   {call.outcome && <p className="text-xs text-neutral-500 mt-0.5">{call.outcome}</p>}
                 </div>
                 <span className="text-xs text-neutral-500">{call.direction === 'inbound' ? '←' : '→'}</span>
                 <span className="text-xs font-mono text-neutral-500 w-12 text-right">{call.duration}</span>
-                <span className="text-xs text-neutral-400">
+                <span className="text-xs text-neutral-500">
                   {new Date(call.startTime).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
                 </span>
               </div>

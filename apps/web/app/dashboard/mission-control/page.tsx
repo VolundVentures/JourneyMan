@@ -130,16 +130,16 @@ export default function MissionControlPage() {
                     const Icon = lineIcons[line.type];
                     return (
                       <div key={line.id} className={cn('flex items-start gap-2', lineColors[line.type])}>
-                        <span className="text-neutral-400 shrink-0">{line.time}</span>
+                        <span className="text-neutral-500 shrink-0">{line.time}</span>
                         <Icon className="w-3 h-3 mt-0.5 shrink-0" />
                         <span className="flex-1">{line.text}</span>
                         {line.confidence !== undefined && (
-                          <span className="text-neutral-400 shrink-0">{Math.round(line.confidence * 100)}%</span>
+                          <span className="text-neutral-500 shrink-0">{Math.round(line.confidence * 100)}%</span>
                         )}
                       </div>
                     );
                   })}
-                  <div className="flex items-center gap-2 text-neutral-400">
+                  <div className="flex items-center gap-2 text-neutral-500">
                     <span className="w-1.5 h-3 bg-neutral-500 animate-blink" />
                   </div>
                 </div>
@@ -167,12 +167,12 @@ export default function MissionControlPage() {
                     const Icon = lineIcons[line.type];
                     return (
                       <div key={line.id} className={cn('flex items-start gap-2', lineColors[line.type])}>
-                        <span className="text-neutral-400 shrink-0 w-16">{line.time}</span>
+                        <span className="text-neutral-500 shrink-0 w-16">{line.time}</span>
                         <Icon className="w-3.5 h-3.5 mt-0.5 shrink-0" />
                         <div className="flex-1">
                           <span>{line.text}</span>
                           {line.confidence !== undefined && (
-                            <span className="ml-2 text-neutral-400">({Math.round(line.confidence * 100)}% confidence)</span>
+                            <span className="ml-2 text-neutral-500">({Math.round(line.confidence * 100)}% confidence)</span>
                           )}
                         </div>
                       </div>

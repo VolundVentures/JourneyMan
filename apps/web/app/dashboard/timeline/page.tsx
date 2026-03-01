@@ -66,7 +66,7 @@ export default function TimelinePage() {
                     <span className="text-lg">{emoji}</span>
                     <div>
                       <p className="text-sm font-medium text-neutral-700">{employee.name}</p>
-                      <p className="text-[10px] text-neutral-400">{employee.department}</p>
+                      <p className="text-[10px] text-neutral-500">{employee.department}</p>
                     </div>
                   </div>
 
