@@ -1,8 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { getToken } from 'next-auth/jwt';
 
-export async function middleware(req: NextRequest) {
+export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   // Public routes that don't require auth
@@ -13,10 +12,12 @@ export async function middleware(req: NextRequest) {
 
   if (isPublicRoute) return NextResponse.next();
 
-  // Check for JWT token (doesn't need Prisma)
-  const token = await getToken({ req, secret: process.env.AUTH_SECRET });
+  // Check for NextAuth session cookie
+  const sessionToken =
+    req.cookies.get('authjs.session-token')?.value ||
+    req.cookies.get('__Secure-authjs.session-token')?.value;
 
-  if (!token) {
+  if (!sessionToken) {
     const loginUrl = new URL('/login', req.nextUrl.origin);
     loginUrl.searchParams.set('callbackUrl', pathname);
     return NextResponse.redirect(loginUrl);
