@@ -9,6 +9,161 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
+      agent_events: {
+        Row: {
+          id: string;
+          org_id: string;
+          employee_id: string;
+          task_id: string | null;
+          event_type: string;
+          content: string;
+          confidence: number | null;
+          metadata: Json;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          org_id: string;
+          employee_id: string;
+          task_id?: string | null;
+          event_type: string;
+          content: string;
+          confidence?: number | null;
+          metadata?: Json;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          org_id?: string;
+          employee_id?: string;
+          task_id?: string | null;
+          event_type?: string;
+          content?: string;
+          confidence?: number | null;
+          metadata?: Json;
+          created_at?: string;
+        };
+      };
+      agent_sessions: {
+        Row: {
+          id: string;
+          org_id: string;
+          employee_id: string;
+          task_id: string | null;
+          sdk_session_id: string | null;
+          status: string;
+          started_at: string;
+          completed_at: string | null;
+          total_cost_usd: number;
+          turns_used: number;
+        };
+        Insert: {
+          id?: string;
+          org_id: string;
+          employee_id: string;
+          task_id?: string | null;
+          sdk_session_id?: string | null;
+          status?: string;
+          started_at?: string;
+          completed_at?: string | null;
+          total_cost_usd?: number;
+          turns_used?: number;
+        };
+        Update: {
+          id?: string;
+          org_id?: string;
+          employee_id?: string;
+          task_id?: string | null;
+          sdk_session_id?: string | null;
+          status?: string;
+          started_at?: string;
+          completed_at?: string | null;
+          total_cost_usd?: number;
+          turns_used?: number;
+        };
+      };
+      episodic_memories: {
+        Row: {
+          id: string;
+          org_id: string;
+          employee_id: string;
+          event_type: string;
+          content: string;
+          significance_score: number;
+          source_ref: Json | null;
+          metadata: Json;
+          is_archived: boolean;
+          task_id: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          org_id: string;
+          employee_id: string;
+          event_type: string;
+          content: string;
+          significance_score?: number;
+          source_ref?: Json | null;
+          metadata?: Json;
+          is_archived?: boolean;
+          task_id?: string | null;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          org_id?: string;
+          employee_id?: string;
+          event_type?: string;
+          content?: string;
+          significance_score?: number;
+          source_ref?: Json | null;
+          metadata?: Json;
+          is_archived?: boolean;
+          task_id?: string | null;
+          created_at?: string;
+        };
+      };
+      institutional_memories: {
+        Row: {
+          id: string;
+          org_id: string;
+          employee_id: string | null;
+          category: string;
+          subject: string;
+          content: string;
+          confidence: number;
+          source_count: number;
+          metadata: Json;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          org_id: string;
+          employee_id?: string | null;
+          category: string;
+          subject: string;
+          content: string;
+          confidence?: number;
+          source_count?: number;
+          metadata?: Json;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          org_id?: string;
+          employee_id?: string | null;
+          category?: string;
+          subject?: string;
+          content?: string;
+          confidence?: number;
+          source_count?: number;
+          metadata?: Json;
+          created_at?: string;
+          updated_at?: string;
+        };
+      };
       organizations: {
         Row: {
           id: string;
