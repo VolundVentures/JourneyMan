@@ -31,16 +31,16 @@ export function getInitials(name: string): string {
 
 export function getTaskStatusColor(status: string): string {
   const colors: Record<string, string> = {
-    queued: 'text-neutral-500 bg-neutral-800',
-    planning: 'text-neutral-300 bg-neutral-800',
-    in_progress: 'text-neutral-200 bg-neutral-800',
-    awaiting_approval: 'text-amber-400 bg-amber-950/50',
-    awaiting_input: 'text-neutral-300 bg-neutral-800',
-    escalated: 'text-red-400 bg-red-950/50',
-    completed: 'text-emerald-400 bg-emerald-950/50',
-    failed: 'text-red-400 bg-red-950/50',
+    queued: 'text-neutral-500 bg-neutral-100',
+    planning: 'text-neutral-600 bg-neutral-100',
+    in_progress: 'text-neutral-700 bg-neutral-100',
+    awaiting_approval: 'text-amber-600 bg-amber-50',
+    awaiting_input: 'text-neutral-600 bg-neutral-100',
+    escalated: 'text-red-600 bg-red-50',
+    completed: 'text-emerald-600 bg-emerald-50',
+    failed: 'text-red-600 bg-red-50',
   };
-  return colors[status] || 'text-neutral-400 bg-neutral-800';
+  return colors[status] || 'text-neutral-500 bg-neutral-100';
 }
 
 // Emoji avatars for AI employees

@@ -1,21 +1,51 @@
 'use client';
 
 import { useState } from 'react';
-import { ArrowRight, Eye, EyeOff } from 'lucide-react';
+import { ArrowRight, Eye, EyeOff, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { createClient } from '@/lib/supabase/client';
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+    setLoading(true);
+
+    try {
+      const supabase = createClient();
+      const { error: authError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (authError) {
+        setError('Invalid email or password');
+        setLoading(false);
+        return;
+      }
+
+      window.location.href = '/dashboard';
+    } catch {
+      setError('Something went wrong. Please try again.');
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="space-y-8 animate-slide-up">
       <div className="text-center space-y-4">
         <div>
-          <h1 className="text-sm font-bold tracking-[0.2em] text-neutral-50 uppercase mb-6">
+          <h1 className="text-sm font-bold tracking-[0.2em] text-neutral-900 uppercase mb-6">
             JourneyMan
           </h1>
-          <h2 className="text-2xl font-bold text-neutral-50 tracking-tight">
+          <h2 className="text-2xl font-bold text-neutral-900 tracking-tight">
             Welcome back
           </h2>
           <p className="text-sm text-neutral-500 mt-1">
@@ -24,7 +54,14 @@ export default function LoginPage() {
         </div>
       </div>
 
-      <div className="rounded-xl border border-neutral-800 bg-neutral-900 p-6 space-y-5">
+      <form onSubmit={handleSubmit} className="rounded-xl border border-neutral-200 bg-white p-6 space-y-5">
+        {error && (
+          <div className="flex items-center gap-2 rounded-lg bg-red-50 border border-red-200 p-3 text-sm text-red-600">
+            <AlertCircle className="w-4 h-4 shrink-0" />
+            {error}
+          </div>
+        )}
+
         <div>
           <label className="block text-xs text-neutral-500 uppercase tracking-wider mb-2">
             Email address
@@ -32,7 +69,9 @@ export default function LoginPage() {
           <Input
             type="email"
             placeholder="you@company.com"
-            defaultValue="zakaria@volundventures.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
           />
         </div>
 
@@ -41,7 +80,7 @@ export default function LoginPage() {
             <label className="block text-xs text-neutral-500 uppercase tracking-wider">
               Password
             </label>
-            <a href="#" className="text-xs text-neutral-400 hover:text-neutral-200 transition-colors">
+            <a href="#" className="text-xs text-neutral-500 hover:text-neutral-700 transition-colors">
               Forgot password?
             </a>
           </div>
@@ -49,31 +88,30 @@ export default function LoginPage() {
             <Input
               type={showPassword ? 'text' : 'password'}
               placeholder="••••••••"
-              defaultValue="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
             />
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-300 transition-colors"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-600 transition-colors"
             >
               {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
             </button>
           </div>
         </div>
 
-        <Button
-          className="w-full h-11"
-          onClick={() => window.location.href = '/dashboard'}
-        >
-          Sign In
-          <ArrowRight className="w-4 h-4" />
+        <Button type="submit" className="w-full h-11" disabled={loading}>
+          {loading ? 'Signing in...' : 'Sign In'}
+          {!loading && <ArrowRight className="w-4 h-4" />}
         </Button>
-      </div>
+      </form>
 
-      <p className="text-center text-xs text-neutral-600">
+      <p className="text-center text-xs text-neutral-400">
         Don&apos;t have an account?{' '}
-        <a href="#" className="text-neutral-400 hover:text-neutral-200 transition-colors">
-          Contact Sales
+        <a href="/signup" className="text-neutral-500 hover:text-neutral-700 transition-colors">
+          Create account
         </a>
       </p>
     </div>

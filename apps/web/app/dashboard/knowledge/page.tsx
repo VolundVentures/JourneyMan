@@ -38,8 +38,8 @@ export default function KnowledgePage() {
     <div className="space-y-6 animate-fade-in">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-neutral-50">Knowledge Base</h1>
-          <p className="mt-1 text-sm text-neutral-400">
+          <h1 className="text-2xl font-bold text-neutral-900">Knowledge Base</h1>
+          <p className="mt-1 text-sm text-neutral-500">
             {mockKnowledgeItems.length} documents powering your AI employees
           </p>
         </div>
@@ -50,13 +50,13 @@ export default function KnowledgePage() {
       </div>
 
       {/* Upload zone */}
-      <div className="rounded-xl border-2 border-dashed border-neutral-700 bg-neutral-900/50 p-8 text-center hover:border-neutral-600 transition-colors cursor-pointer group">
+      <div className="rounded-xl border-2 border-dashed border-neutral-300 bg-white/50 p-8 text-center hover:border-neutral-400 transition-colors cursor-pointer group">
         <div className="flex flex-col items-center gap-3">
-          <div className="w-14 h-14 rounded-xl bg-neutral-800 flex items-center justify-center group-hover:bg-neutral-700 transition-colors">
-            <Upload className="w-7 h-7 text-neutral-500 group-hover:text-neutral-300 transition-colors" />
+          <div className="w-14 h-14 rounded-xl bg-neutral-100 flex items-center justify-center group-hover:bg-neutral-200 transition-colors">
+            <Upload className="w-7 h-7 text-neutral-500 group-hover:text-neutral-600 transition-colors" />
           </div>
           <div>
-            <p className="text-sm font-medium text-neutral-300">
+            <p className="text-sm font-medium text-neutral-600">
               Drop files here or click to upload
             </p>
             <p className="text-xs text-neutral-500 mt-1">
@@ -91,15 +91,15 @@ export default function KnowledgePage() {
           return (
             <div
               key={item.id}
-              className="rounded-xl border border-neutral-800 bg-neutral-900 p-4 hover:bg-neutral-800/80 transition-colors group"
+              className="rounded-xl border border-neutral-200 bg-white p-4 hover:bg-neutral-100 transition-colors group"
             >
               <div className="flex items-start gap-3">
-                <div className="rounded-lg p-2 shrink-0 bg-neutral-800 text-neutral-400">
+                <div className="rounded-lg p-2 shrink-0 bg-neutral-100 text-neutral-500">
                   <SourceIcon className="w-4 h-4" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
-                    <h3 className="font-medium text-neutral-200 truncate">{item.title}</h3>
+                    <h3 className="font-medium text-neutral-700 truncate">{item.title}</h3>
                     <Badge variant={item.status === 'active' ? 'success' : 'secondary'}>
                       {item.status}
                     </Badge>
@@ -115,13 +115,13 @@ export default function KnowledgePage() {
                   </div>
                 </div>
                 <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <Button variant="ghost" size="icon" className="h-8 w-8 text-neutral-500 hover:text-neutral-300">
+                  <Button variant="ghost" size="icon" className="h-8 w-8 text-neutral-500 hover:text-neutral-600">
                     <Eye className="w-4 h-4" />
                   </Button>
-                  <Button variant="ghost" size="icon" className="h-8 w-8 text-neutral-500 hover:text-neutral-300">
+                  <Button variant="ghost" size="icon" className="h-8 w-8 text-neutral-500 hover:text-neutral-600">
                     <Archive className="w-4 h-4" />
                   </Button>
-                  <Button variant="ghost" size="icon" className="h-8 w-8 text-neutral-500 hover:text-red-400">
+                  <Button variant="ghost" size="icon" className="h-8 w-8 text-neutral-500 hover:text-red-600">
                     <Trash2 className="w-4 h-4" />
                   </Button>
                 </div>

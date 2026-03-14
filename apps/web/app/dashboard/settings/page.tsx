@@ -12,15 +12,15 @@ export default function SettingsPage() {
   return (
     <div className="max-w-3xl space-y-6 animate-fade-in">
       <div>
-        <h1 className="text-2xl font-bold text-neutral-50">Settings</h1>
-        <p className="mt-1 text-sm text-neutral-400">Manage your organization settings</p>
+        <h1 className="text-2xl font-bold text-neutral-900">Settings</h1>
+        <p className="mt-1 text-sm text-neutral-500">Manage your organization settings</p>
       </div>
 
       <Card>
         <CardHeader>
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center">
-              <Building2 className="w-5 h-5 text-neutral-400" />
+            <div className="w-10 h-10 rounded-lg bg-neutral-100 flex items-center justify-center">
+              <Building2 className="w-5 h-5 text-neutral-500" />
             </div>
             <div>
               <CardTitle>Organization</CardTitle>
@@ -57,8 +57,8 @@ export default function SettingsPage() {
       <Card>
         <CardHeader>
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center">
-              <Bell className="w-5 h-5 text-neutral-400" />
+            <div className="w-10 h-10 rounded-lg bg-neutral-100 flex items-center justify-center">
+              <Bell className="w-5 h-5 text-neutral-500" />
             </div>
             <div>
               <CardTitle>Notifications</CardTitle>
@@ -75,17 +75,17 @@ export default function SettingsPage() {
           ].map((item) => (
             <div key={item.label} className="flex items-center justify-between py-2">
               <div>
-                <p className="text-sm text-neutral-200">{item.label}</p>
+                <p className="text-sm text-neutral-700">{item.label}</p>
                 <p className="text-xs text-neutral-500">{item.desc}</p>
               </div>
               <button
                 className={`relative w-11 h-6 rounded-full transition-colors ${
-                  item.checked ? 'bg-neutral-50' : 'bg-neutral-700'
+                  item.checked ? 'bg-neutral-900' : 'bg-neutral-200'
                 }`}
               >
                 <span
                   className={`absolute top-0.5 left-0.5 w-5 h-5 rounded-full transition-transform ${
-                    item.checked ? 'translate-x-5 bg-neutral-900' : 'translate-x-0 bg-neutral-400'
+                    item.checked ? 'translate-x-5 bg-white' : 'translate-x-0 bg-neutral-400'
                   }`}
                 />
               </button>
@@ -94,25 +94,25 @@ export default function SettingsPage() {
         </CardContent>
       </Card>
 
-      <Card className="border-red-900/30">
+      <Card className="border-red-200">
         <CardHeader>
-          <CardTitle className="text-red-400">Danger Zone</CardTitle>
+          <CardTitle className="text-red-600">Danger Zone</CardTitle>
           <CardDescription>Irreversible actions</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-neutral-200">Pause All AI Employees</p>
+              <p className="text-sm text-neutral-700">Pause All AI Employees</p>
               <p className="text-xs text-neutral-500">Immediately stop all AI employee activity</p>
             </div>
-            <Button variant="outline" size="sm" className="border-amber-900/50 text-amber-400 hover:bg-amber-950/30">
+            <Button variant="outline" size="sm" className="border-amber-200 text-amber-600 hover:bg-amber-50">
               Pause All
             </Button>
           </div>
           <Separator />
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-neutral-200">Emergency Kill Switch</p>
+              <p className="text-sm text-neutral-700">Emergency Kill Switch</p>
               <p className="text-xs text-neutral-500">Halt all activity and disconnect integrations</p>
             </div>
             <Button variant="destructive" size="sm">
